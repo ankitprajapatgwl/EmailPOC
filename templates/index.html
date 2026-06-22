@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Send RFQ — EmailPOC{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div class="page-title">Send RFQ Email</div>
+  <div class="page-sub">Create a new request-for-quotation with a unique tracked email address</div>
+</div>
+
+{% if success %}
+<div class="alert alert-success">
+  ✅ Email sent successfully! Conversation ID: <strong>{{ conv_id }}</strong>
+  — <a href="/tracking/{{ user_id }}/{{ conv_id }}">View conversation →</a>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-error">
+  ❌ Failed to send email: {{ error }}
+</div>
+{% endif %}
+
+<div class="card" style="max-width: 680px;">
+  <div class="card-header">
+    New Request for Quotation
+  </div>
+  <div class="card-body">
+    <form method="post" action="/send" id="rfq-form">
+
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--txt2); margin-bottom: 14px;">
+          Sender / Conversation
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="user_id">User ID <span class="label-hint">(your account ID)</span></label>
+            <input type="text" id="user_id" name="user_id" required
+                   placeholder="e.g. 42" pattern="[A-Za-z0-9_-]+"
+                   title="Alphanumeric, dash, or underscore only">
+          </div>
+          <div style="display: flex; align-items: flex-end; padding-bottom: 1px;">
+            <div style="flex: 1; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;">
+              <div style="font-size: 11px; color: var(--txt2); margin-bottom: 2px;">Dynamic reply address (auto-generated)</div>
+              <div class="font-mono" style="color: var(--primary);">usr{id}_conv{uuid}@mail.yourdomain.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--txt2); margin-bottom: 14px;">
+          Supplier Details
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="supplier_name">Supplier Name</label>
+            <input type="text" id="supplier_name" name="supplier_name" required
+                   placeholder="e.g. Acme Electronics">
+          </div>
+          <div class="form-group">
+            <label for="supplier_email">Supplier Email</label>
+            <input type="email" id="supplier_email" name="supplier_email" required
+                   placeholder="e.g. purchasing@acme.com">
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--txt2); margin-bottom: 14px;">
+          Product Details
+        </div>
+        <div class="form-grid">
+          <div class="form-group span2">
+            <label for="product_name">Product Name</label>
+            <input type="text" id="product_name" name="product_name" required
+                   placeholder="e.g. Bluetooth Speaker Model X200">
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity <span class="label-hint">(units)</span></label>
+            <input type="number" id="quantity" name="quantity" required
+                   min="1" placeholder="e.g. 500">
+          </div>
+          <div class="form-group">
+            <label for="target_price">Target Price <span class="label-hint">(per unit)</span></label>
+            <input type="text" id="target_price" name="target_price" required
+                   placeholder="e.g. $12.00">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-12">
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <span>📤</span> Send RFQ Email
+        </button>
+        <span class="text-sm text-muted" id="sending-msg" style="display:none;">Sending…</span>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div style="margin-top: 24px; padding: 16px 20px; background: var(--card); border: 1px solid var(--border); border-radius: var(--r); max-width: 680px;">
+  <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--txt2);">How it works</div>
+  <ol style="padding-left: 18px; font-size: 13px; color: var(--txt2); line-height: 1.8;">
+    <li>A unique email address is generated per conversation (encodes your user ID + conv ID).</li>
+    <li>The RFQ is sent from that address — supplier replies come back to the same address.</li>
+    <li>SendGrid routes inbound replies to <code style="background:var(--bg);padding:1px 5px;border-radius:3px;">/webhooks/inbound</code>, which parses and stores the reply.</li>
+    <li>View the full conversation thread on the <a href="/tracking">Tracking</a> page.</li>
+  </ol>
+</div>
+
+<script>
+  document.getElementById("rfq-form").addEventListener("submit", function () {
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("submit-btn").textContent = "Sending…";
+    document.getElementById("sending-msg").style.display = "inline";
+  });
+</script>
+{% endblock %}

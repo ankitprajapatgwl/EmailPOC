@@ -1,0 +1,150 @@
+{
+  "conversations": {
+    "56513701": {
+      "conv_id": "56513701",
+      "user_id": "10",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr10_conv56513701@mail.jobsetu.online",
+      "status": "open",
+      "created_at": "2026-06-22T13:39:20.599887+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [],
+      "emails_received": []
+    },
+    "09de42f2": {
+      "conv_id": "09de42f2",
+      "user_id": "10",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr10_conv09de42f2@mail.jobsetu.online",
+      "status": "open",
+      "created_at": "2026-06-22T13:41:41.491698+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [],
+      "emails_received": []
+    },
+    "466b0f0b": {
+      "conv_id": "466b0f0b",
+      "user_id": "10",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr10_conv466b0f0b@mail.jobsetu.online",
+      "status": "open",
+      "created_at": "2026-06-22T13:58:50.307395+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [],
+      "emails_received": []
+    },
+    "505bd27b": {
+      "conv_id": "505bd27b",
+      "user_id": "10",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr10_conv505bd27b@mail.jobsetu.online",
+      "status": "open",
+      "created_at": "2026-06-22T14:02:52.410491+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [],
+      "emails_received": []
+    },
+    "fe9660f5": {
+      "conv_id": "fe9660f5",
+      "user_id": "10",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr10_convfe9660f5@mail.jobsetu.online",
+      "status": "replied",
+      "created_at": "2026-06-22T14:17:31.083335+00:00",
+      "reply_count": 2,
+      "last_reply_at": "2026-06-22T14:21:19.915521+00:00",
+      "emails_sent": [
+        {
+          "from_email": "usr10_convfe9660f5@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-FE96] Request for Quotation — Speaker",
+          "body_html": "\n        <div style=\"font-family: Arial, sans-serif; max-width: 600px;\">\n            <p>Dear Ankit Prajapat,</p>\n            <p>I am writing to request a formal quotation for the following:</p>\n            <table border=\"1\" cellpadding=\"8\" cellspacing=\"0\"\n                style=\"border-collapse: collapse; width: 100%;\">\n                <tr style=\"background-color: #f5f5f5;\">\n                    <th>Product</th>\n                    <th>Quantity</th>\n                    <th>Target Price</th>\n                </tr>\n                <tr>\n                    <td>Speaker</td>\n                    <td>500 units</td>\n                    <td>13 per unit</td>\n                </tr>\n            </table>\n            <p>Please include the following in your quotation:</p>\n            <ul>\n                <li>Unit price at stated quantity (FOB)</li>\n                <li>Minimum order quantity (MOQ)</li>\n                <li>Lead time and production capacity</li>\n                <li>Payment terms</li>\n                <li>Product specifications and certifications</li>\n            </ul>\n            <p>We look forward to your response within 3 business days.</p>\n            <p>Best regards,<br>\n            <strong>JobSetu Sourcing Team</strong></p>\n            <hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\">\n            <p style=\"font-size:11px; color:#aaa;\">\n                Reference: CONV-FE9660F5 | USR-10\n            </p>\n        </div>\n        ",
+          "product_name": "Speaker",
+          "quantity": 500,
+          "target_price": "13",
+          "status_code": 202,
+          "sent_at": "2026-06-22T14:17:33.449443+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "from_email": "Ankit prajapat <ankitprajapat948@gmail.com>",
+          "to_email": "usr10_convfe9660f5@mail.jobsetu.online",
+          "subject": "Re: [RFQ-FE96] Request for Quotation — Speaker",
+          "body_text": "Done\r\n\r\nOn Mon, Jun 22, 2026 at 7:47 PM JobSetu <noreply@jobsetu.online> wrote:\r\n\r\n> Dear Ankit Prajapat,\r\n>\r\n> I am writing to request a formal quotation for the following:\r\n> Product Quantity Target Price\r\n> Speaker 500 units 13 per unit\r\n>\r\n> Please include the following in your quotation:\r\n>\r\n>    - Unit price at stated quantity (FOB)\r\n>    - Minimum order quantity (MOQ)\r\n>    - Lead time and production capacity\r\n>    - Payment terms\r\n>    - Product specifications and certifications\r\n>\r\n> We look forward to your response within 3 business days.\r\n>\r\n> Best regards,\r\n> *JobSetu Sourcing Team*\r\n> ------------------------------\r\n>\r\n> Reference: CONV-FE9660F5 | USR-10\r\n>\r\n",
+          "body_html": "<div dir=\"ltr\">Done</div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Mon, Jun 22, 2026 at 7:47 PM JobSetu &lt;noreply@jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\">\r\n        <div style=\"font-family:Arial,sans-serif;max-width:600px\">\r\n            <p>Dear Ankit Prajapat,</p>\r\n            <p>I am writing to request a formal quotation for the following:</p>\r\n            <table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\">\r\n                <tbody><tr style=\"background-color:rgb(245,245,245)\">\r\n                    <th>Product</th>\r\n                    <th>Quantity</th>\r\n                    <th>Target Price</th>\r\n                </tr>\r\n                <tr>\r\n                    <td>Speaker</td>\r\n                    <td>500 units</td>\r\n                    <td>13 per unit</td>\r\n                </tr>\r\n            </tbody></table>\r\n            <p>Please include the following in your quotation:</p>\r\n            <ul>\r\n                <li>Unit price at stated quantity (FOB)</li>\r\n                <li>Minimum order quantity (MOQ)</li>\r\n                <li>Lead time and production capacity</li>\r\n                <li>Payment terms</li>\r\n                <li>Product specifications and certifications</li>\r\n            </ul>\r\n            <p>We look forward to your response within 3 business days.</p>\r\n            <p>Best regards,<br>\r\n            <strong>JobSetu Sourcing Team</strong></p>\r\n            <hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\">\r\n            <p style=\"font-size:11px;color:rgb(170,170,170)\">\r\n                Reference: CONV-FE9660F5 | USR-10\r\n            </p>\r\n        </div>\r\n        <img src=\"https://u109675297.ct.sendgrid.net/wf/open?upn=u001.QWCWaQKo4zGCic8SsfE1WxSk4gMns-2Fw08t5IlXaD3Yrjd73xsv1mjE0B2xr8clluI3yIYPlAUcBMlLsGliFjIuC9pZ0ga66CUhMWOZzLiDZGh-2Fl9Gn22Acv9yN7SbHrvmMqd6FJy5CLlIcBCmRg6mxA9SdrnVslL-2FbxF8ME0gg6czu6OpVYWy4MkhG8ynh5vb3Or8dWRX7XH1XCweupk57Q2ISh02zKUhMwotgG5pgs-3D\" alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height: 1px; width: 1px; border-width: 0px; margin: 0px; padding: 0px;\">\r\n</blockquote></div>\r\n",
+          "attachments": [
+            {
+              "filename": "cbc-report-format 1.pdf",
+              "content_type": "application/pdf",
+              "size": 90244,
+              "url": "/attachments/fe9660f5_1_cbc-report-format 1.pdf"
+            }
+          ],
+          "dkim": "{@gmail.com : pass}",
+          "spf": "pass",
+          "spam_score": "1.2",
+          "received_at": "2026-06-22T14:20:23.683616+00:00"
+        },
+        {
+          "from_email": "Ankit prajapat <ankitprajapat948@gmail.com>",
+          "to_email": "usr10_convfe9660f5@mail.jobsetu.online",
+          "subject": "Re: [RFQ-FE96] Request for Quotation — Speaker",
+          "body_text": "Done\r\n\r\nOn Mon, Jun 22, 2026 at 7:47 PM JobSetu <noreply@jobsetu.online> wrote:\r\n\r\n> Dear Ankit Prajapat,\r\n>\r\n> I am writing to request a formal quotation for the following:\r\n> Product Quantity Target Price\r\n> Speaker 500 units 13 per unit\r\n>\r\n> Please include the following in your quotation:\r\n>\r\n>    - Unit price at stated quantity (FOB)\r\n>    - Minimum order quantity (MOQ)\r\n>    - Lead time and production capacity\r\n>    - Payment terms\r\n>    - Product specifications and certifications\r\n>\r\n> We look forward to your response within 3 business days.\r\n>\r\n> Best regards,\r\n> *JobSetu Sourcing Team*\r\n> ------------------------------\r\n>\r\n> Reference: CONV-FE9660F5 | USR-10\r\n>\r\n",
+          "body_html": "<div dir=\"ltr\">Done</div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Mon, Jun 22, 2026 at 7:47 PM JobSetu &lt;noreply@jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\">\r\n        <div style=\"font-family:Arial,sans-serif;max-width:600px\">\r\n            <p>Dear Ankit Prajapat,</p>\r\n            <p>I am writing to request a formal quotation for the following:</p>\r\n            <table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\">\r\n                <tbody><tr style=\"background-color:rgb(245,245,245)\">\r\n                    <th>Product</th>\r\n                    <th>Quantity</th>\r\n                    <th>Target Price</th>\r\n                </tr>\r\n                <tr>\r\n                    <td>Speaker</td>\r\n                    <td>500 units</td>\r\n                    <td>13 per unit</td>\r\n                </tr>\r\n            </tbody></table>\r\n            <p>Please include the following in your quotation:</p>\r\n            <ul>\r\n                <li>Unit price at stated quantity (FOB)</li>\r\n                <li>Minimum order quantity (MOQ)</li>\r\n                <li>Lead time and production capacity</li>\r\n                <li>Payment terms</li>\r\n                <li>Product specifications and certifications</li>\r\n            </ul>\r\n            <p>We look forward to your response within 3 business days.</p>\r\n            <p>Best regards,<br>\r\n            <strong>JobSetu Sourcing Team</strong></p>\r\n            <hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\">\r\n            <p style=\"font-size:11px;color:rgb(170,170,170)\">\r\n                Reference: CONV-FE9660F5 | USR-10\r\n            </p>\r\n        </div>\r\n        <img src=\"https://u109675297.ct.sendgrid.net/wf/open?upn=u001.QWCWaQKo4zGCic8SsfE1WxSk4gMns-2Fw08t5IlXaD3Yrjd73xsv1mjE0B2xr8clluI3yIYPlAUcBMlLsGliFjIuC9pZ0ga66CUhMWOZzLiDZGh-2Fl9Gn22Acv9yN7SbHrvmMqd6FJy5CLlIcBCmRg6mxA9SdrnVslL-2FbxF8ME0gg6czu6OpVYWy4MkhG8ynh5vb3Or8dWRX7XH1XCweupk57Q2ISh02zKUhMwotgG5pgs-3D\" alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height: 1px; width: 1px; border-width: 0px; margin: 0px; padding: 0px;\">\r\n</blockquote></div>\r\n",
+          "attachments": [
+            {
+              "filename": "cbc-report-format 1.pdf",
+              "content_type": "application/pdf",
+              "size": 90244,
+              "url": "/attachments/fe9660f5_1_cbc-report-format 1.pdf"
+            }
+          ],
+          "dkim": "{@gmail.com : pass}",
+          "spf": "pass",
+          "spam_score": "1.2",
+          "received_at": "2026-06-22T14:21:19.915521+00:00"
+        }
+      ],
+      "product_name": "Speaker",
+      "quantity": 500,
+      "target_price": "13",
+      "subject": "[RFQ-FE96] Request for Quotation — Speaker"
+    },
+    "cc301bcc": {
+      "conv_id": "cc301bcc",
+      "user_id": "12",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Preetam",
+      "email_address": "usr12_convcc301bcc@mail.jobsetu.online",
+      "status": "open",
+      "created_at": "2026-06-22T14:30:22.158199+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [],
+      "emails_received": []
+    }
+  },
+  "users": {
+    "10": [
+      "56513701",
+      "09de42f2",
+      "466b0f0b",
+      "505bd27b",
+      "fe9660f5"
+    ],
+    "12": [
+      "cc301bcc"
+    ]
+  },
+  "unmatched_emails": []
+}
