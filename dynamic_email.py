@@ -54,6 +54,7 @@ from db import EmailDB
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 INBOUND_DOMAIN   = os.getenv("INBOUND_DOMAIN")
 COMPANY_NAME     = os.getenv("COMPANY_NAME")
+FROM_EMAIL       = os.getenv("FROM_EMAIL")  # Must be a verified sender in SendGrid
 
 sg = sendgrid.SendGridAPIClient(api_key=SENDGRID_API_KEY)
 db = EmailDB()
@@ -287,24 +288,21 @@ def send_rfq_email(
             </p>
         </div>
         """
-        # FROM_EMAIL = "noreply@jobsetu.online"
-        # REPLY_TO_EMAIL = "support@jobsetu.online"
-
+        # From must be a verified sender identity in SendGrid.
+        # Reply-To is the dynamic address so supplier replies route back correctly.
         message = Mail(
-            from_email   = From(dynamic_from, COMPANY_NAME),
+            from_email   = From(FROM_EMAIL, COMPANY_NAME),
             to_emails    = To(supplier_email, supplier_name),
             subject      = subject_line,
             html_content = html_body,
         )
-        # message.reply_to = ReplyTo(REPLY_TO_EMAIL)
-
-        # Override with dynamic Reply-To via custom header
-        message.reply_to = ReplyTo(dynamic_from)  # ← This overrides the static one
+        message.reply_to = ReplyTo(dynamic_from)
 
         response = sg.send(message)
 
         sent_record = {
-            "from_email":   dynamic_from,
+            "from_email":   FROM_EMAIL,
+            "reply_to":     dynamic_from,
             "to_email":     supplier_email,
             "subject":      subject_line,
             "body_html":    html_body,
