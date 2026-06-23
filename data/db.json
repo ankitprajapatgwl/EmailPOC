@@ -48,13 +48,82 @@
       "quantity": 500,
       "target_price": "13",
       "subject": "[RFQ-FE96] Request for Quotation — Speaker"
+    },
+    "936fbe76": {
+      "conv_id": "936fbe76",
+      "user_id": "20",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit Prajapat",
+      "email_address": "usr20_conv936fbe76@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "replied",
+      "created_at": "2026-06-23T12:56:16.281347+00:00",
+      "reply_count": 2,
+      "last_reply_at": "2026-06-23T13:00:41.787249+00:00",
+      "emails_sent": [
+        {
+          "from_email": "usr20_conv936fbe76@mail.jobsetu.online",
+          "reply_to": "usr20_conv936fbe76@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-936F] Request for Quotation — Speaker",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><p>Dear Ankit Prajapat,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Speaker</td><td>200 units</td><td>20 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-936FBE76 | USR-20</p></div>",
+          "product_name": "Speaker",
+          "quantity": 200,
+          "target_price": "20",
+          "provider": "sendgrid",
+          "provider_message_id": "iE1t6IrsRveyOjzhGKeYew",
+          "status_code": 202,
+          "sent_at": "2026-06-23T12:56:31.004395+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "from_email": "Ankit prajapat <ankitprajapat948@gmail.com>",
+          "to_email": "usr20_conv936fbe76@mail.jobsetu.online",
+          "subject": "Re: [RFQ-936F] Request for Quotation — Speaker",
+          "body_text": "Reply on email functionality working\r\n\r\nOn Tue, Jun 23, 2026 at 6:27 PM JobSetu\r\n<usr20_conv936fbe76@mail.jobsetu.online> wrote:\r\n\r\n> Dear Ankit Prajapat,\r\n>\r\n> I am writing to request a formal quotation for the following:\r\n> Product Quantity Target Price\r\n> Speaker 200 units 20 per unit\r\n>\r\n> Please include the following in your quotation:\r\n>\r\n>    - Unit price at stated quantity (FOB)\r\n>    - Minimum order quantity (MOQ)\r\n>    - Lead time and production capacity\r\n>    - Payment terms\r\n>    - Product specifications and certifications\r\n>\r\n> We look forward to your response within 3 business days.\r\n>\r\n> Best regards,\r\n> *JobSetu Sourcing Team*\r\n> ------------------------------\r\n>\r\n> Reference: CONV-936FBE76 | USR-20\r\n>\r\n",
+          "body_html": "<div dir=\"ltr\">Reply on email functionality working</div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Jun 23, 2026 at 6:27 PM JobSetu &lt;usr20_conv936fbe76@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div style=\"font-family:Arial,sans-serif;max-width:600px\"><p>Dear Ankit Prajapat,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\"><tbody><tr style=\"background-color:rgb(245,245,245)\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Speaker</td><td>200 units</td><td>20 per unit</td></tr></tbody></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\"><p style=\"font-size:11px;color:rgb(170,170,170)\">Reference: CONV-936FBE76 | USR-20</p></div><img src=\"https://u109675297.ct.sendgrid.net/wf/open?upn=u001.QWCWaQKo4zGCic8SsfE1WxSk4gMns-2Fw08t5IlXaD3YoBVPjhrrm1DeKj7qy80GvgETZHYQB8qD31I28GB6TQwJzKXFOVHt5jppbGVdStFzQ9ofpWnN9DyH0JIiHTyuyerrkkO5vyAXXNnSuSZO6ePbXZYTZSvxohdlGPwsXWboStagMlrSLXFWoXKeBiZ635kzsqllSOKCKm20iS1-2FAXzboPZUYRFgvjXGkLs-2BJtO3Q-3D\" alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height: 1px; width: 1px; border-width: 0px; margin: 0px; padding: 0px;\">\r\n</blockquote></div>\r\n",
+          "attachments": [],
+          "dkim": "{@gmail.com : pass}",
+          "spf": "pass",
+          "spam_score": "0.6",
+          "provider": "sendgrid",
+          "received_at": "2026-06-23T12:58:56.481401+00:00"
+        },
+        {
+          "from_email": "Ankit prajapat <ankitprajapat948@gmail.com>",
+          "to_email": "usr20_conv936fbe76@mail.jobsetu.online",
+          "subject": "Fwd: [RFQ-936F] Request for Quotation — Speaker",
+          "body_text": "Reply on forwarded email is working\r\n\r\n---------- Forwarded message ---------\r\nFrom: Ankit prajapat <ankitprajapat948@gmail.com>\r\nDate: Tue, Jun 23, 2026 at 6:28 PM\r\nSubject: Re: [RFQ-936F] Request for Quotation — Speaker\r\nTo: <usr20_conv936fbe76@mail.jobsetu.online>\r\n\r\n\r\nReply on email functionality working\r\n\r\nOn Tue, Jun 23, 2026 at 6:27 PM JobSetu\r\n<usr20_conv936fbe76@mail.jobsetu.online> wrote:\r\n\r\n> Dear Ankit Prajapat,\r\n>\r\n> I am writing to request a formal quotation for the following:\r\n> Product Quantity Target Price\r\n> Speaker 200 units 20 per unit\r\n>\r\n> Please include the following in your quotation:\r\n>\r\n>    - Unit price at stated quantity (FOB)\r\n>    - Minimum order quantity (MOQ)\r\n>    - Lead time and production capacity\r\n>    - Payment terms\r\n>    - Product specifications and certifications\r\n>\r\n> We look forward to your response within 3 business days.\r\n>\r\n> Best regards,\r\n> *JobSetu Sourcing Team*\r\n> ------------------------------\r\n>\r\n> Reference: CONV-936FBE76 | USR-20\r\n>\r\n",
+          "body_html": "<div dir=\"ltr\">Reply on forwarded email is working <br><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">---------- Forwarded message ---------<br>From: <strong class=\"gmail_sendername\" dir=\"auto\">Ankit prajapat</strong> <span dir=\"auto\">&lt;<a href=\"mailto:ankitprajapat948@gmail.com\">ankitprajapat948@gmail.com</a>&gt;</span><br>Date: Tue, Jun 23, 2026 at 6:28 PM<br>Subject: Re: [RFQ-936F] Request for Quotation — Speaker<br>To:  &lt;usr20_conv936fbe76@mail.jobsetu.online&gt;<br></div><br><br><div dir=\"ltr\">Reply on email functionality working</div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Jun 23, 2026 at 6:27 PM JobSetu &lt;usr20_conv936fbe76@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div style=\"font-family:Arial,sans-serif;max-width:600px\"><p>Dear Ankit Prajapat,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\"><tbody><tr style=\"background-color:rgb(245,245,245)\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Speaker</td><td>200 units</td><td>20 per unit</td></tr></tbody></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\"><p style=\"font-size:11px;color:rgb(170,170,170)\">Reference: CONV-936FBE76 | USR-20</p></div><img src=\"https://u109675297.ct.sendgrid.net/wf/open?upn=u001.QWCWaQKo4zGCic8SsfE1WxSk4gMns-2Fw08t5IlXaD3YoBVPjhrrm1DeKj7qy80GvgETZHYQB8qD31I28GB6TQwJzKXFOVHt5jppbGVdStFzQ9ofpWnN9DyH0JIiHTyuyerrkkO5vyAXXNnSuSZO6ePbXZYTZSvxohdlGPwsXWboStagMlrSLXFWoXKeBiZ635kzsqllSOKCKm20iS1-2FAXzboPZUYRFgvjXGkLs-2BJtO3Q-3D\" alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height:1px;width:1px;border-width:0px;margin:0px;padding:0px\">\r\n</blockquote></div>\r\n</div></div>\r\n",
+          "attachments": [
+            {
+              "filename": "cbc-report-format 1.pdf",
+              "content_type": "application/pdf",
+              "size": 90244,
+              "url": "/attachments/936fbe76_a1e5cd1d_1_cbc-report-format_1.pdf"
+            }
+          ],
+          "dkim": "{@gmail.com : pass}",
+          "spf": "pass",
+          "spam_score": "1.2",
+          "provider": "sendgrid",
+          "received_at": "2026-06-23T13:00:41.787249+00:00"
+        }
+      ],
+      "product_name": "Speaker",
+      "quantity": 200,
+      "target_price": "20",
+      "subject": "[RFQ-936F] Request for Quotation — Speaker"
     }
   },
   "users": {
     "10": [
       "fe9660f5"
     ],
-    "12": [
+    "12": [],
+    "20": [
+      "936fbe76"
     ]
   },
   "unmatched_emails": []
