@@ -31,6 +31,8 @@ from pathlib import Path
 from threading import Lock
 
 from src.logger import AppLogger
+from src.predefined_projects import PREDEFINED_PROJECTS
+from src.predefined_users import PREDEFINED_USERS
 
 
 class EmailDB:
@@ -87,10 +89,41 @@ class EmailDB:
             self._write({
                 "conversations": {},
                 "users": {},
+                "user_conversations": {},
+                "threads": {},
+                "predefined_users": PREDEFINED_USERS,
+                "predefined_projects": PREDEFINED_PROJECTS,
                 "unmatched_emails": [],
             })
+        else:
+            self._migrate()
 
     # ── Internal helpers ─────────────────────────────────────────────
+
+    def _migrate(self) -> None:
+        """Ensure the store has all required top-level keys.
+
+        Called on startup when the file already exists so that new keys
+        are back-filled into stores created by older versions of the app.
+        """
+        with self._lock:
+            data = self._read()
+            changed = False
+            if "predefined_users" not in data:
+                data["predefined_users"] = PREDEFINED_USERS
+                changed = True
+            if "user_conversations" not in data:
+                data["user_conversations"] = {}
+                changed = True
+            if "threads" not in data:
+                data["threads"] = {}
+                changed = True
+            if "predefined_projects" not in data:
+                data["predefined_projects"] = PREDEFINED_PROJECTS
+                changed = True
+            if changed:
+                self._write(data)
+                self.log.info("Migrated JSON store at %s", self.db_path)
 
     def _read(self) -> dict:
         """Load and return the entire store from disk.
@@ -295,6 +328,87 @@ class EmailDB:
             email_data.get("to_email"),
         )
 
+    def insert_user_conversation(
+        self,
+        conv_id: str,
+        user_id: str,
+        user_name: str,
+        user_email: str,
+        created_at: str,
+    ) -> None:
+        """Record a conversation-to-user mapping in the tracking table.
+
+        Creates an entry in ``user_conversations`` keyed by ``conv_id`` so
+        tracking pages can resolve full user details from a conversation id
+        without scanning the entire ``conversations`` collection.
+
+        Args:
+            conv_id (str): The 8-character conversation identifier.
+            user_id (str): The user UUID who owns this conversation.
+            user_name (str): The user's display name.
+            user_email (str): The user's email address.
+            created_at (str): ISO-8601 timestamp of conversation creation.
+
+        Returns:
+            None
+        """
+        with self._lock:
+            data = self._read()
+            data.setdefault("user_conversations", {})[conv_id] = {
+                "conv_id": conv_id,
+                "user_id": user_id,
+                "user_name": user_name,
+                "user_email": user_email,
+                "created_at": created_at,
+            }
+            self._write(data)
+        self.log.debug(
+            "Recorded user_conversation entry %s -> user=%s", conv_id, user_id
+        )
+
+    def insert_thread(
+        self,
+        thread_id: str,
+        conv_id: str,
+        project_id: str,
+        project_name: str,
+        user_id: str,
+        user_name: str,
+        created_at: str,
+    ) -> None:
+        """Record the binding of thread_id, conv_id (project UUID) and user_id.
+
+        Args:
+            thread_id (str): Unique 8-char hex identifier for this email thread.
+            conv_id (str): Same as thread_id (used for email routing).
+            project_id (str): UUID of the selected predefined project.
+            project_name (str): Human-readable product name.
+            user_id (str): The user who created this thread.
+            user_name (str): The user's display name.
+            created_at (str): ISO-8601 creation timestamp.
+
+        Returns:
+            None
+        """
+        with self._lock:
+            data = self._read()
+            data.setdefault("threads", {})[thread_id] = {
+                "thread_id": thread_id,
+                "conv_id": conv_id,
+                "project_id": project_id,
+                "project_name": project_name,
+                "user_id": user_id,
+                "user_name": user_name,
+                "created_at": created_at,
+            }
+            self._write(data)
+        self.log.debug(
+            "Recorded thread %s -> project=%s user=%s",
+            thread_id,
+            project_id,
+            user_id,
+        )
+
     # ── Read methods ─────────────────────────────────────────────────
 
     def get_conversation(self, conv_id: str) -> dict | None:
@@ -343,6 +457,76 @@ class EmailDB:
             reverse=True,
         )
 
+    def get_predefined_users(self) -> list[dict]:
+        """Return the list of predefined system users.
+
+        Returns:
+            list[dict]: Each dict has ``id``, ``full_name`` and ``email``.
+        """
+        return self._read().get("predefined_users", PREDEFINED_USERS)
+
+    def get_user_by_id(self, user_id: str) -> dict | None:
+        """Look up a predefined user by their UUID.
+
+        Args:
+            user_id (str): The user's UUID.
+
+        Returns:
+            dict | None: User record with ``id``, ``full_name``, ``email``,
+                or ``None`` if not found.
+        """
+        return next(
+            (u for u in self.get_predefined_users() if u["id"] == user_id),
+            None,
+        )
+
+    def get_predefined_projects(self) -> list[dict]:
+        """Return the list of predefined projects.
+
+        Returns:
+            list[dict]: Each dict has ``id`` and ``product_name``.
+        """
+        return self._read().get("predefined_projects", PREDEFINED_PROJECTS)
+
+    def get_project_by_id(self, project_id: str) -> dict | None:
+        """Look up a predefined project by its UUID.
+
+        Args:
+            project_id (str): The project UUID.
+
+        Returns:
+            dict | None: Project record with ``id`` and ``product_name``,
+                or ``None`` if not found.
+        """
+        return next(
+            (p for p in self.get_predefined_projects() if p["id"] == project_id),
+            None,
+        )
+
+    def get_thread(self, thread_id: str) -> dict | None:
+        """Fetch a thread binding record by thread_id.
+
+        Args:
+            thread_id (str): The 8-character thread identifier.
+
+        Returns:
+            dict | None: Thread record with thread_id, conv_id, project_id,
+                project_name, user_id, user_name, created_at, or None.
+        """
+        return self._read().get("threads", {}).get(thread_id)
+
+    def get_user_conversation_info(self, conv_id: str) -> dict | None:
+        """Fetch the user_conversations tracking record for a conversation.
+
+        Args:
+            conv_id (str): The 8-character conversation identifier.
+
+        Returns:
+            dict | None: Record with ``conv_id``, ``user_id``, ``user_name``,
+                ``user_email``, ``created_at``, or ``None`` if not found.
+        """
+        return self._read().get("user_conversations", {}).get(conv_id)
+
     def get_all_users(self) -> list[dict]:
         """Return a summary record for every user, most active first.
 
@@ -361,6 +545,7 @@ class EmailDB:
             '42'
         """
         data = self._read()
+        predefined = {u["id"]: u for u in data.get("predefined_users", [])}
         result = []
         for user_id, conv_ids in data["users"].items():
             convs = [data["conversations"].get(cid) for cid in conv_ids]
@@ -378,8 +563,11 @@ class EmailDB:
             open_count = sum(
                 1 for c in convs if c.get("status") == "open"
             )
+            user_info = predefined.get(user_id, {})
             result.append({
                 "user_id": user_id,
+                "user_name": user_info.get("full_name") or f"User {user_id[:8]}",
+                "user_email": user_info.get("email", ""),
                 "conversation_count": len(convs),
                 "replied_count": replied,
                 "open_count": open_count,

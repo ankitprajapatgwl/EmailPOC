@@ -1,0 +1,46 @@
+Pending:-
+1. We need to test tracking email body table content, multiple attachments, and images.
+2. We will store userId, conversation ID, and thread ID in the database.
+    The email address will contain the thread ID and user name.
+    Example: AnkitPrajapat-hsdgfus@mail.jobsetu.online
+3. We need to test tracking completely new thread emails.
+
+4. We need to identify how many dynamic email addresses we can create.
+5. Is there a way SendGrid provides mailbox functionality, or can users view conversation emails?
+
+
+Implemented:
+POC created with python code and we have cover below points with Sendgrid
+
+1. We can create and send email using dynamic email
+    address:- AnkitPrajapat-00000@mail.jobsetu.online, AnkitPrajapat-11111@mail.jobsetu.online
+2. We can track and monitor supplier Reply and forward email on same thread or email.
+3. We can track Attachmenets, Subject, Body of an email.
+
+Props:-
+
+
+Cons:-
+
+=========================================
+
+0. Till we have implemented Gmail Platform.
+1. What we have implemented yet regarding User specific email address suppose
+    personal gmail, outlook etc platform.
+2. Challenges, what if user uses new platform
+3. Identify Props/Cons for this approach. Example: Security Concern.
+4. If client wants to implement multiple platform for sending email on behalf of user
+    from its personal mail address, Then we need to implement functionality
+    all platforms Like login with Gmail, Login with Outlook etc, and Client needs to provide
+    all credential.json file
+
+
+Props:-
+
+
+Cons:-
+
+==========================================
+
+We need to Identify is there any service provider, that provides
+single credential.json to send email on behalf od user from multiple platforms

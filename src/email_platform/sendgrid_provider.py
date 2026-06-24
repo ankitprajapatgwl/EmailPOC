@@ -22,10 +22,21 @@ Example:
     'sendgrid'
 """
 
+import base64
 import logging
 
 import sendgrid
-from sendgrid.helpers.mail import From, Mail, ReplyTo, To
+from sendgrid.helpers.mail import (
+    Attachment,
+    Disposition,
+    FileContent,
+    FileName,
+    FileType,
+    From,
+    Mail,
+    ReplyTo,
+    To,
+)
 
 from src.config import Settings
 from src.email_platform.email_master import EmailMaster, EmailSendError
@@ -97,6 +108,7 @@ class SendGridEmailProvider(EmailMaster):
         subject: str,
         html_body: str,
         reply_to: str,
+        attachments: list | None = None,
     ) -> dict:
         """Send one email via SendGrid and normalise the result.
 
@@ -141,6 +153,19 @@ class SendGridEmailProvider(EmailMaster):
             # Reply-To carries the dynamic address so supplier replies flow
             # back through SendGrid Inbound Parse to the webhook.
             message.reply_to = ReplyTo(reply_to)
+
+            for att in (attachments or []):
+                sg_att = Attachment(
+                    FileContent(
+                        base64.b64encode(att["content"]).decode()
+                    ),
+                    FileName(att["filename"]),
+                    FileType(
+                        att.get("content_type", "application/octet-stream")
+                    ),
+                    Disposition("attachment"),
+                )
+                message.add_attachment(sg_att)
 
             response = self._client.send(message)
 

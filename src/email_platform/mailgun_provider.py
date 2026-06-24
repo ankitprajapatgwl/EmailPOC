@@ -113,6 +113,7 @@ class MailgunEmailProvider(EmailMaster):
         subject: str,
         html_body: str,
         reply_to: str,
+        attachments: list | None = None,
     ) -> dict:
         """Send one email via the Mailgun messages API.
 
@@ -159,11 +160,18 @@ class MailgunEmailProvider(EmailMaster):
             "h:Reply-To": reply_to,
         }
 
+        files = [
+            ("attachment", (att["filename"], att["content"],
+                            att.get("content_type", "application/octet-stream")))
+            for att in (attachments or [])
+        ]
+
         try:
             response = requests.post(
                 self.messages_url,
                 auth=(_BASIC_AUTH_USER, self.api_key),
                 data=payload,
+                files=files or None,
                 timeout=_REQUEST_TIMEOUT,
             )
         except requests.RequestException as exc:

@@ -110,6 +110,7 @@ class ElasticEmailProvider(EmailMaster):
         subject: str,
         html_body: str,
         reply_to: str,
+        attachments: list | None = None,
     ) -> dict:
         """Send one email via Elastic Email's transactional endpoint.
 

@@ -29,16 +29,20 @@
 {% if users %}
 <div style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
   <div style="font-size: 15px; font-weight: 600;">All Users ({{ users | length }})</div>
-  <input type="text" id="search" placeholder="Search user ID…"
+  <input type="text" id="search" placeholder="Search by name or email…"
          style="width: 220px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px;"
          oninput="filterUsers(this.value)">
 </div>
 
 <div class="user-grid" id="user-grid">
   {% for user in users %}
-  <a href="/tracking/{{ user.user_id }}" class="user-card" data-uid="{{ user.user_id }}">
-    <div class="user-avatar">{{ user.user_id[0] | upper }}</div>
-    <div class="user-id">User {{ user.user_id }}</div>
+  <a href="/tracking/{{ user.user_id }}" class="user-card"
+     data-uid="{{ user.user_id }}"
+     data-name="{{ user.user_name | lower }}"
+     data-email="{{ user.user_email | lower }}">
+    <div class="user-avatar">{{ (user.user_name or user.user_id)[0] | upper }}</div>
+    <div class="user-id">{{ user.user_name or ("User " ~ user.user_id[:8]) }}</div>
+    <div class="user-meta" style="font-size:11px;">{{ user.user_email or user.user_id }}</div>
     <div class="user-meta">
       {% if user.last_activity %}
         Last activity: {{ user.last_activity[:10] }}
@@ -68,8 +72,10 @@
 function filterUsers(q) {
   q = q.toLowerCase();
   document.querySelectorAll(".user-card").forEach(function(card) {
-    var uid = card.dataset.uid.toLowerCase();
-    card.style.display = uid.includes(q) ? "" : "none";
+    var match = card.dataset.name.includes(q) ||
+                card.dataset.email.includes(q) ||
+                card.dataset.uid.toLowerCase().includes(q);
+    card.style.display = match ? "" : "none";
   });
 }
 </script>

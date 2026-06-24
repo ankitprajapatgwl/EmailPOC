@@ -90,39 +90,45 @@ class ConversationService:
     def create_conversation(
         self,
         user_id: str,
+        user_name: str,
         supplier_email: str,
         supplier_name: str = "",
+        project_id: str = "",
+        project_name: str = "",
     ) -> dict:
         """Create and persist a new tracked conversation.
 
-        Generates a unique conversation id (via the provider's inherited
-        helper), builds the associated dynamic email address, stores the
-        record and returns it.
+        Generates a unique thread_id (used as conv_id for email routing),
+        builds the associated dynamic email address, stores the record in
+        ``conversations``, ``user_conversations``, and ``threads`` tables.
 
         Args:
-            user_id (str): The platform user who owns this conversation.
-            supplier_email (str): The supplier address that will receive the
-                outbound RFQ.
+            user_id (str): The platform user UUID who owns this conversation.
+            user_name (str): The user's display name.
+            supplier_email (str): The supplier address for the outbound RFQ.
             supplier_name (str): Human-readable supplier display name.
-                Defaults to an empty string.
+            project_id (str): UUID of the selected predefined project.
+                When provided this is stored as the "Conversation ID" for
+                grouping; the generated thread_id handles email routing.
+            project_name (str): Product name from the selected project.
 
         Returns:
-            dict: The newly created conversation record (status ``"open"``,
-                empty ``emails_sent`` / ``emails_received`` lists).
-
-        Example:
-            >>> conv = service.create_conversation(  # doctest: +SKIP
-            ...     "42", "buyer@acme.com", "Acme")
-            >>> conv["email_address"]                 # doctest: +SKIP
-            'usr42_conv3fa9c1b2@mail.yourdomain.com'
+            dict: The newly created conversation record.
         """
-        conv_id = self.email.generate_conversation_id()
-        email_addr = self.email.build_dynamic_email(user_id, conv_id)
+        thread_id = self.email.generate_conversation_id()
+        # conv_id = thread_id for email routing; project_id is the business
+        # level conversation identifier displayed in the UI.
+        conv_id = thread_id
+        email_addr = self.email.build_dynamic_email(user_name, conv_id)
         now = datetime.now(timezone.utc).isoformat()
 
         conversation = {
             "conv_id": conv_id,
+            "thread_id": thread_id,
+            "project_id": project_id,
+            "project_name": project_name,
             "user_id": str(user_id),
+            "user_name": user_name,
             "supplier_email": supplier_email,
             "supplier_name": supplier_name,
             "email_address": email_addr,
@@ -135,9 +141,31 @@ class ConversationService:
             "emails_received": [],
         }
         self.db.insert_conversation(conversation)
+
+        user_info = self.db.get_user_by_id(user_id)
+        self.db.insert_user_conversation(
+            conv_id=conv_id,
+            user_id=str(user_id),
+            user_name=user_name,
+            user_email=user_info.get("email", "") if user_info else "",
+            created_at=now,
+        )
+
+        self.db.insert_thread(
+            thread_id=thread_id,
+            conv_id=conv_id,
+            project_id=project_id,
+            project_name=project_name,
+            user_id=str(user_id),
+            user_name=user_name,
+            created_at=now,
+        )
+
         self.log.info(
-            "Created conversation %s (user=%s, provider=%s)",
+            "Created conversation %s (thread=%s project=%s user=%s provider=%s)",
             conv_id,
+            thread_id,
+            project_id or "none",
             user_id,
             self.email.provider_name,
         )
@@ -153,6 +181,7 @@ class ConversationService:
         product_name: str,
         quantity: int,
         target_price: str,
+        attachments: list | None = None,
     ) -> dict:
         """Render and send an RFQ email, then persist the sent record.
 
@@ -189,7 +218,12 @@ class ConversationService:
             >>> result["status_code"]                 # doctest: +SKIP
             202
         """
-        reply_to = self.email.build_dynamic_email(user_id, conv_id)
+        conversation = self.db.get_conversation(conv_id)
+        reply_to = (
+            conversation["email_address"]
+            if conversation
+            else self.email.build_dynamic_email(user_id, conv_id)
+        )
         subject = self.email.build_rfq_subject(conv_id, product_name)
         html_body = self.email.build_rfq_html(
             user_id=user_id,
@@ -212,10 +246,11 @@ class ConversationService:
             subject=subject,
             html_body=html_body,
             reply_to=reply_to,
+            attachments=attachments,
         )
 
-         # self.settings.from_email,
         sent_record = {
+            "email_type": "new_thread",
             "from_email": reply_to,
             "reply_to": reply_to,
             "to_email": supplier_email,
@@ -224,6 +259,12 @@ class ConversationService:
             "product_name": product_name,
             "quantity": quantity,
             "target_price": target_price,
+            "attachments": [
+                {"filename": a["filename"],
+                 "content_type": a.get("content_type", "application/octet-stream"),
+                 "size": len(a["content"])}
+                for a in (attachments or [])
+            ],
             "provider": result.get("provider"),
             "provider_message_id": result.get("provider_message_id"),
             "status_code": result.get("status_code"),
@@ -328,14 +369,28 @@ class ConversationService:
             self.log.info("Unmatched inbound address: %s", inbound.to_email)
             return {"status": "unmatched"}
 
-        user_id = parsed["user_id"]
         conv_id = parsed["conv_id"]
+        conversation = self.db.get_conversation(conv_id)
+        if not conversation:
+            self.db.insert_unmatched({
+                "from_email": inbound.from_email,
+                "to_email": inbound.to_email,
+                "subject": inbound.subject,
+                "provider": inbound.provider,
+                "received_at": received_at,
+                "needs_review": True,
+            })
+            self.log.info("Unmatched conv_id %s in address: %s", conv_id, inbound.to_email)
+            return {"status": "unmatched"}
+
+        user_id = conversation["user_id"]
         self.log.info("Matched inbound -> user=%s conv=%s", user_id, conv_id)
 
         attachments = self.webhook.persist_attachments(
             conv_id, inbound.attachments
         )
         inbound_record = {
+            "email_type": self._detect_email_type(inbound.subject),
             "from_email": inbound.from_email,
             "to_email": inbound.to_email,
             "subject": inbound.subject,
@@ -397,3 +452,20 @@ class ConversationService:
         # Hook a negotiation agent here, e.g.:
         #   agent.invoke({"conv_id": conv_id, "action": action, ...})
         return action
+
+    @staticmethod
+    def _detect_email_type(subject: str) -> str:
+        """Detect whether an inbound email is a reply, forward, or new thread.
+
+        Args:
+            subject (str): The subject line of the inbound email.
+
+        Returns:
+            str: One of ``"reply"``, ``"forwarded"``, or ``"new_thread"``.
+        """
+        s = (subject or "").strip().lower()
+        if s.startswith("re:") or s.startswith("re "):
+            return "reply"
+        if s.startswith("fwd:") or s.startswith("fw:") or s.startswith("fwd "):
+            return "forwarded"
+        return "new_thread"

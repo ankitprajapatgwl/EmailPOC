@@ -1,19 +1,23 @@
 {% extends "base.html" %}
-{% block title %}User {{ user_id }} — EmailPOC{% endblock %}
+{% block title %}{{ user_name }} — EmailPOC{% endblock %}
 
 {% block content %}
 <div class="breadcrumb">
   <a href="/tracking">Tracking</a>
   <span class="breadcrumb-sep">›</span>
-  <span class="breadcrumb-cur">User {{ user_id }}</span>
+  <span class="breadcrumb-cur">{{ user_name }}</span>
 </div>
 
 <div class="page-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
   <div>
-    <div class="page-title">User {{ user_id }}</div>
+    <div class="page-title">{{ user_name }}</div>
+    {% if user_email %}
+    <div class="page-sub" style="font-size:13px;">{{ user_email }} &nbsp;·&nbsp; {{ conversations | length }} conversation{% if conversations | length != 1 %}s{% endif %}</div>
+    {% else %}
     <div class="page-sub">{{ conversations | length }} conversation{% if conversations | length != 1 %}s{% endif %}</div>
+    {% endif %}
   </div>
-  <a href="/?uid={{ user_id }}" class="btn btn-secondary btn-sm">📤 New RFQ</a>
+  <a href="/" class="btn btn-secondary btn-sm">📤 New RFQ</a>
 </div>
 
 {% if conversations %}
@@ -22,7 +26,8 @@
     <table>
       <thead>
         <tr>
-          <th>Conv ID</th>
+          <th>Thread ID</th>
+          <th>Product / Conversation ID</th>
           <th>Supplier</th>
           <th>Product</th>
           <th>Qty</th>
@@ -36,7 +41,17 @@
       <tbody>
         {% for conv in conversations %}
         <tr onclick="location.href='/tracking/{{ user_id }}/{{ conv.conv_id }}'">
-          <td class="mono">{{ conv.conv_id }}</td>
+          <td class="mono" style="font-size:12px;">{{ conv.thread_id or conv.conv_id }}</td>
+          <td>
+            {% if conv.project_name %}
+              <div style="font-weight:600; font-size:13px;">{{ conv.project_name }}</div>
+            {% endif %}
+            {% if conv.project_id %}
+              <div class="text-xs text-muted mono" style="font-size:10px; word-break:break-all;">{{ conv.project_id }}</div>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
           <td>
             <div style="font-weight:600;">{{ conv.supplier_name or '—' }}</div>
             <div class="text-xs text-muted">{{ conv.supplier_email }}</div>

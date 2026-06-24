@@ -5,9 +5,9 @@
 <div class="breadcrumb">
   <a href="/tracking">Tracking</a>
   <span class="breadcrumb-sep">›</span>
-  <a href="/tracking/{{ conversation.user_id }}">User {{ conversation.user_id }}</a>
+  <a href="/tracking/{{ conversation.user_id }}">{{ conversation.user_name or ("User " ~ conversation.user_id[:8]) }}</a>
   <span class="breadcrumb-sep">›</span>
-  <span class="breadcrumb-cur" class="font-mono">{{ conversation.conv_id }}</span>
+  <span class="breadcrumb-cur font-mono">{{ conversation.project_name or conversation.conv_id }}</span>
 </div>
 
 {% if success %}
@@ -17,9 +17,23 @@
 <!-- Conversation Info Bar -->
 <div class="conv-info-bar">
   <div class="conv-info-item">
+    <div class="conv-info-label">Thread ID</div>
+    <div class="conv-info-value font-mono">{{ conversation.thread_id or conversation.conv_id }}</div>
+  </div>
+  {% if conversation.project_id %}
+  <div class="conv-info-item">
+    <div class="conv-info-label">Conversation ID (Product)</div>
+    <div class="conv-info-value" style="font-size:12px;">
+      <div style="font-weight:600;">{{ conversation.project_name or '—' }}</div>
+      <div class="font-mono" style="font-size:10px; color:var(--txt2); word-break:break-all;">{{ conversation.project_id }}</div>
+    </div>
+  </div>
+  {% else %}
+  <div class="conv-info-item">
     <div class="conv-info-label">Conv ID</div>
     <div class="conv-info-value font-mono">{{ conversation.conv_id }}</div>
   </div>
+  {% endif %}
   <div class="conv-info-item">
     <div class="conv-info-label">Supplier</div>
     <div class="conv-info-value">{{ conversation.supplier_name or conversation.supplier_email }}</div>
@@ -84,22 +98,21 @@
     <div class="email-card-header">
       <div class="email-card-meta">
         <div class="email-card-parties">
-          <span class="email-card-from">
-            {% if email.direction == 'sent' %}
-              From: {{ email.from_email }}
-            {% else %}
-              From: {{ email.from_email }}
-            {% endif %}
-          </span>
-          <span class="email-card-to">
-            To: {{ email.to_email }}
-          </span>
+          <span class="email-card-from">From: {{ email.from_email }}</span>
+          <span class="email-card-to">To: {{ email.to_email }}</span>
         </div>
       </div>
-      <div class="email-card-time">
+      <div class="email-card-time" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
         <span class="badge {% if email.direction == 'sent' %}badge-sent{% else %}badge-received{% endif %}" style="font-size:11px;">
           {% if email.direction == 'sent' %}↑ Sent{% else %}↓ Received{% endif %}
         </span>
+        {% if email.email_type == 'reply' %}
+          <span class="badge" style="font-size:10px; background:#e0f0ff; color:#0066cc; border:1px solid #b3d7ff;">↩ Reply</span>
+        {% elif email.email_type == 'forwarded' %}
+          <span class="badge" style="font-size:10px; background:#fff3e0; color:#cc6600; border:1px solid #ffd699;">⇒ Forwarded</span>
+        {% elif email.email_type == 'new_thread' %}
+          <span class="badge" style="font-size:10px; background:#e6f9e6; color:#1a7a1a; border:1px solid #99d699;">✉ New Thread</span>
+        {% endif %}
         <span>
           {% set ts = email.sent_at or email.received_at or '' %}
           {{ ts[:16].replace('T', ' ') if ts else '—' }} UTC

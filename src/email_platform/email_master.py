@@ -130,77 +130,74 @@ class EmailMaster(ABC):
         """
         return uuid.uuid4().hex[:8]
 
-    def build_dynamic_email(self, user_id: str | int, conv_id: str) -> str:
+    def build_dynamic_email(self, user_name: str, conv_id: str) -> str:
         """Construct the dynamic email address for a conversation.
 
-        The address encodes ``user_id`` and ``conv_id`` in the local-part so
-        both values can be recovered from any email that arrives at the
-        address without a database lookup on the receiving side.
+        Converts the user's display name to CamelCase (e.g.
+        ``"Ankit Prajapat"`` → ``"AnkitPrajapat"``) and combines it with the
+        conversation/thread id via a hyphen so the address is human-readable
+        and the conv_id can be recovered from any reply that arrives there.
 
         Args:
-            user_id (str | int): The platform user identifier.
+            user_name (str): The user's display name (e.g. ``"Ankit Prajapat"``).
             conv_id (str): The 8-character conversation identifier returned
                 by :meth:`generate_conversation_id`.
 
         Returns:
             str: Fully qualified address, e.g.
-                ``"usr42_conv3fa9c1b2@mail.yourdomain.com"``.
+                ``"AnkitPrajapat-3fa9c1b2@mail.jobsetu.online"``.
 
         Example:
-            >>> provider.build_dynamic_email(42, "3fa9c1b2")
-            'usr42_conv3fa9c1b2@mail.yourdomain.com'
+            >>> provider.build_dynamic_email("Ankit Prajapat", "3fa9c1b2")
+            'AnkitPrajapat-3fa9c1b2@mail.jobsetu.online'
         """
-        return (
-            f"usr{user_id}_conv{conv_id}@{self.settings.inbound_domain}"
-        )
+        camel = "".join(word.capitalize() for word in user_name.split())
+        return f"{camel}-{conv_id}@{self.settings.inbound_domain}"
 
     def parse_dynamic_email(self, email_address: str) -> dict | None:
-        """Extract ``user_id`` and ``conv_id`` from a dynamic address.
+        """Extract ``conv_id`` from a dynamic address.
 
-        Matches ``usr{user_id}_conv{conv_id}@{INBOUND_DOMAIN}`` with a
-        case-insensitive regex (some clients upper-case the ``To`` header).
-        This method is the single source of truth for decoding inbound
-        addresses and is reused by the webhook layer.
+        Supports two address formats:
+
+        * **Current**: ``{CamelCaseName}-{conv_id}@{INBOUND_DOMAIN}``
+          e.g. ``AnkitPrajapat-3fa9c1b2@mail.jobsetu.online``
+        * **Legacy** (backward-compat): ``{prefix}_conv{conv_id}@{INBOUND_DOMAIN}``
+          e.g. ``ankit.prajapat_conv3fa9c1b2@mail.jobsetu.online``
 
         Args:
             email_address (str): The raw ``To`` address from an inbound
-                email, e.g. ``"usr42_conv3fa9c1b2@mail.yourdomain.com"``.
+                email.
 
         Returns:
-            dict | None: ``{"user_id": str, "conv_id": str}`` on success, or
-                ``None`` when the address does not match the pattern (or when
+            dict | None: ``{"conv_id": str}`` on success, or ``None`` when
+                the address does not match any known pattern (or when
                 ``INBOUND_DOMAIN`` is not configured).
 
         Example:
             >>> provider.parse_dynamic_email(
-            ...     "usr42_conv3fa9c1b2@mail.yourdomain.com")
-            {'user_id': '42', 'conv_id': '3fa9c1b2'}
+            ...     "AnkitPrajapat-3fa9c1b2@mail.jobsetu.online")
+            {'conv_id': '3fa9c1b2'}
             >>> provider.parse_dynamic_email("nobody@other.com") is None
             True
         """
         inbound_domain = self.settings.inbound_domain
         if not inbound_domain:
-            # With no configured domain the pattern would match ANY domain
-            # (``@`` followed by anything). Refuse rather than accept every
-            # sender — this would otherwise be a spoofing hole.
             self.log.error(
                 "INBOUND_DOMAIN is not set; cannot match inbound address"
             )
             return None
 
         domain = re.escape(inbound_domain)
-        # The trailing negative lookahead anchors the host so a look-alike
-        # suffix (e.g. ``@mail.yourdomain.com.evil.com``) cannot be decoded
-        # as a real conversation. ``[\w.-]`` are the characters a hostname
-        # could legitimately continue with; anything else (``>``, space,
-        # comma, end-of-string) ends the address cleanly.
-        pattern = rf"usr(\w+)_conv([a-f0-9]{{8}})@{domain}(?![\w.-])"
-        match = re.search(pattern, email_address or "", re.IGNORECASE)
-        if match:
-            return {
-                "user_id": match.group(1),
-                "conv_id": match.group(2),
-            }
+        patterns = [
+            # Current format: CamelCaseName-{8hex}@domain
+            rf"[A-Za-z0-9]+-([a-f0-9]{{8}})@{domain}(?![\w.-])",
+            # Legacy format: any_prefix_conv{8hex}@domain
+            rf"[a-z0-9._-]+_conv([a-f0-9]{{8}})@{domain}(?![\w.-])",
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, email_address or "", re.IGNORECASE)
+            if match:
+                return {"conv_id": match.group(1)}
         return None
 
     # ── Shared RFQ rendering ─────────────────────────────────────────
@@ -265,9 +262,25 @@ class EmailMaster(ABC):
         company = self.settings.company_name
         # Built as a list of short lines so no single source line exceeds
         # the 79-column limit; ``"".join`` reassembles the final markup.
+        # Small base64-encoded blue banner (320×40 PNG) for image-tracking
+        # tests — demonstrates inline image rendering across email clients.
+        banner_b64 = (
+            "iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+"
+            "AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDP"
+            "Zu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iB"
+            "IczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCE"
+            "GRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjAD"
+            "Q5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJ"
+            "RU5ErkJggg=="
+        )
         parts = [
             '<div style="font-family: Arial, sans-serif; '
             'max-width: 600px;">',
+            # Company banner image (inline base64 — renders without external
+            # host; tests that images in email body are tracked correctly)
+            f'<img src="data:image/png;base64,{banner_b64}" '
+            f'alt="{company}" width="320" height="40" '
+            'style="display:block; margin-bottom:16px;">',
             f"<p>Dear {supplier_name},</p>",
             "<p>I am writing to request a formal quotation for the "
             "following:</p>",
@@ -294,7 +307,8 @@ class EmailMaster(ABC):
             '<hr style="border:none; border-top:1px solid #eee; '
             'margin-top:30px;">',
             '<p style="font-size:11px; color:#aaa;">',
-            f"Reference: CONV-{conv_id.upper()} | USR-{user_id}</p>",
+            f"Reference: CONV-{conv_id.upper()} | USR-{user_id} "
+            f"| THREAD-{conv_id.upper()}</p>",
             "</div>",
         ]
         return "".join(parts)
@@ -312,6 +326,7 @@ class EmailMaster(ABC):
         subject: str,
         html_body: str,
         reply_to: str,
+        attachments: list | None = None,
     ) -> dict:
         """Transmit a single email through the concrete provider.
 
@@ -329,6 +344,9 @@ class EmailMaster(ABC):
             html_body (str): HTML body of the message.
             reply_to (str): ``Reply-To`` address — the dynamic conversation
                 address so replies route back correctly.
+            attachments (list | None): Optional list of attachment dicts,
+                each with keys ``filename`` (str), ``content`` (bytes) and
+                ``content_type`` (str).
 
         Returns:
             dict: Normalised result with keys ``status_code`` (int),

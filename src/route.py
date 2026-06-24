@@ -28,9 +28,10 @@ Example:
     >>> app.include_router(router)            # doctest: +SKIP
 """
 
+from typing import List
 from urllib.parse import quote
 
-from fastapi import APIRouter, Form, HTTPException, Request
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import RedirectResponse
 
 from src.email_platform.email_master import EmailProviderError
@@ -68,12 +69,15 @@ async def send_email_page(
         TemplateResponse: The rendered ``index.html`` template.
     """
     templates = request.app.state.templates
+    service: ConversationService = request.app.state.service
     return templates.TemplateResponse(request, "index.html", {
         "active_page": "send",
         "success": success,
         "error": error,
         "conv_id": conv_id,
         "user_id": user_id,
+        "predefined_users": service.db.get_predefined_users(),
+        "predefined_projects": service.db.get_predefined_projects(),
     })
 
 
@@ -81,11 +85,15 @@ async def send_email_page(
 async def send_email_form(
     request: Request,
     user_id: str = Form(...),
+    user_name: str = Form(...),
+    project_id: str = Form(default=""),
+    project_name: str = Form(default=""),
     supplier_email: str = Form(...),
     supplier_name: str = Form(...),
     product_name: str = Form(...),
     quantity: int = Form(...),
     target_price: str = Form(...),
+    attachments: List[UploadFile] = File(default=[]),
 ):
     """Process the RFQ form submission and send the email.
 
@@ -96,7 +104,8 @@ async def send_email_form(
 
     Args:
         request (Request): FastAPI request.
-        user_id (str): Platform user identifier from the form.
+        user_id (str): Platform user UUID from the dropdown selection.
+        user_name (str): User's display name (hidden field, set by JS).
         supplier_email (str): Supplier's email address.
         supplier_name (str): Supplier's display name.
         product_name (str): Name of the product being quoted.
@@ -110,8 +119,22 @@ async def send_email_form(
     service: ConversationService = request.app.state.service
     log = request.app.state.log
     try:
+        attachment_data = []
+        for upload in attachments:
+            if upload.filename:
+                content = await upload.read()
+                attachment_data.append({
+                    "filename": upload.filename,
+                    "content": content,
+                    "content_type": (
+                        upload.content_type or "application/octet-stream"
+                    ),
+                })
+
         conversation = service.create_conversation(
-            user_id, supplier_email, supplier_name
+            user_id, user_name, supplier_email, supplier_name,
+            project_id=project_id,
+            project_name=project_name,
         )
         conv_id = conversation["conv_id"]
 
@@ -123,6 +146,7 @@ async def send_email_form(
             product_name=product_name,
             quantity=quantity,
             target_price=target_price,
+            attachments=attachment_data or None,
         )
         return RedirectResponse(
             f"/tracking/{user_id}/{conv_id}?success=1",
@@ -181,12 +205,15 @@ async def user_tracking(request: Request, user_id: str):
     service: ConversationService = request.app.state.service
     templates = request.app.state.templates
     conversations = service.db.get_user_conversations(user_id)
+    user_info = service.db.get_user_by_id(user_id) or {}
     return templates.TemplateResponse(
         request,
         "user_conversations.html",
         {
             "active_page": "tracking",
             "user_id": user_id,
+            "user_name": user_info.get("full_name") or f"User {user_id[:8]}",
+            "user_email": user_info.get("email", ""),
             "conversations": conversations,
         },
     )
