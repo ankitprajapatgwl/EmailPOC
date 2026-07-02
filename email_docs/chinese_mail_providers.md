@@ -1,6 +1,5 @@
-# Chinese Email Providers — Comparison for a Python Send & Monitoring System
+# Chinese Email Providers Comparison for mail sending and monitoring
 
-> **Scope & sources:** Every provider was evaluated against the same set of questions for an **Indian developer** using **Indian details** and an **Indian GoDaddy domain**, building a **Python** send-and-monitoring system.
 >
 > **Providers covered:**
 > 1. MXtoChina (MXflow.io — Webpower China)
@@ -11,7 +10,7 @@
 > 6. Alibaba Cloud DirectMail
 > 7. Microsoft 365 operated by 21Vianet
 >
-> **Note:** **NetEase Enterprise Mail** and **NetEase QiYe** are the *same product* — "NetEase QiYe" (网易企业邮箱) is simply the native Chinese brand name of NetEase Enterprise Mail. They are covered as a single provider here.
+
 
 ---
 
@@ -73,11 +72,11 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 |---|---|---|---|---|
 | **MXtoChina** | ❌ None | ❌ None (no public trial) | **Custom quotation only** — no public pricing catalog or standard monthly packages listed on mxflow.io. Structure (per contract): fixed monthly base + pay-as-you-go overages; indicative baseline ~**50,000 emails/month**; overages metered at cycle end. SMS priced separately by CN carrier rates. Contact **support@mxtochina.com** or **contact@mxtochina.com** for a quote. (Includes manual brand registration with Chinese ISPs.) | No self-service/casual tier — pricing disclosed only via custom sales contract |
 | **Tencent Cloud SES** | ✅ **1,000 free emails** (per-account allowance) | (Free allowance serves as the trial) | **Pay-as-you-go**, daily billing cycle: **$0.00028/email** beyond the free allowance; optional **Dedicated IP at $120.00/month per IP** | International payment card required at signup; Balance ≤ 0 → API auto-suspends sending until topped up |
-| **NetEase Enterprise Mail** (NetEase QiYe) | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Subscription per seat/year, min **5 seats**. **Flagship (旗舰版):** ~¥200/user/yr — ¥1,000 (5-user) / ¥3,700 (20-user). **Deluxe (尊享版):** ~¥260/user/yr — ¥1,300 (5-user) / ¥4,810 (20-user). ¥1,000 ≈ $138 USD | Not pay-as-you-go; no API developer profile. Multi-year deals (e.g. "buy 3 years, get 3 free") via resellers |
+| **NetEase Enterprise Mail** (NetEase QiYe) | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Subscription per seat/year, min **5 seats**. **Flagship (旗舰版):** ~¥200/user/yr (**~$27.60**) — ¥1,000 / **$138** (5-user) / ¥3,700 / **$510.60** (20-user). **Deluxe (尊享版):** ~¥260/user/yr (**~$35.88**) — ¥1,300 / **$179.40** (5-user) / ¥4,810 / **$663.78** (20-user). *(Conversion: ¥1 ≈ $0.138 USD)* | Not pay-as-you-go; no API developer profile. Multi-year deals (e.g. "buy 3 years, get 3 free") via resellers |
 | **Alibaba Enterprise Mail** | ❌ No developer free tier (use **DirectMail** for Alibaba's free quota) | ❌ None documented (self-service purchase online) | **Per-user seat subscription** — starts ~**$2.87/user/month**, **3-seat minimum**, **500 GB storage/user**; higher **Standard/Advanced** editions billed **annually** | Not pay-as-you-go; direct self-service purchase (quotation only for large/custom migrations); intl credit card / **PayPal** / gateway |
-| **SendCloud (by Sohu)** | ✅ **10 emails/day** free (sandbox/trial tier) | (Free daily quota is the trial) | **Base monthly platform fee + tiered pay-as-you-go:** ¥59 CNY/month for 0–10,000 emails; +¥5.6 CNY per 1,000 for 10,001–50,000; +¥5.3 CNY per 1,000 for 50,001–100,000 | ❌ No international pay-as-you-go card billing; global users must arrange **international bank wire** to top up |
+| **SendCloud (by Sohu)** | ✅ **10 emails/day** free (sandbox/trial tier) | (Free daily quota is the trial) | **Base monthly platform fee + tiered pay-as-you-go:** ¥59 CNY / **~$8.14** per month for 0–10,000 emails; +¥5.6 CNY / **~$0.77** per 1,000 for 10,001–50,000; +¥5.3 CNY / **~$0.73** per 1,000 for 50,001–100,000 | ❌ No international pay-as-you-go card billing; global users must arrange **international bank wire** to top up |
 | **Alibaba Cloud DirectMail** | ✅ **Free tier: 2,000 emails/day** | N/A (free daily quota is the trial) | **Pay-as-you-go:** **$0.29 per 1,000 emails** beyond the free tier; **Prepaid 6-month resource packages:** 50k emails = $13.05 · 500k = $121.80 · 1M = $230.55; **Dedicated IP add-on:** $128/IP/month | New accounts capped at 2,000 emails/day (scales up with clean history) |
-| **M365 by 21Vianet** | ❌ No developer free tier / no instant credit | ⚠️ 7–30 day corporate eval (~25 licenses), negotiated with a 21Vianet account manager | Enterprise subscription via 21Vianet portal (`21vbluecloud.com/o365-landing/`) or local CSP; all pricing billed in **CNY (¥)** under localized **annual** contracts. Per-user/month (annual): **O365 E1** ¥66.06 · **M365 Enterprise Apps** ¥79.27 · **O365 E3** ¥151.93 · **M365 E3** ¥192.65 | No open Developer Program / no casual programmatic trial (unlike global M365) |
+| **M365 by 21Vianet** | ❌ No developer free tier / no instant credit | ⚠️ 7–30 day corporate eval (~25 licenses), negotiated with a 21Vianet account manager | Enterprise subscription via 21Vianet portal (`21vbluecloud.com/o365-landing/`) or local CSP; all pricing billed in **CNY (¥)** under localized **annual** contracts. Per-user/month (annual): **O365 E1** ¥66.06 / **~$9.12** · **M365 Enterprise Apps** ¥79.27 / **~$10.94** · **O365 E3** ¥151.93 / **~$20.97** · **M365 E3** ¥192.65 / **~$26.59** | No open Developer Program / no casual programmatic trial (unlike global M365) |
 
 ---
 
@@ -135,9 +134,9 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
   - **Official caveat:** NetEase support documentation states the platform is optimized for domestic operations and is explicitly **not suitable for independent overseas foreign-trade or global developer operations** due to these firewall/IP hurdles.
 - **Registration flow (direct vs. quotation):** You can initiate registration **directly online** for standard tiers — retail packs of **5 to 100 users** are structured via the NetEase Mobile Price Matrix Page. But to actually activate service and **lift international network filters**, you must submit your details to a dedicated enterprise consultant through a **"Purchase Consultation" (购买咨询)** request workflow (or via an authorized reseller).
 - **Q2 — Cost/free tier/trial:** **No developer free tier.** A **7-day free trial** exists but is manual (consultation/account-manager provisioned, not scriptable). Commercial pricing is a strict per-seat/year subscription with a **5-user minimum**:
-  - **Flagship Edition (旗舰版):** ~¥200 RMB/user/year — **¥1,000/year** (5-user pack), **¥3,700/year** (20-user pack).
-  - **Deluxe Edition (尊享版):** ~¥260 RMB/user/year — **¥1,300/year** (5-user pack), **¥4,810/year** (20-user pack).
-  - **Promotions:** multi-year commitments (e.g. 3-year tiers) often unlock deep reseller/agent discounts or **"Buy 3 Years, Get 3 Years Free"** extensions. (¥1,000 ≈ $138 USD.) Not pay-as-you-go; no API developer profile.
+  - **Flagship Edition (旗舰版):** ~¥200 RMB/user/year (**~$27.60**) — **¥1,000/year / ~$138** (5-user pack), **¥3,700/year / ~$510.60** (20-user pack).
+  - **Deluxe Edition (尊享版):** ~¥260 RMB/user/year (**~$35.88**) — **¥1,300/year / ~$179.40** (5-user pack), **¥4,810/year / ~$663.78** (20-user pack).
+  - **Promotions:** multi-year commitments (e.g. 3-year tiers) often unlock deep reseller/agent discounts or **"Buy 3 Years, Get 3 Years Free"** extensions. (¥1,000 ≈ $138 USD, i.e. ¥1 ≈ $0.138 — the conversion rate used throughout this document.) Not pay-as-you-go; no API developer profile.
 - **Q3 — Restrictions & mandatory steps:**
   - **Custom domain verification:** **Fully supported.** Map a custom domain (e.g. `@mail.ims.com`) by configuring standard **MX, SPF, and DKIM** records at your DNS registrar (GoDaddy), which points your corporate domain at the NetEase transmission clusters. (For reliable *Mainland* delivery the domain should also carry an **ICP Filing (备案)** with MIIT, or domestic telecom nodes may throttle/drop the traffic.)
   - **Email sending / dynamic "From":** **No native dynamic/wildcard "From" support.** Every unique "From" prefix must map to a valid, pre-configured mailbox seat, user account, or structural alias (unregistered → SMTP 550). NetEase's own documentation directs developers who need programmatic, high-volume dynamic outbound pipelines to use dedicated transactional relays (e.g. **SendGrid** or similar) rather than the fixed enterprise mailbox system. Workarounds: Account/Alias Management API, or pivot to Tencent SES / Aliyun DirectMail.
@@ -180,9 +179,9 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
   - Python scripts via REST/SMTP work immediately once the account is provisioned (against whitelisted test recipients in sandbox; all recipients after identity verification).
 - **Registration method:** **Direct self-service** — no quotation/sales contact needed to register or activate the free tier. Quotation/enterprise support is only needed when monthly volume exceeds standard commercial tiers.
 - **Q2 — Cost/free tier/trial:** **Free tier — 10 emails/day** (sandbox/trial tier, activated immediately after registration). Commercial billing uses a **base monthly platform fee + tiered pay-as-you-go volume model:**
-  - **0–10,000 emails:** ¥59 CNY/month (base plan)
-  - **10,001–50,000 emails:** +¥5.6 CNY per 1,000 emails
-  - **50,001–100,000 emails:** +¥5.3 CNY per 1,000 emails
+  - **0–10,000 emails:** ¥59 CNY/month (base plan) — **~$8.14/month**
+  - **10,001–50,000 emails:** +¥5.6 CNY per 1,000 emails — **~$0.77 per 1,000**
+  - **50,001–100,000 emails:** +¥5.3 CNY per 1,000 emails — **~$0.73 per 1,000**
   - **No international pay-as-you-go card billing** — global users must contact financial support to arrange an **international bank wire** to top up.
 - **Q3 — Restrictions & mandatory steps:**
   - **Real-name gating:** Corporate identity verification (business registration or passport scan) to send to real, un-whitelisted recipients and lift sandbox limits.
@@ -217,14 +216,14 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
   - A **+86 Mainland China mobile** number.
   - Cannot register on microsoftonline.cn with Indian-only details.
   - If you satisfy the above onshore legal criteria, sign up via the localized **21Vianet portal** (`https://www.21vbluecloud.com/o365-landing/`); otherwise, coordinate with a **regional Microsoft account manager** or submit a business request to **21Vianet Presales Support**.
-- **Q2 — Cost/free tier/trial:** **No developer free tier / no instant credit** (unlike the global M365 Developer Program's free 90-day sandbox). Enterprise subscription via the **21Vianet portal** or local CSP partners. **7–30 day corporate eval trials (~25 licenses)** must be negotiated with a 21Vianet account manager. All pricing is billed exclusively in **Chinese Yuan (CNY / ¥)** under localized **annual** contracts; regional tax additions apply. Current tier pricing (per user/month, annual commitment):
+- **Q2 — Cost/free tier/trial:** **No developer free tier / no instant credit** (unlike the global M365 Developer Program's free 90-day sandbox). Enterprise subscription via the **21Vianet portal** or local CSP partners. **7–30 day corporate eval trials (~25 licenses)** must be negotiated with a 21Vianet account manager. All pricing is billed exclusively in **Chinese Yuan (CNY / ¥)** under localized **annual** contracts; regional tax additions apply. Current tier pricing (per user/month, annual commitment; USD conversion at ¥1 ≈ $0.138):
 
-  | Plan | Price (¥/user/month) | Key Features |
-  |---|---|---|
-  | Office 365 E1 | ¥66.06 (~₹760) | Web/Mobile apps, 50 GB mailbox, 1 TB OneDrive |
-  | Microsoft 365 Enterprise Apps | ¥79.27 (~₹915) | Desktop Office suite, 1 TB OneDrive |
-  | Office 365 E3 | ¥151.93 (~₹1,750) | Desktop apps, 100 GB mailbox, advanced compliance |
-  | Microsoft 365 E3 | ¥192.65 (~₹2,220) | Full O365 E3 + Advanced Threat & Identity Protection |
+  | Plan | Price (¥/user/month) | Price (~USD/user/month) | Key Features |
+  |---|---|---|---|
+  | Office 365 E1 | ¥66.06 (~₹760) | ~$9.12 | Web/Mobile apps, 50 GB mailbox, 1 TB OneDrive |
+  | Microsoft 365 Enterprise Apps | ¥79.27 (~₹915) | ~$10.94 | Desktop Office suite, 1 TB OneDrive |
+  | Office 365 E3 | ¥151.93 (~₹1,750) | ~$20.97 | Desktop apps, 100 GB mailbox, advanced compliance |
+  | Microsoft 365 E3 | ¥192.65 (~₹2,220) | ~$26.59 | Full O365 E3 + Advanced Threat & Identity Protection |
 - **Q3 — Restrictions & mandatory steps:**
   - **Domain verification:** Add GoDaddy domain with MX/SPF/DKIM, but the domain must have an **ICP Filing (备案)** with MIIT or Mainland telecom filters/severs the traffic.
   - **Email sending:** Exchange Online is **not an open SMTP relay** — every sender prefix must be a licensed User / Shared Mailbox / provisioned Alias in the Azure China Portal (unprovisioned → SMTP 550). Microsoft 365 is **not designed** for transactional bulk email with dynamic/randomized sub-prefixes. Dynamic senders workaround: Graph API alias provisioning (**≤400 aliases per mailbox**) via chinacloudapi.cn, or bypass outbound to **Azure Communication Services**, Tencent SES, or Aliyun DirectMail.
