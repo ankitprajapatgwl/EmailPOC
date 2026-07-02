@@ -5,14 +5,13 @@
 > **Providers covered:**
 > 1. MXtoChina (MXflow.io — Webpower China)
 > 2. Tencent Cloud SES (Simple Email Service)
-> 3. NetEase Enterprise Mail (网易企业邮箱)
+> 3. NetEase Enterprise Mail (网易企业邮箱 / NetEase QiYe)
 > 4. Alibaba Enterprise Mail (阿里企业邮箱 / Aliyun Mail)
 > 5. SendCloud (by Sohu)
 > 6. Alibaba Cloud DirectMail
-> 7. NetEase QiYe (网易企业邮箱 — native brand name of NetEase Enterprise Mail)
-> 8. Microsoft 365 operated by 21Vianet
+> 7. Microsoft 365 operated by 21Vianet
 >
-> **Note:** Per the source files, **NetEase Enterprise Mail** and **NetEase QiYe** are the *same product* (English name vs. native Chinese brand name). They are listed separately because they were supplied as separate files, and their answers are identical.
+> **Note:** **NetEase Enterprise Mail** and **NetEase QiYe** are the *same product* — "NetEase QiYe" (网易企业邮箱) is simply the native Chinese brand name of NetEase Enterprise Mail. They are covered as a single provider here.
 
 ---
 
@@ -22,15 +21,13 @@
 
 - **Tencent Cloud SES:** A developer-first transactional cloud email API/SMTP service on Tencent Cloud International. Domain-level authentication, dynamic senders, outbound event webhooks, and deep routing into Chinese ISPs (~97% in-China delivery). **Open to Indian developers.**
 
-- **NetEase Enterprise Mail (网易企业邮箱):** A corporate mailbox/collaboration suite (like Google Workspace / M365), not a transactional API. Strict per-mailbox sender authorization. **Requires Chinese identity to register.**
+- **NetEase Enterprise Mail (网易企业邮箱 / NetEase QiYe):** A corporate mailbox/collaboration suite (like Google Workspace / M365), not a transactional API. Strict per-mailbox sender authorization. **Registrable by an Indian developer, but with heavy infrastructure limitations** — mandates a real-name-authenticated **Chinese (+86) mobile number** to generate the 16-digit Client Authorization Password, plus corporate- or passport-based real-name verification to lift external IP restrictions (`ERR.LOGIN.IPDENY`). Officially stated to be optimized for domestic operations and *not* suitable for overseas/global developer use.
 
 - **Alibaba Enterprise Mail (Aliyun Mail):** A corporate workforce mailbox suite managed via Alibaba Cloud International. Strict per-mailbox sender verification, but registrable with Indian details (with programmatic restrictions). Has a free edition.
 
 - **SendCloud (by Sohu):** A Chinese developer-first transactional + marketing cloud email platform (spun off from Sohu). Domain-level auth, dynamic senders, outbound webhooks, optimized for delivery into Chinese ISPs. **Open to Indian developers with constraints; has a free daily quota.**
 
 - **Alibaba Cloud DirectMail:** An outbound-only transactional email engine on Alibaba Cloud International. Registrable with Indian details, includes a lifetime free quota, but requires each sender address to be pre-registered (no wildcard/dynamic senders).
-
-- **NetEase QiYe:** Native Chinese brand of NetEase Enterprise Mail — identical policies (corporate suite, Chinese identity required, per-mailbox sending).
 
 - **Microsoft 365 operated by 21Vianet:** The sovereign, China-isolated instance of Microsoft 365 (Exchange Online) hosted entirely inside Mainland China. Not an open SMTP relay, but uniquely offers inbound parsing via Microsoft Graph Change Notifications. **Requires Chinese business credentials to register.**
 
@@ -46,11 +43,10 @@ This table answers: **(Q1)** Can an Indian developer register & test with Python
 |---|---|---|---|---|---|
 | **MXtoChina** | B2B SMTP relay + SMS delivery | ⚠️ YES (corporate-only, no self-service) — Indian devs *can* register, but only as a verified corporate/professional identity (not casual individuals). Requires a business email on your own domain, verified domain control, and a stated compliance use-case. Onboard via request/quotation to info@mxtochina.com; 2FA enforced. | ✅ YES — SPF/DKIM/DMARC domain-level; no per-inbox verification | ✅ YES — dynamic From accepted & signed under verified domain | ❌ NO — outbound tracking only; workaround: route inbound MX to Mailgun/SendGrid/Postmark or self-host aiosmtpd/Haraka |
 | **Tencent Cloud SES** | Developer transactional API/SMTP | ✅ YES — **direct self-service signup (no quotation/sales contact)**; Indian details + Indian mobile OTP (+91) + international payment card + KYC govt-ID (2–4 day review); email/Google SSO; instant Python test via API Explorer or `tencentcloud-sdk-python` | ✅ YES — domain-level auth via **SPF + DKIM** (Tencent advises a third-level subdomain, e.g. `mail.ims.com`, over the root domain); once verified, any prefix under it sends without per-address verification | ✅ YES — dynamic From via API 3.0 (SendEmail) or SMTP | ❌ NO — outbound-only push service; workaround: use `ReplyToAddresses` to an external inbox, or SendGrid/Mailgun inbound parse / self-host aiosmtpd/Haraka |
-| **NetEase Enterprise Mail** | Corporate mailbox suite | ❌ NO — requires +86 China mobile + domestic Chinese business license | ❌ NO — every sender must be a provisioned mailbox/group/alias (else SMTP 550) | ❌ NO — blocked; workaround: sub-account API bridge, or pivot to NetEase Transactional Mail / Tencent SES / Aliyun DirectMail | ❌ NO — corporate events only; workaround: IMAP IDLE polling or MX split to Mailgun/SendGrid |
+| **NetEase Enterprise Mail** (NetEase QiYe) | Corporate mailbox suite | ⚠️ YES (heavy limitations) — requires a real-name-authenticated **+86 China mobile** (to issue the 16-digit Client Authorization Password) + corporate- or **passport**-based real-name verification to lift IP restrictions (`ERR.LOGIN.IPDENY`). Officially not suitable for overseas/global dev use. | ❌ NO — every sender must be a provisioned mailbox/group/alias (else SMTP 550) | ❌ NO — blocked; NetEase directs high-volume dynamic pipelines to a transactional relay (SendGrid / Tencent SES / Aliyun DirectMail) | ❌ NO — traditional inbound rules only; workaround: route MX to SendGrid/Brevo Inbound Parse, or IMAP IDLE polling |
 | **Alibaba Enterprise Mail** | Corporate mailbox suite | ⚠️ YES (with restrictions) — Alibaba Cloud Intl account w/ Indian details; uses Client Security Password, not an open bulk mailer | ❌ NO — sender prefix must be pre-registered user/group/alias | ❌ NO — sender mismatch block; workaround: API alias provisioning, or pivot to Tencent SES / SendCloud | ❌ NO — admin events only; workaround: IMAP polling or MX split to SendGrid/Postmark/Mailgun |
 | **SendCloud (by Sohu)** | Developer transactional/marketing cloud | ⚠️ YES (with constraints) — register w/ Indian mobile, but starts in Sandbox mode (sending only to whitelisted test recipients until vetted) | ✅ YES — domain-level (SPF/DKIM/MX); no per-prefix registration | ✅ YES — dynamic From via HTTP REST API (/apiv2/mail/send) or SMTP | ❌ NO — outbound events only; workaround: MX to SendGrid/Postmark/Mailgun or self-host aiosmtpd/Haraka |
 | **Alibaba Cloud DirectMail** | Outbound-only transactional engine | ✅ YES — Alibaba Cloud Intl w/ Indian details; `alibabacloud-dm20151123` SDK or SMTP | ❌ NO — each exact sender prefix must be pre-registered (else InvalidSenderAddress) | ❌ NO — workaround: pre-provisioned sender pool via OpenAPI SDK (quota-limited), or pivot to Tencent SES / SendCloud | ❌ NO — uses MNS event webhooks for outbound only; workaround: MX split to third-party parser or self-host aiosmtpd/Haraka |
-| **NetEase QiYe** | Corporate mailbox suite (same as NetEase Ent. Mail) | ❌ NO — requires +86 China mobile + domestic Chinese business license (Unified Social Credit Code) | ❌ NO — every address must be a provisioned account/alias (else SMTP 550) | ❌ NO — workaround: Account/Alias Management API, or NetEase Transactional Mail Solution | ❌ NO — SSO/AD-sync/unread-count APIs only; workaround: IMAP IDLE, or MX split to Cloudflare Email Routing/Mailgun/aiosmtpd |
 | **M365 by 21Vianet** | Sovereign Exchange Online (China) | ❌ NO — requires Mainland China business license + +86 mobile; cannot register on microsoftonline.cn with Indian details | ❌ NO — Exchange Online not an open relay; sender must be licensed user/shared mailbox/alias (else SMTP 550) | ❌ NO — workaround: Graph API alias provisioning (≤400 aliases/mailbox) via chinacloudapi.cn, or bypass to Tencent SES / Aliyun DirectMail | ✅ **YES** — via Microsoft Graph Change Notifications (subscribe to /me/messages or /users/{id}/messages; JSON webhook) |
 
 ### 2b. Cross-Border Recipient Matrix Compatibility
@@ -65,7 +61,6 @@ Every provider reported **YES** to all four routing scenarios; the differences a
 | **Alibaba Enterprise Mail** | ✅ (excellent) | ✅ | ✅ ("green-pass" servers) | ✅ (exceptional) | Mainland: keyword/data-export filters; ICP filing needed |
 | **SendCloud (by Sohu)** | ✅ (excellent, optimized) | ✅ | ✅ (mandatory content scanners) | ✅ (bypasses GFW) | Mainland pool requires ICP filing for domain approval |
 | **Alibaba Cloud DirectMail** | ✅ (highly efficient) | ✅ | ✅ (domestic auditing applies) | ✅ (excellent) | Mainland-region account requires ICP filing |
-| **NetEase QiYe** | ✅ (domestic authority) | ✅ | ✅ (smart cross-border nodes) | ✅ (exceptional) | Mainland accounts: keyword/compliance scrubbing; ICP filing needed |
 | **M365 by 21Vianet** | ✅ | ✅ (may hit anti-spam on bulk) | ✅ (extensive compliance filtering) | ✅ (highly optimized) | Entirely in-China; ICP filing mandatory for the domain |
 
 ---
@@ -78,11 +73,10 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 |---|---|---|---|---|
 | **MXtoChina** | ❌ None | ❌ None (no public trial) | **Hybrid:** fixed monthly subscription (per sales contract) **+ pay-as-you-go overages**. Baseline includes up to **50,000 emails/month**; overages metered at cycle end. SMS priced separately by CN carrier rates. (Includes manual brand registration with Chinese ISPs.) | No self-service/casual tier — base fee disclosed only via sales contract; overages billed at end of monthly cycle |
 | **Tencent Cloud SES** | ✅ **1,000 free emails** (per-account allowance) | (Free allowance serves as the trial) | **Pay-as-you-go**, daily billing cycle: **$0.00028/email** beyond the free allowance; optional **Dedicated IP at $120.00/month per IP** | International payment card required at signup; Balance ≤ 0 → API auto-suspends sending until topped up |
-| **NetEase Enterprise Mail** | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Fixed enterprise packages; min **5 mailboxes** from **~¥1,000 RMB (~$138 USD)/year** | Not pay-as-you-go; no API developer profile |
+| **NetEase Enterprise Mail** (NetEase QiYe) | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Subscription per seat/year, min **5 seats**. **Flagship (旗舰版):** ~¥200/user/yr — ¥1,000 (5-user) / ¥3,700 (20-user). **Deluxe (尊享版):** ~¥260/user/yr — ¥1,300 (5-user) / ¥4,810 (20-user). ¥1,000 ≈ $138 USD | Not pay-as-you-go; no API developer profile. Multi-year deals (e.g. "buy 3 years, get 3 free") via resellers |
 | **Alibaba Enterprise Mail** | ✅ **Free Edition** (limits) — bind custom GoDaddy domain + small cluster of internal accounts | (Free Edition serves as the entry point) | Standard/Advanced Editions: fixed **annual** commitment per mailbox (~5-account baseline) | Not pay-as-you-go |
 | **SendCloud (by Sohu)** | ✅ **50 emails/day** free (up to **100/day** by completing console checklist tasks) | (Free daily quota is the trial) | **Prepaid credit** system; bulk "Email Packages" (e.g., start at 10,000 emails) | ❌ No international pay-as-you-go card billing; global users must arrange **international bank wire** to top up |
 | **Alibaba Cloud DirectMail** | ✅ **Lifetime free quota: 2,000 emails** (does not expire) | ⚠️ Possible 6-month trial of 10,000 / 50,000 emails (promo-dependent) | **Pay-as-you-go** after free credits, or bulk prepaid "resource plans" | New accounts capped at 2,000 emails/day (scales up with clean history) |
-| **NetEase QiYe** | ❌ No developer free tier | ⚠️ 7-day free trial (manual, sales-desk provisioned) | Fixed package; entry **5 mailboxes ~¥1,000 RMB (~$138 USD)/year** | Not pay-as-you-go; no API developer profile |
 | **M365 by 21Vianet** | ❌ No developer free tier / no instant credit | ⚠️ 7–30 day corporate eval (~25 licenses), negotiated with a 21Vianet account manager | Enterprise subscription via direct sales / local CSP partners; localized **annual** contracts | No open Developer Program / no casual programmatic trial (unlike global M365) |
 
 ---
@@ -132,15 +126,22 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
   - **Inbound parse:** Not supported — Tencent SES is architected as an **outbound-only email-push service** (no MX parsing engine, no inbound webhooks). To capture replies, set the `ReplyToAddresses` parameter to an external inbox (a personal or corporate mailbox); replies bypass Tencent entirely and route straight to that inbox. For programmatic inbound handling, route inbound MX to a third-party (Mailgun Inbound Parse) or a Python aiosmtpd listener.
   - **Cross-border/ICP:** Domestic Mainland infrastructure requires ICP Filing (Beian) with MIIT.
 
-### 4.3 NetEase Enterprise Mail (网易企业邮箱)
+### 4.3 NetEase Enterprise Mail (网易企业邮箱 / NetEase QiYe)
 
-- **Type:** Corporate mailbox/collaboration suite (like Google Workspace / M365), not a transactional API. China's largest email infrastructure network.
-- **Q1 — Indian dev registration & Python testing:** **NO.** No self-service onboarding/sandbox for international entities. Requires a **+86 Mainland China mobile number** for verification and a **domestic Chinese business license / localized legal representative** to sign the provisioning contract.
-- **Q2 — Cost/free tier/trial:** **No developer free tier.** A **7-day free trial** exists but is manual (via Online Consultation System / activation desk, account-manager provisioned). Commercial minimum is a **5-mailbox package starting ~¥1,000 RMB (~$138 USD)/year**.
+- **Type:** Corporate mailbox/collaboration suite (like Google Workspace / M365), not a transactional API. "NetEase QiYe" is the native Chinese brand name of the same product. China's largest email infrastructure network.
+- **Q1 — Indian dev registration & Python testing:** **YES, but with heavy infrastructure limitations.** An Indian developer *can* register, subject to two hard requirements:
+  - **Chinese phone number (+86):** the system mandates a real-name-authenticated Chinese mobile to generate the **16-digit Client Authorization Password**. You cannot bind third-party SMTP/IMAP clients using your normal login password — the Client Authorization Password is required.
+  - **Real-name verification:** the admin account requires **corporate- or passport-based** real-name verification before you can fully lift the external IP restriction (`ERR.LOGIN.IPDENY`). Passport-based verification means a Chinese business license is *not* strictly required, but the +86 number is.
+  - **Official caveat:** NetEase support documentation states the platform is optimized for domestic operations and is explicitly **not suitable for independent overseas foreign-trade or global developer operations** due to these firewall/IP hurdles.
+- **Registration flow (direct vs. quotation):** You can initiate registration **directly online** for standard tiers — retail packs of **5 to 100 users** are structured via the NetEase Mobile Price Matrix Page. But to actually activate service and **lift international network filters**, you must submit your details to a dedicated enterprise consultant through a **"Purchase Consultation" (购买咨询)** request workflow (or via an authorized reseller).
+- **Q2 — Cost/free tier/trial:** **No developer free tier.** A **7-day free trial** exists but is manual (consultation/account-manager provisioned, not scriptable). Commercial pricing is a strict per-seat/year subscription with a **5-user minimum**:
+  - **Flagship Edition (旗舰版):** ~¥200 RMB/user/year — **¥1,000/year** (5-user pack), **¥3,700/year** (20-user pack).
+  - **Deluxe Edition (尊享版):** ~¥260 RMB/user/year — **¥1,300/year** (5-user pack), **¥4,810/year** (20-user pack).
+  - **Promotions:** multi-year commitments (e.g. 3-year tiers) often unlock deep reseller/agent discounts or **"Buy 3 Years, Get 3 Years Free"** extensions. (¥1,000 ≈ $138 USD.) Not pay-as-you-go; no API developer profile.
 - **Q3 — Restrictions & mandatory steps:**
-  - **Domain verification:** GoDaddy domain can be added with MX/SPF/DKIM, but the domain must have an **ICP Filing (备案)** with MIIT or Mainland telecom nodes drop it.
-  - **Email sending:** Strict sender identity checks — every sender must be a provisioned mailbox/group/alias (unregistered → SMTP 550). Each user needs a **16-digit Client Authorization Code** for third-party Python clients. No dynamic/spoofed "From" (workarounds: sub-account API bridge, or pivot to NetEase Transactional Mail Solution / Tencent SES / Aliyun DirectMail).
-  - **Inbound parse:** No webhook framework — use Python IMAP IDLE polling or split inbound MX to Mailgun/aiosmtpd.
+  - **Custom domain verification:** **Fully supported.** Map a custom domain (e.g. `@mail.ims.com`) by configuring standard **MX, SPF, and DKIM** records at your DNS registrar (GoDaddy), which points your corporate domain at the NetEase transmission clusters. (For reliable *Mainland* delivery the domain should also carry an **ICP Filing (备案)** with MIIT, or domestic telecom nodes may throttle/drop the traffic.)
+  - **Email sending / dynamic "From":** **No native dynamic/wildcard "From" support.** Every unique "From" prefix must map to a valid, pre-configured mailbox seat, user account, or structural alias (unregistered → SMTP 550). NetEase's own documentation directs developers who need programmatic, high-volume dynamic outbound pipelines to use dedicated transactional relays (e.g. **SendGrid** or similar) rather than the fixed enterprise mailbox system. Workarounds: Account/Alias Management API, or pivot to Tencent SES / Aliyun DirectMail.
+  - **Inbound parse:** **Not supported** — NetEase is a traditional SaaS office platform with only conventional inbound *rules* (auto-forwarding, auto-replies, public-account push routing). It cannot convert incoming raw MIME streams into a real-time HTTP POST callback to a destination URL. For a true inbound pipeline, route your MX records through a transactional parser such as **SendGrid Inbound Parse** or the **Brevo Inbound Parse Webhook** suite, or use Python IMAP IDLE polling.
 - **Cross-border:** All four supported; Mainland outbound subject to keyword/spam screening; overseas "green-pass" nodes clear foreign firewalls.
 
 ### 4.4 Alibaba Enterprise Mail (阿里企业邮箱 / Aliyun Mail)
@@ -180,18 +181,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
   - **Inbound parse:** Outbound-only; uses **Alibaba Cloud Message Service (MNS)** event webhooks for outbound metrics. Route inbound MX to a third-party (Mailgun) or a Python aiosmtpd/Haraka server.
   - **Cross-border/ICP:** Mainland-region account requires ICP Filing (备案) with MIIT.
 
-### 4.7 NetEase QiYe (网易企业邮箱)
-
-- **Type:** Native Chinese brand name of **NetEase Enterprise Mail** — identical operational policies, infrastructure gates, and platform rules. Corporate email hosting/collaboration suite, not a developer SMTP relay.
-- **Q1 — Indian dev registration & Python testing:** **NO.** No self-service onboarding/sandbox for international individuals. Requires **+86 Mainland China mobile** for SMS verification and a **domestic Chinese business license (Unified Social Credit Code)** to sign the provisioning contract.
-- **Q2 — Cost/free tier/trial:** **No developer free tier / no pay-as-you-go API profile.** **7-day free trial** is manual (sales-desk, account-manager reviewed — not scriptable). Entry commercial package: **5 mailboxes ~¥1,000 RMB (~$138 USD)/year**.
-- **Q3 — Restrictions & mandatory steps:**
-  - **Domain verification:** Add GoDaddy domain with MX/SPF/DKIM, but the domain must hold an **ICP Filing (备案)** with MIIT or Mainland telecom drops/throttles the traffic.
-  - **Email sending:** Not an open relay — every outbound address must be an explicitly created account/alias; each needs a **16-digit Client Authorization Code** as the SMTP password. No dynamic/unprovisioned "From" (workaround: Account/Alias Management API, or NetEase Transactional Mail Solution).
-  - **Inbound parse:** No inward webhooks (only SSO/AD-sync/unread-count APIs). Use Python IMAP IDLE polling or split inbound MX to Cloudflare Email Routing / Mailgun / aiosmtpd.
-- **Cross-border:** All four supported; Mainland outbound gets keyword/compliance scrubbing; smart overseas "green-pass" nodes for outbound-to-global.
-
-### 4.8 Microsoft 365 operated by 21Vianet
+### 4.7 Microsoft 365 operated by 21Vianet
 
 - **Type:** Sovereign, China-isolated instance of Microsoft 365 / Exchange Online, hosted entirely inside Mainland China (endpoints microsoftonline.cn / portal.azure.cn / chinacloudapi.cn).
 - **Q1 — Indian dev registration & Python testing:** **NO.** No international self-service/sandbox. Requires a **Mainland China Business License** (unified social credit code) or localized corporate credentials, plus a **+86 mobile**. Cannot register on microsoftonline.cn with Indian-only details.
@@ -209,7 +199,8 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 - **Easiest for an Indian developer to sign up & test with Python today:** **Alibaba Cloud DirectMail** and **Tencent Cloud SES** (both fully open with Indian details; SendCloud and Alibaba Enterprise Mail also work but with sandbox/mailbox constraints).
 - **Best free entry point:** **Alibaba Cloud DirectMail** (2,000-email lifetime free quota) and **Tencent Cloud SES** (1,000 free emails), then **SendCloud** (50–100 emails/day free) and **Alibaba Enterprise Mail** (Free Edition).
 - **Cannot be self-served (must request onboarding), but open to Indian *corporate* identities — no Chinese identity required:** **MXtoChina** (register as a verified corporate/professional entity via info@mxtochina.com; hybrid pricing with a 50k-emails/month baseline).
-- **Cannot be self-served with Indian details (need Chinese identity/business):** **NetEase Enterprise Mail / NetEase QiYe**, **M365 by 21Vianet**.
+- **Registrable but heavily gated for Indian developers (needs a real-name-authenticated +86 China mobile; passport-based verification works, so no Chinese business license is strictly required):** **NetEase Enterprise Mail (NetEase QiYe)** — but officially not recommended for overseas/global developer use.
+- **Cannot be self-served with Indian details (need Chinese identity/business):** **M365 by 21Vianet**.
 - **Support truly dynamic "From" addresses (domain-level auth):** **MXtoChina, Tencent Cloud SES, SendCloud** — YES. All others require pre-provisioned senders.
 - **Native inbound parse:** Only **M365 by 21Vianet** (via Microsoft Graph). Every other provider needs an inbound MX split to a third party (Mailgun/SendGrid/Postmark) or a self-hosted Python IMAP/aiosmtpd listener.
 - **Universal compliance requirement:** Any Mainland-China-hosted sending path requires an **ICP Filing (备案) with MIIT** for the domain.
