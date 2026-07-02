@@ -27,7 +27,7 @@
 
 - **SendCloud (by Sohu):** A Chinese developer-first transactional + marketing cloud email platform (spun off from Sohu), operating under **sendcloud.net** (entirely separate from the European logistics platform sendcloud.com). Domain-level auth, dynamic senders, inbound parse webhooks, and outbound events; optimized for delivery into Chinese ISPs. **Registration strictly requires a +86 Mainland China mobile for OTP — Indian (+91) numbers are not accepted at signup.** Free tier: 10 emails/day.
 
-- **Alibaba Cloud DirectMail:** An outbound-only transactional email engine on Alibaba Cloud International. Registrable with Indian details, includes a lifetime free quota, but requires each sender address to be pre-registered (no wildcard/dynamic senders).
+- **Alibaba Cloud DirectMail:** An outbound-only transactional email engine on Alibaba Cloud International. Registrable with Indian details (India region closed Jul 2024 — deploy in Singapore); includes a free tier of **2,000 emails/day**, but requires each sender address to be pre-registered (no wildcard/dynamic senders). PAYG billing at **$0.29 per 1,000 emails** after the free tier.
 
 - **Microsoft 365 operated by 21Vianet:** The sovereign, China-isolated instance of Microsoft 365 (Exchange Online) hosted entirely inside Mainland China. Not an open SMTP relay, but uniquely offers inbound parsing via Microsoft Graph Change Notifications. **Requires Chinese business credentials to register.**
 
@@ -76,7 +76,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 | **NetEase Enterprise Mail** (NetEase QiYe) | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Subscription per seat/year, min **5 seats**. **Flagship (旗舰版):** ~¥200/user/yr — ¥1,000 (5-user) / ¥3,700 (20-user). **Deluxe (尊享版):** ~¥260/user/yr — ¥1,300 (5-user) / ¥4,810 (20-user). ¥1,000 ≈ $138 USD | Not pay-as-you-go; no API developer profile. Multi-year deals (e.g. "buy 3 years, get 3 free") via resellers |
 | **Alibaba Enterprise Mail** | ❌ No developer free tier (use **DirectMail** for Alibaba's free quota) | ❌ None documented (self-service purchase online) | **Per-user seat subscription** — starts ~**$2.87/user/month**, **3-seat minimum**, **500 GB storage/user**; higher **Standard/Advanced** editions billed **annually** | Not pay-as-you-go; direct self-service purchase (quotation only for large/custom migrations); intl credit card / **PayPal** / gateway |
 | **SendCloud (by Sohu)** | ✅ **10 emails/day** free (sandbox/trial tier) | (Free daily quota is the trial) | **Base monthly platform fee + tiered pay-as-you-go:** ¥59 CNY/month for 0–10,000 emails; +¥5.6 CNY per 1,000 for 10,001–50,000; +¥5.3 CNY per 1,000 for 50,001–100,000 | ❌ No international pay-as-you-go card billing; global users must arrange **international bank wire** to top up |
-| **Alibaba Cloud DirectMail** | ✅ **Lifetime free quota: 2,000 emails** (does not expire) | ⚠️ Possible 6-month trial of 10,000 / 50,000 emails (promo-dependent) | **Pay-as-you-go** after free credits (metered per **10,000-email intervals**), or bulk prepaid "resource plans" | New accounts capped at 2,000 emails/day (scales up with clean history) |
+| **Alibaba Cloud DirectMail** | ✅ **Free tier: 2,000 emails/day** | N/A (free daily quota is the trial) | **Pay-as-you-go:** **$0.29 per 1,000 emails** beyond the free tier; **Prepaid 6-month resource packages:** 50k emails = $13.05 · 500k = $121.80 · 1M = $230.55; **Dedicated IP add-on:** $128/IP/month | New accounts capped at 2,000 emails/day (scales up with clean history) |
 | **M365 by 21Vianet** | ❌ No developer free tier / no instant credit | ⚠️ 7–30 day corporate eval (~25 licenses), negotiated with a 21Vianet account manager | Enterprise subscription via direct sales / local CSP partners; localized **annual** contracts | No open Developer Program / no casual programmatic trial (unlike global M365) |
 
 ---
@@ -195,7 +195,11 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 - **Type:** Outbound-only transactional email engine on Alibaba Cloud International (built on the infra powering Alibaba e-commerce).
 - **Q1 — Indian dev registration & Python testing:** **YES.** Alibaba Cloud International fully supports Indian personal/corporate details (Indian mobile + credit/debit card). Map the GoDaddy domain and test immediately with `alibabacloud-dm20151123` SDK or SMTP.
-- **Q2 — Cost/free tier/trial:** **Lifetime free quota of 2,000 emails** (no expiry) for development testing. Possible **6-month trial** of 10,000 or 50,000 emails (promo-dependent). After credits: **pay-as-you-go** (metered per **10,000-email intervals**) or bulk prepaid "resource plans."
+- **Q2 — Cost/free tier/trial:** **Free tier of 2,000 emails/day** (active immediately on account creation; no separate activation needed). After the free daily quota: **pay-as-you-go at $0.29 per 1,000 emails** (default billing method). For bulk volume, **prepaid 6-month resource packages** are available at a lower effective rate:
+  - **50,000 emails:** $13.05
+  - **500,000 emails:** $121.80
+  - **1,000,000 emails:** $230.55
+  - **Dedicated IP add-on** (to protect sender reputation by isolating from the shared IP pool): **$128/IP/month**.
 - **Q3 — Restrictions & mandatory steps:**
   - **Real-name gating:** Individual/Enterprise Real-Name Verification (Indian passport/license or incorporation filings).
   - **Domain verification (GoDaddy):** Configure **4 records — SPF, DKIM, DMARC, MX**; domain locked until all propagate.
@@ -219,7 +223,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 ## Quick Takeaways (from the source files)
 
 - **Easiest for an Indian developer to sign up & test with Python today:** **Alibaba Cloud DirectMail** and **Tencent Cloud SES** (both fully open with Indian details; Alibaba Enterprise Mail also works but with mailbox constraints). **SendCloud requires a +86 Chinese mobile for signup — Indian numbers are not accepted.**
-- **Best free entry point:** **Alibaba Cloud DirectMail** (2,000-email lifetime free quota) and **Tencent Cloud SES** (1,000 free emails), then **SendCloud** (10 emails/day free — but requires +86 mobile to register). *(Alibaba **Enterprise** Mail has no free tier — it is a paid per-seat product from ~$2.87/user/month, 3-seat minimum; use DirectMail for Alibaba's free quota.)*
+- **Best free entry point:** **Alibaba Cloud DirectMail** (2,000 emails/day free tier; PAYG at $0.29/1,000 emails after that) and **Tencent Cloud SES** (1,000 free emails one-time allowance), then **SendCloud** (10 emails/day free — but requires +86 mobile to register). *(Alibaba **Enterprise** Mail has no free tier — it is a paid per-seat product from ~$2.87/user/month, 3-seat minimum; use DirectMail for Alibaba's free quota.)*
 - **Cannot be self-served (must request onboarding), but open to Indian *corporate* identities — no Chinese identity required:** **MXtoChina** (register as a verified corporate/professional entity via info@mxtochina.com; hybrid pricing with a 50k-emails/month baseline).
 - **Registrable but heavily gated — require a +86 China mobile:** **NetEase Enterprise Mail (NetEase QiYe)** (passport-based verification works, so no Chinese business license strictly required — but officially not recommended for overseas/global developer use) and **SendCloud** (strictly requires +86 for signup OTP; no workaround documented).
 - **Cannot be self-served with Indian details (need Chinese identity/business):** **M365 by 21Vianet**.
