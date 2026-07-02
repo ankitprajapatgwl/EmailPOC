@@ -71,7 +71,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 | Provider | Free Tier | Free Trial | Commercial Pricing Model | Notable Payment Constraints |
 |---|---|---|---|---|
-| **MXtoChina** | ❌ None | ❌ None (no public trial) | **Hybrid:** fixed monthly subscription (per sales contract) **+ pay-as-you-go overages**. Baseline includes up to **50,000 emails/month**; overages metered at cycle end. SMS priced separately by CN carrier rates. (Includes manual brand registration with Chinese ISPs.) | No self-service/casual tier — base fee disclosed only via sales contract; overages billed at end of monthly cycle |
+| **MXtoChina** | ❌ None | ❌ None (no public trial) | **Custom quotation only** — no public pricing catalog or standard monthly packages listed on mxflow.io. Structure (per contract): fixed monthly base + pay-as-you-go overages; indicative baseline ~**50,000 emails/month**; overages metered at cycle end. SMS priced separately by CN carrier rates. Contact **support@mxtochina.com** or **contact@mxtochina.com** for a quote. (Includes manual brand registration with Chinese ISPs.) | No self-service/casual tier — pricing disclosed only via custom sales contract |
 | **Tencent Cloud SES** | ✅ **1,000 free emails** (per-account allowance) | (Free allowance serves as the trial) | **Pay-as-you-go**, daily billing cycle: **$0.00028/email** beyond the free allowance; optional **Dedicated IP at $120.00/month per IP** | International payment card required at signup; Balance ≤ 0 → API auto-suspends sending until topped up |
 | **NetEase Enterprise Mail** (NetEase QiYe) | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Subscription per seat/year, min **5 seats**. **Flagship (旗舰版):** ~¥200/user/yr — ¥1,000 (5-user) / ¥3,700 (20-user). **Deluxe (尊享版):** ~¥260/user/yr — ¥1,300 (5-user) / ¥4,810 (20-user). ¥1,000 ≈ $138 USD | Not pay-as-you-go; no API developer profile. Multi-year deals (e.g. "buy 3 years, get 3 free") via resellers |
 | **Alibaba Enterprise Mail** | ❌ No developer free tier (use **DirectMail** for Alibaba's free quota) | ❌ None documented (self-service purchase online) | **Per-user seat subscription** — starts ~**$2.87/user/month**, **3-seat minimum**, **500 GB storage/user**; higher **Standard/Advanced** editions billed **annually** | Not pay-as-you-go; direct self-service purchase (quotation only for large/custom migrations); intl credit card / **PayPal** / gateway |
@@ -92,20 +92,20 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
     - **Verified domain control** — proof of ownership or admin access to the domain you plan to route through their SMTP relay.
     - **Compliance with Chinese anti-spam laws** — your application must state its intended use-case; content is audited for financial scams, restricted data, and explicit materials.
   - **Steps to sign up:**
-    1. Navigate to the official site (MXflow / MXtoChina — `https://mxflow.io/about/`).
-    2. Initiate contact via their developer onboarding form or email **info@mxtochina.com**.
-    3. Provide your domain name, company details, and expected monthly volume.
-    4. Set up the mandatory **two-factor authentication (2FA)** enforced on the Webpower framework to secure your API pipeline.
-  - **Registration method (direct vs. quotation):** You **cannot** instantly spin up a self-service account — you must submit a request or a consultation/quotation inquiry first, via **info@mxtochina.com** or **support@mxtochina.com**. The platform then manually registers your brand name with localized Chinese ISPs to whitelist your traffic and optimize real-time deliverability.
-- **Q2 — Cost/free tier/trial:** **No free tier, no public trial.** Pricing follows a **hybrid subscription model** — a baseline fixed monthly subscription fee (disclosed via a sales contract tailored to corporate requirements) **plus pay-as-you-go volume overages**:
-  - **Base monthly plan:** fixed monthly fee (per sales contract).
-  - **Included baseline volume:** up to **50,000 emails/month**.
-  - **Overage pricing:** volumes exceeding 50,000 emails/month are metered and billed as a variable charge at the end of the monthly billing cycle.
+    1. Go to the primary onboarding engine at **mxflow.io** and click **"Get Started"** or **"Schedule a call today"** to submit your corporate email infrastructure details. (The button routes to a manual review and scheduling funnel — there is no public self-service login creation screen.)
+    2. Provide your domain name, company details, and expected monthly volume.
+    3. Complete **domain whitelisting** per the SMTP Relay Guide (step 3: "Whitelist your domain"), align SPF/DKIM/SMTP security variables, and establish mandatory **two-factor authentication (2FA)** enforced through the Webpower engine.
+  - **Registration method (direct vs. quotation):** You **cannot** instantly spin up a self-service account — you must submit a consultation or quotation request first, via **info@mxtochina.com**, **support@mxtochina.com**, or **contact@mxtochina.com**. The platform then manually registers your brand with Chinese ISPs (Tencent, NetEase, etc.) to whitelist your traffic before initiating delivery.
+- **Q2 — Cost/free tier/trial:** **No free tier, no public trial.** There are **no standardized or publicly listed pricing tiers** — the entire rate structure is determined on a **custom quotation basis** tailored to your enterprise volume and infrastructure requirements. No public pricing catalog or standard monthly packages appear on the mxflow.io website; pricing is disclosed only after contacting their support team. General structure (per sales contract):
+  - **Base monthly plan:** fixed monthly fee (disclosed via custom contract).
+  - **Included baseline volume:** up to **50,000 emails/month** (indicative figure from quoted contracts).
+  - **Overage pricing:** volumes exceeding the contracted baseline are metered and billed as a variable charge at the end of the monthly billing cycle.
   - **SMS tracking/delivery:** priced separately based on localized mainland-China mobile-carrier rates.
+  - **To obtain pricing:** contact **support@mxtochina.com** or **contact@mxtochina.com** with your volume metrics and domain details.
 - **Q3 — Restrictions & mandatory steps:**
   - **Domain verification:** GoDaddy domain usable, but standard SPF/DKIM/MX is *insufficient on its own* — your brand must be registered directly with Chinese ISPs to whitelist outbound templates.
   - **Email sending:** Domain-level auth means dynamic "From" addresses work; but anonymous bulk traffic, spam-like dynamic variations, and unauthorized marketing are prohibited under Chinese anti-spam rules; content is heavily audited.
-  - **Inbound parse:** Not supported. Maintain inbound MX routing through an independent third-party mail handler (Mailgun/SendGrid/Postmark) or self-hosted Python IMAP/aiosmtpd/Haraka.
+  - **Inbound parse:** Not supported — mxflow.io is a strictly outbound transaction engine. Their documented 4-step workflow is: *"You relay to us (Outbound) → We authenticate → We deliver in-country → You track results."* No webhooks or inbound parse documentation exist on their platform. Maintain inbound MX routing through an independent third-party mail handler (Mailgun/SendGrid/Postmark) or self-hosted Python IMAP/aiosmtpd/Haraka.
 - **Cross-border:** All four scenarios supported; Mainland-originating mail must comply with regional regulatory/anti-spam standards.
 
 ### 4.2 Tencent Cloud SES (Simple Email Service)
@@ -237,7 +237,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 - **Easiest for an Indian developer to sign up & test with Python today:** **Alibaba Cloud DirectMail** and **Tencent Cloud SES** (both fully open with Indian details; Alibaba Enterprise Mail also works but with mailbox constraints). **SendCloud requires a +86 Chinese mobile for signup — Indian numbers are not accepted.**
 - **Best free entry point:** **Alibaba Cloud DirectMail** (2,000 emails/day free tier; PAYG at $0.29/1,000 emails after that) and **Tencent Cloud SES** (1,000 free emails one-time allowance), then **SendCloud** (10 emails/day free — but requires +86 mobile to register). *(Alibaba **Enterprise** Mail has no free tier — it is a paid per-seat product from ~$2.87/user/month, 3-seat minimum; use DirectMail for Alibaba's free quota.)*
-- **Cannot be self-served (must request onboarding), but open to Indian *corporate* identities — no Chinese identity required:** **MXtoChina** (register as a verified corporate/professional entity via info@mxtochina.com; hybrid pricing with a 50k-emails/month baseline).
+- **Cannot be self-served (must request onboarding), but open to Indian *corporate* identities — no Chinese identity required:** **MXtoChina** (register as a verified corporate/professional entity via clicking "Get Started" / "Schedule a call today" on mxflow.io, or email info@mxtochina.com / contact@mxtochina.com; custom-quotation pricing only — no public tiers; indicative baseline ~50k emails/month).
 - **Registrable but heavily gated — require a +86 China mobile:** **NetEase Enterprise Mail (NetEase QiYe)** (passport-based verification works, so no Chinese business license strictly required — but officially not recommended for overseas/global developer use) and **SendCloud** (strictly requires +86 for signup OTP; no workaround documented).
 - **Cannot be self-served with Indian details (need Chinese identity/business):** **M365 by 21Vianet**.
 - **Support truly dynamic "From" addresses (domain-level auth):** **MXtoChina, Tencent Cloud SES, SendCloud** — YES. All others require pre-provisioned senders.
