@@ -18,7 +18,7 @@
 
 ## 1. Short Description of Each Provider
 
-- **MXtoChina (MXflow.io):** A specialized, managed authenticated transactional/marketing relay operated by Webpower China (offices in Netherlands, Hong Kong, Shanghai). Purpose-built to push mail through China's firewall filters into local ISPs. **Managed enterprise service — no self-service signup.**
+- **MXtoChina (MXflow.io):** A specialized, **Shanghai-based B2B SMTP relay *and* SMS delivery** service operated by Webpower China (offices in Netherlands, Hong Kong, Shanghai). Purpose-built to help international businesses/developers bypass the "Great Firewall" and reliably deliver transactional email (invoices, password recoveries, OTPs) and marketing SMS into mainland China's local ISPs. Enforces SPF/DKIM/DMARC compliance. **Open to verified corporate/professional identities (including Indian) — but via request/quotation only; no instant self-service signup.**
 
 - **Tencent Cloud SES:** A developer-first transactional cloud email API/SMTP service on Tencent Cloud International. Domain-level authentication, dynamic senders, outbound event webhooks, and deep routing into Chinese ISPs (~97% in-China delivery). **Open to Indian developers.**
 
@@ -44,7 +44,7 @@ This table answers: **(Q1)** Can an Indian developer register & test with Python
 
 | Provider | Service Type | Indian Dev Register + Python Test? (Q1) | Domain Verification w/o Sender Verification | Custom Dynamic "From" Addresses | Inbound Parse via Webhook (Q3) |
 |---|---|---|---|---|---|
-| **MXtoChina** | Managed transactional/marketing relay | ❌ NO — no self-service/sandbox; must request enterprise onboarding via corporate offices, you cannot register as a casual individual developer. You must register as a verified corporate or professional identity. | ✅ YES — SPF/DKIM/DMARC domain-level; no per-inbox verification | ✅ YES — dynamic From accepted & signed under verified domain | ❌ NO — outbound tracking only; workaround: route inbound MX to Mailgun/SendGrid/Postmark or self-host aiosmtpd/Haraka |
+| **MXtoChina** | B2B SMTP relay + SMS delivery | ⚠️ YES (corporate-only, no self-service) — Indian devs *can* register, but only as a verified corporate/professional identity (not casual individuals). Requires a business email on your own domain, verified domain control, and a stated compliance use-case. Onboard via request/quotation to info@mxtochina.com; 2FA enforced. | ✅ YES — SPF/DKIM/DMARC domain-level; no per-inbox verification | ✅ YES — dynamic From accepted & signed under verified domain | ❌ NO — outbound tracking only; workaround: route inbound MX to Mailgun/SendGrid/Postmark or self-host aiosmtpd/Haraka |
 | **Tencent Cloud SES** | Developer transactional API/SMTP | ✅ YES — Indian details, email/Google SSO, instant Python test via API Explorer or `tencentcloud-sdk-python` | ✅ YES — authorize whole domain/subdomain via TXT/CNAME/MX; any address under it | ✅ YES — dynamic From via API 3.0 (SendEmail) or SMTP | ❌ NO — outbound events only; workaround: SendGrid/Mailgun inbound parse or self-host aiosmtpd/Haraka |
 | **NetEase Enterprise Mail** | Corporate mailbox suite | ❌ NO — requires +86 China mobile + domestic Chinese business license | ❌ NO — every sender must be a provisioned mailbox/group/alias (else SMTP 550) | ❌ NO — blocked; workaround: sub-account API bridge, or pivot to NetEase Transactional Mail / Tencent SES / Aliyun DirectMail | ❌ NO — corporate events only; workaround: IMAP IDLE polling or MX split to Mailgun/SendGrid |
 | **Alibaba Enterprise Mail** | Corporate mailbox suite | ⚠️ YES (with restrictions) — Alibaba Cloud Intl account w/ Indian details; uses Client Security Password, not an open bulk mailer | ❌ NO — sender prefix must be pre-registered user/group/alias | ❌ NO — sender mismatch block; workaround: API alias provisioning, or pivot to Tencent SES / SendCloud | ❌ NO — admin events only; workaround: IMAP polling or MX split to SendGrid/Postmark/Mailgun |
@@ -76,7 +76,7 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 | Provider | Free Tier | Free Trial | Commercial Pricing Model | Notable Payment Constraints |
 |---|---|---|---|---|
-| **MXtoChina** | ❌ None | ❌ None (no public trial) | Custom enterprise, volume-dependent contractual pricing (includes manual brand registration with Chinese ISPs) | No pay-as-you-go / no casual developer tier |
+| **MXtoChina** | ❌ None | ❌ None (no public trial) | **Hybrid:** fixed monthly subscription (per sales contract) **+ pay-as-you-go overages**. Baseline includes up to **50,000 emails/month**; overages metered at cycle end. SMS priced separately by CN carrier rates. (Includes manual brand registration with Chinese ISPs.) | No self-service/casual tier — base fee disclosed only via sales contract; overages billed at end of monthly cycle |
 | **Tencent Cloud SES** | ❌ No continuous free tier | ❌ No free trial credits for outgoing email | **Pay-as-you-go**, daily billing cycle, tiered volume model | Balance ≤ 0 → API auto-suspends sending until topped up |
 | **NetEase Enterprise Mail** | ❌ No developer free tier | ⚠️ 7-day free trial (manual; via consultation/account manager, not scriptable) | Fixed enterprise packages; min **5 mailboxes** from **~¥1,000 RMB (~$138 USD)/year** | Not pay-as-you-go; no API developer profile |
 | **Alibaba Enterprise Mail** | ✅ **Free Edition** (limits) — bind custom GoDaddy domain + small cluster of internal accounts | (Free Edition serves as the entry point) | Standard/Advanced Editions: fixed **annual** commitment per mailbox (~5-account baseline) | Not pay-as-you-go |
@@ -91,11 +91,25 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 ### 4.1 MXtoChina (MXflow.io — Webpower China)
 
-- **Type:** Managed, authenticated transactional/marketing relay optimized to bypass China's firewall filters into local ISPs (qq.com, 163.com). Operated by Webpower China (Netherlands, Hong Kong, Shanghai offices).
-- **Q1 — Indian dev registration & Python testing:** **NO.** No open self-service registration or developer sandbox. Accounts are strictly vetted; you must contact their corporate offices to request an enterprise onboarding evaluation.
-- **Q2 — Cost/free tier/trial:** **No free tier, no public trial.** Pricing is customized on an enterprise, volume-dependent contractual basis (includes manually registering your brand with Chinese ISPs like Tencent and NetEase). No pay-as-you-go developer model.
+- **Type:** Specialized, **Shanghai-based B2B SMTP relay *and* SMS delivery** service operated by Webpower China (Netherlands, Hong Kong, Shanghai offices). Built to help international businesses/developers reliably bypass the "Great Firewall" and deliver transactional email (invoices, password recoveries, OTPs) and marketing SMS into mainland China's local ISPs (qq.com, 163.com). Enforces SPF, DKIM, and DMARC compliance to guarantee delivery across Chinese ISPs.
+- **Q1 — Indian dev registration & Python testing:** **YES, but corporate-only and via request (no self-service/sandbox).** Indian developers *can* register — but not as casual individuals; you must register as a verified corporate or professional identity.
+  - **Mandatory requirements:**
+    - **Corporate email account** — a business email on your own domain (generic providers like Gmail/Yahoo/Outlook are restricted unless manually whitelisted for enterprise clients).
+    - **Verified domain control** — proof of ownership or admin access to the domain you plan to route through their SMTP relay.
+    - **Compliance with Chinese anti-spam laws** — your application must state its intended use-case; content is audited for financial scams, restricted data, and explicit materials.
+  - **Steps to sign up:**
+    1. Navigate to the official site (MXflow / MXtoChina — `https://mxflow.io/about/`).
+    2. Initiate contact via their developer onboarding form or email **info@mxtochina.com**.
+    3. Provide your domain name, company details, and expected monthly volume.
+    4. Set up the mandatory **two-factor authentication (2FA)** enforced on the Webpower framework to secure your API pipeline.
+  - **Registration method (direct vs. quotation):** You **cannot** instantly spin up a self-service account — you must submit a request or a consultation/quotation inquiry first, via **info@mxtochina.com** or **support@mxtochina.com**. The platform then manually registers your brand name with localized Chinese ISPs to whitelist your traffic and optimize real-time deliverability.
+- **Q2 — Cost/free tier/trial:** **No free tier, no public trial.** Pricing follows a **hybrid subscription model** — a baseline fixed monthly subscription fee (disclosed via a sales contract tailored to corporate requirements) **plus pay-as-you-go volume overages**:
+  - **Base monthly plan:** fixed monthly fee (per sales contract).
+  - **Included baseline volume:** up to **50,000 emails/month**.
+  - **Overage pricing:** volumes exceeding 50,000 emails/month are metered and billed as a variable charge at the end of the monthly billing cycle.
+  - **SMS tracking/delivery:** priced separately based on localized mainland-China mobile-carrier rates.
 - **Q3 — Restrictions & mandatory steps:**
-  - **Domain verification:** GoDaddy domain usable, but standard SPF/DKIM/MX is *insufficient* — your brand must be registered directly with Chinese ISPs to whitelist outbound templates.
+  - **Domain verification:** GoDaddy domain usable, but standard SPF/DKIM/MX is *insufficient on its own* — your brand must be registered directly with Chinese ISPs to whitelist outbound templates.
   - **Email sending:** Domain-level auth means dynamic "From" addresses work; but anonymous bulk traffic, spam-like dynamic variations, and unauthorized marketing are prohibited under Chinese anti-spam rules; content is heavily audited.
   - **Inbound parse:** Not supported. Maintain inbound MX routing through an independent third-party mail handler (Mailgun/SendGrid/Postmark) or self-hosted Python IMAP/aiosmtpd/Haraka.
 - **Cross-border:** All four scenarios supported; Mainland-originating mail must comply with regional regulatory/anti-spam standards.
@@ -188,7 +202,8 @@ This table answers **(Q2)** cost details, free tier, and trial options, plus how
 
 - **Easiest for an Indian developer to sign up & test with Python today:** **Alibaba Cloud DirectMail** and **Tencent Cloud SES** (both fully open with Indian details; SendCloud and Alibaba Enterprise Mail also work but with sandbox/mailbox constraints).
 - **Best free entry point:** **Alibaba Cloud DirectMail** (2,000-email lifetime free quota), then **SendCloud** (50–100 emails/day free) and **Alibaba Enterprise Mail** (Free Edition).
-- **Cannot be self-served with Indian details (need Chinese identity/business):** **MXtoChina**, **NetEase Enterprise Mail / NetEase QiYe**, **M365 by 21Vianet**.
+- **Cannot be self-served (must request onboarding), but open to Indian *corporate* identities — no Chinese identity required:** **MXtoChina** (register as a verified corporate/professional entity via info@mxtochina.com; hybrid pricing with a 50k-emails/month baseline).
+- **Cannot be self-served with Indian details (need Chinese identity/business):** **NetEase Enterprise Mail / NetEase QiYe**, **M365 by 21Vianet**.
 - **Support truly dynamic "From" addresses (domain-level auth):** **MXtoChina, Tencent Cloud SES, SendCloud** — YES. All others require pre-provisioned senders.
 - **Native inbound parse:** Only **M365 by 21Vianet** (via Microsoft Graph). Every other provider needs an inbound MX split to a third party (Mailgun/SendGrid/Postmark) or a self-hosted Python IMAP/aiosmtpd listener.
 - **Universal compliance requirement:** Any Mainland-China-hosted sending path requires an **ICP Filing (备案) with MIIT** for the domain.
