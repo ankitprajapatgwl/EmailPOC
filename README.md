@@ -1,9 +1,10 @@
 # EmailPOC
 
 A FastAPI proof-of-concept for managing RFQ (Request for Quotation) email
-conversations with suppliers using **dynamic email addressing**, across
-**multiple interchangeable email providers** (SendGrid, Mailgun, Elastic
-Email).
+conversations with suppliers using **dynamic email addressing**. The
+supported and actively-documented provider is **SendGrid**; Mailgun and
+Elastic Email are also implemented and selectable via config, but only
+SendGrid currently has a written setup guide in this repo.
 
 Each conversation gets a unique email address that encodes the user and
 conversation IDs directly in the local-part:
@@ -24,8 +25,11 @@ no lookup tables needed on the mail side.
 
 ## Features
 
-- **Pluggable providers** — switch between SendGrid, Mailgun and Elastic
-  Email with a single `EMAIL_PROVIDER` env var. No code changes.
+- **SendGrid-first** — domain-level authentication + Inbound Parse, fully
+  documented in [`sendgrid_dynamic_domain_auth.md`](sendgrid_dynamic_domain_auth.md).
+- **Pluggable providers** — the code also supports Mailgun and Elastic Email
+  via a single `EMAIL_PROVIDER` env var (no code changes), but they have no
+  written setup guide in this repo yet.
 - **Send RFQ emails** from a per-conversation dynamic address.
 - **One inbound webhook** for every provider — a factory selects the right
   parser to normalise each provider's payload (and attachments).
@@ -46,17 +50,20 @@ and inbound sides, so providers are swappable and share all common logic.
 ```
 EmailPOC/
 ├── main.py                       # Entry point — boots Uvicorn (only root file)
+├── sendgrid_dynamic_domain_auth.md  # Full SendGrid setup guide (DNS, MX, webhook, code)
 ├── src/
 │   ├── config.py                 # Settings — all env vars in one place
 │   ├── logger.py                 # AppLogger — the single shared logger
 │   ├── db.py                     # EmailDB — thread-safe JSON store
 │   ├── app.py                    # create_app() factory + `app` object
 │   ├── route.py                  # HTTP routes only (UI + 1 webhook)
+│   ├── predefined_users.py       # Seed users shown in the Send RFQ dropdown
+│   ├── predefined_projects.py    # Seed projects shown in the Send RFQ dropdown
 │   ├── services/
 │   │   └── conversation_service.py   # Business logic / orchestration
 │   ├── email_platform/           # OUTBOUND providers
 │   │   ├── email_master.py       # EmailMaster ABC (shared helpers)
-│   │   ├── sendgrid_provider.py  # SendGrid SDK
+│   │   ├── sendgrid_provider.py  # SendGrid SDK (primary, documented)
 │   │   ├── mailgun_provider.py   # Mailgun HTTP API (requests)
 │   │   ├── elasticemail_provider.py  # Elastic Email SDK
 │   │   └── factory.py            # EmailProviderFactory
@@ -66,10 +73,6 @@ EmailPOC/
 │       ├── mailgun_webhook.py    # + HMAC signature verification
 │       ├── elasticemail_webhook.py
 │       └── factory.py            # WebhookParserFactory
-├── setup_docs/                   # Per-provider setup guides (DNS, MX, webhook)
-│   ├── sendgrid_setup.md
-│   ├── mailgun_setup.md
-│   └── elasticemail_setup.md
 ├── templates/                    # Jinja2 UI templates
 ├── static/                       # Static assets (served at /static)
 └── data/
@@ -97,12 +100,12 @@ data/db.json
 
 ## Prerequisites
 
-| Tool                             | Version | Notes                                  |
-| -------------------------------- | ------- | -------------------------------------- |
-| Python                           | ≥ 3.11  | Union type hints `X \| Y`              |
-| [uv](https://docs.astral.sh/uv/) | latest  | Fast Python package manager            |
-| A provider account               | —       | SendGrid, Mailgun **or** Elastic Email |
-| Domain with DNS control          | —       | Needed for MX + auth records           |
+| Tool                             | Version | Notes                              |
+| -------------------------------- | ------- | ----------------------------------- |
+| Python                           | ≥ 3.11  | Union type hints `X \| Y`           |
+| [uv](https://docs.astral.sh/uv/) | latest  | Fast Python package manager         |
+| A SendGrid account               | —       | Free tier is fine to start          |
+| Domain with DNS control          | —       | Needed for domain auth + MX record  |
 
 ---
 
@@ -130,14 +133,28 @@ startup with a clear message if the selected provider is misconfigured.
 
 ---
 
-## Provider Setup Guides
+## Provider Setup Guide (SendGrid)
 
-Each provider needs domain authentication, MX records for inbound receiving,
-and inbound-webhook configuration. Detailed step-by-step guides:
+SendGrid is the primary, fully-documented provider. Domain authentication,
+the inbound MX record, Inbound Parse webhook configuration and working code
+samples are all covered end-to-end in:
 
-- **SendGrid** → [`setup_docs/sendgrid_setup.md`](setup_docs/sendgrid_setup.md)
-- **Mailgun** → [`setup_docs/mailgun_setup.md`](setup_docs/mailgun_setup.md)
-- **Elastic Email** → [`setup_docs/elasticemail_setup.md`](setup_docs/elasticemail_setup.md)
+- **[`sendgrid_dynamic_domain_auth.md`](sendgrid_dynamic_domain_auth.md)**
+
+It walks through:
+
+1. Authenticating the sending subdomain (domain-level auth, no per-address
+   sender verification needed for dynamic addresses).
+2. Adding the CNAME records SendGrid generates at your DNS provider.
+3. Pointing an MX record at `mx.sendgrid.net` for inbound mail.
+4. Configuring the Inbound Parse webhook to POST to `/webhooks/inbound`.
+5. Generating dynamic `From`/`Reply-To` addresses and sending/receiving RFQ
+   emails end-to-end.
+
+Mailgun and Elastic Email are implemented in `src/email_platform/` and
+`src/webhook_factory/` and can be selected via `EMAIL_PROVIDER`, but neither
+has a written setup guide in this repo yet — refer to each provider's own
+docs for domain authentication and inbound routing if you switch to them.
 
 ---
 
@@ -206,7 +223,8 @@ curl -X POST http://localhost:7000/webhooks/inbound \
   -F "spam_score=0.1"
 ```
 
-See each provider's setup guide for its exact inbound field names.
+See `sendgrid_dynamic_domain_auth.md` for SendGrid's exact inbound field
+names; other providers use different field names for the same data.
 
 ### Reset the store
 
