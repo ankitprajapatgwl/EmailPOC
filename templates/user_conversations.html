@@ -20,6 +20,10 @@
   <a href="/" class="btn btn-secondary btn-sm">📤 New RFQ</a>
 </div>
 
+{% if deleted %}
+<div class="alert alert-success">🗑️ Conversation deleted.</div>
+{% endif %}
+
 {% if conversations %}
 <div class="card">
   <div class="table-wrap">
@@ -36,6 +40,7 @@
           <th>Replies</th>
           <th>Created</th>
           <th>Last Reply</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -80,6 +85,12 @@
           </td>
           <td class="text-xs text-muted" style="white-space:nowrap;">
             {{ conv.last_reply_at[:16].replace('T',' ') if conv.last_reply_at else '—' }}
+          </td>
+          <td onclick="event.stopPropagation();">
+            <form method="post" action="/tracking/{{ user_id }}/{{ conv.conv_id }}/delete"
+                  onsubmit="return confirm('Delete this conversation and all its messages? This cannot be undone.');">
+              <button type="submit" class="btn btn-danger btn-sm" title="Delete conversation">🗑️</button>
+            </form>
           </td>
         </tr>
         {% endfor %}

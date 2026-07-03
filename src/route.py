@@ -16,7 +16,9 @@ Method + path           Purpose
 ``POST /send``          Create a conversation and send the RFQ.
 ``GET /tracking``       User grid with aggregate stats.
 ``GET /tracking/{u}``   All conversations for one user.
+``POST /tracking/{u}/delete`` Delete all of a user's conversations.
 ``GET /tracking/{u}/{c}`` Full conversation thread.
+``POST /tracking/{u}/{c}/delete`` Delete a conversation.
 ``POST /webhooks/inbound`` Receive an inbound reply (any provider).
 ``GET /webhooks/inbound``  Validation probe (Elastic Email GETs this).
 ================ ====== ==============================================
@@ -168,7 +170,7 @@ async def send_email_form(
 
 
 @router.get("/tracking")
-async def tracking_home(request: Request):
+async def tracking_home(request: Request, deleted: str = ""):
     """Render the tracking home page with a user grid.
 
     Loads all user summaries and global statistics and renders them as a
@@ -176,6 +178,8 @@ async def tracking_home(request: Request):
 
     Args:
         request (Request): FastAPI request.
+        deleted (str): Non-empty value triggers a "user deleted" banner
+            after a delete/redirect cycle.
 
     Returns:
         TemplateResponse: Rendered ``tracking.html`` with ``users`` and
@@ -187,16 +191,41 @@ async def tracking_home(request: Request):
         "active_page": "tracking",
         "users": service.db.get_all_users(),
         "stats": service.db.get_stats(),
+        "deleted": deleted,
     })
 
 
+@router.post("/tracking/{user_id}/delete")
+async def delete_user(request: Request, user_id: str):
+    """Delete every conversation and email belonging to a user.
+
+    This is the Email Tracking page's per-user delete action: it wipes
+    all of the user's conversations, their sent/received emails and any
+    attachment files, then redirects back to the user grid. It does not
+    remove the user from the predefined users dropdown — they can still
+    start new conversations afterwards.
+
+    Args:
+        request (Request): FastAPI request.
+        user_id (str): The user whose tracking history should be wiped.
+
+    Returns:
+        RedirectResponse: ``303`` to ``/tracking?deleted=1``.
+    """
+    service: ConversationService = request.app.state.service
+    service.delete_user_conversations(user_id)
+    return RedirectResponse("/tracking?deleted=1", status_code=303)
+
+
 @router.get("/tracking/{user_id}")
-async def user_tracking(request: Request, user_id: str):
+async def user_tracking(request: Request, user_id: str, deleted: str = ""):
     """Render all conversations for a specific user.
 
     Args:
         request (Request): FastAPI request.
         user_id (str): The user whose conversations should be listed.
+        deleted (str): Non-empty value triggers a "conversation deleted"
+            banner after a delete/redirect cycle.
 
     Returns:
         TemplateResponse: Rendered ``user_conversations.html`` with
@@ -215,6 +244,7 @@ async def user_tracking(request: Request, user_id: str):
             "user_name": user_info.get("full_name") or f"User {user_id[:8]}",
             "user_email": user_info.get("email", ""),
             "conversations": conversations,
+            "deleted": deleted,
         },
     )
 
@@ -278,6 +308,28 @@ async def conversation_detail(
             "success": success,
         },
     )
+
+
+@router.post("/tracking/{user_id}/{conv_id}/delete")
+async def delete_conversation(request: Request, user_id: str, conv_id: str):
+    """Delete a conversation and its attachments, then redirect.
+
+    Args:
+        request (Request): FastAPI request.
+        user_id (str): Owner of the conversation (used for the auth check).
+        conv_id (str): The 8-character conversation identifier to delete.
+
+    Returns:
+        RedirectResponse: ``303`` to ``/tracking/{user_id}?deleted=1``.
+
+    Raises:
+        HTTPException: ``404`` if ``conv_id`` is not found or belongs to a
+            different ``user_id``.
+    """
+    service: ConversationService = request.app.state.service
+    if not service.delete_conversation(conv_id, user_id):
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    return RedirectResponse(f"/tracking/{user_id}?deleted=1", status_code=303)
 
 
 # ── Inbound webhook (single URL for every provider) ──────────────────

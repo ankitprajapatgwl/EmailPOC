@@ -26,6 +26,10 @@
   </div>
 </div>
 
+{% if deleted %}
+<div class="alert alert-success">🗑️ User's conversations and emails deleted.</div>
+{% endif %}
+
 {% if users %}
 <div style="margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between;">
   <div style="font-size: 15px; font-weight: 600;">All Users ({{ users | length }})</div>
@@ -36,11 +40,18 @@
 
 <div class="user-grid" id="user-grid">
   {% for user in users %}
-  <a href="/tracking/{{ user.user_id }}" class="user-card"
+  <div class="user-card" onclick="location.href='/tracking/{{ user.user_id }}'"
      data-uid="{{ user.user_id }}"
      data-name="{{ user.user_name | lower }}"
      data-email="{{ user.user_email | lower }}">
-    <div class="user-avatar">{{ (user.user_name or user.user_id)[0] | upper }}</div>
+    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px;">
+      <div class="user-avatar">{{ (user.user_name or user.user_id)[0] | upper }}</div>
+      <form method="post" action="/tracking/{{ user.user_id }}/delete"
+            onclick="event.stopPropagation();"
+            onsubmit="return confirm('Delete ALL conversations and emails for this user? This cannot be undone.');">
+        <button type="submit" class="btn btn-danger btn-sm" title="Delete all conversations for this user">🗑️</button>
+      </form>
+    </div>
     <div class="user-id">{{ user.user_name or ("User " ~ user.user_id[:8]) }}</div>
     <div class="user-meta" style="font-size:11px;">{{ user.user_email or user.user_id }}</div>
     <div class="user-meta">
@@ -64,7 +75,7 @@
         <div class="user-stat-lbl">Open</div>
       </div>
     </div>
-  </a>
+  </div>
   {% endfor %}
 </div>
 

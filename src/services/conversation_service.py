@@ -25,6 +25,7 @@ Example:
 
 import logging
 from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import Request
 
@@ -285,6 +286,61 @@ class ConversationService:
             "to": supplier_email,
             "conv_id": conv_id,
         }
+
+    def delete_conversation(self, conv_id: str, user_id: str) -> bool:
+        """Delete a conversation owned by ``user_id`` and its attachments.
+
+        Verifies ownership before deleting anything, so one user cannot
+        delete another user's conversation by guessing its id. Attachment
+        files are named ``{conv_id}_...`` on disk (see
+        :meth:`~src.webhook_factory.webhook_master.WebhookParserMaster.persist_attachments`),
+        so they can be removed with a simple glob.
+
+        Args:
+            conv_id (str): The conversation to delete.
+            user_id (str): The user requesting the deletion.
+
+        Returns:
+            bool: True if the conversation existed and belonged to
+                ``user_id`` and was deleted, False otherwise.
+        """
+        conversation = self.db.get_conversation(conv_id)
+        if not conversation or str(conversation["user_id"]) != str(user_id):
+            return False
+
+        for path in Path(self.settings.attachments_dir).glob(f"{conv_id}_*"):
+            path.unlink(missing_ok=True)
+
+        self.db.delete_conversation(conv_id, user_id)
+        self.log.info("Deleted conversation %s for user %s", conv_id, user_id)
+        return True
+
+    def delete_user_conversations(self, user_id: str) -> int:
+        """Delete every conversation, email and attachment for a user.
+
+        Used by the Email Tracking page's per-user delete action, where
+        deleting a user is really "wipe all conversations owned by this
+        user" — the underlying ``EmailDB`` has no separate user record to
+        remove, and the fixed ``predefined_users`` dropdown list is left
+        untouched so the user can still start new conversations later.
+
+        Args:
+            user_id (str): The user whose entire tracking history should
+                be wiped.
+
+        Returns:
+            int: The number of conversations deleted.
+        """
+        conv_ids = self.db.delete_user_conversations(user_id)
+        for conv_id in conv_ids:
+            for path in Path(self.settings.attachments_dir).glob(f"{conv_id}_*"):
+                path.unlink(missing_ok=True)
+        self.log.info(
+            "Deleted %d conversation(s) and their attachments for user %s",
+            len(conv_ids),
+            user_id,
+        )
+        return len(conv_ids)
 
     # ── Inbound ──────────────────────────────────────────────────────
 

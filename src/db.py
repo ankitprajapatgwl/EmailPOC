@@ -297,6 +297,81 @@ class EmailDB:
                 self._write(data)
                 self.log.debug("Updated conversation %s", conv_id)
 
+    def delete_conversation(self, conv_id: str, user_id: str | None = None) -> bool:
+        """Delete a conversation and its cross-referenced records.
+
+        Removes the conversation from ``conversations``, its id from the
+        owning user's list in ``users``, and its entries in
+        ``user_conversations`` and ``threads``. Attachment files on disk
+        are not touched here — callers that need that should delete them
+        separately before or after calling this method.
+
+        Args:
+            conv_id (str): The conversation to delete.
+            user_id (str | None): The owner whose ``users`` list entry
+                should be pruned. When ``None`` the owner is read from the
+                conversation record itself.
+
+        Returns:
+            bool: True if a conversation was found and deleted, False if
+                ``conv_id`` was not present in the store.
+
+        Example:
+            >>> db.delete_conversation("3fa9c1b2", user_id="42")
+            True
+        """
+        with self._lock:
+            data = self._read()
+            conversation = data["conversations"].pop(conv_id, None)
+            if conversation is None:
+                return False
+            owner = str(
+                user_id if user_id is not None else conversation.get("user_id", "")
+            )
+            if owner in data["users"] and conv_id in data["users"][owner]:
+                data["users"][owner].remove(conv_id)
+            data.get("user_conversations", {}).pop(conv_id, None)
+            data.get("threads", {}).pop(conv_id, None)
+            self._write(data)
+        self.log.info("Deleted conversation %s (user=%s)", conv_id, owner)
+        return True
+
+    def delete_user_conversations(self, user_id: str) -> list[str]:
+        """Delete every conversation belonging to a user.
+
+        Removes each of the user's conversations from ``conversations``,
+        ``user_conversations`` and ``threads``, and drops the user's own
+        entry from ``users``. Attachment files on disk are not touched
+        here — callers that need that should delete them separately using
+        the returned conv_ids.
+
+        Args:
+            user_id (str): The user whose conversations should all be
+                deleted.
+
+        Returns:
+            list[str]: The conv_ids that were deleted. Empty if the user
+                had no entry in ``users``.
+
+        Example:
+            >>> db.delete_user_conversations("42")
+            ['3fa9c1b2', 'a1b2c3d4']
+        """
+        with self._lock:
+            data = self._read()
+            user_id = str(user_id)
+            conv_ids = data["users"].pop(user_id, [])
+            for conv_id in conv_ids:
+                data["conversations"].pop(conv_id, None)
+                data.get("user_conversations", {}).pop(conv_id, None)
+                data.get("threads", {}).pop(conv_id, None)
+            if conv_ids:
+                self._write(data)
+        self.log.info(
+            "Deleted %d conversation(s) for user %s", len(conv_ids), user_id
+        )
+        return conv_ids
+
     def insert_unmatched(self, email_data: dict) -> None:
         """Record an inbound email whose ``To`` address did not parse.
 

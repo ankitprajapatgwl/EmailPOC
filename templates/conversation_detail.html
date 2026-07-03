@@ -14,6 +14,13 @@
 <div class="alert alert-success">✅ Email sent successfully! Awaiting supplier reply.</div>
 {% endif %}
 
+<div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+  <form method="post" action="/tracking/{{ conversation.user_id }}/{{ conversation.conv_id }}/delete"
+        onsubmit="return confirm('Delete this conversation and all its messages? This cannot be undone.');">
+    <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete Conversation</button>
+  </form>
+</div>
+
 <!-- Conversation Info Bar -->
 <div class="conv-info-bar">
   <div class="conv-info-item">
