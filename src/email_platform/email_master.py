@@ -106,8 +106,8 @@ class EmailMaster(ABC):
         """Return the lowercase provider key.
 
         Returns:
-            str: One of ``"sendgrid"``, ``"mailgun"`` or
-                ``"elasticemail"``.
+            str: One of ``"sendgrid"``, ``"mailgun"``, ``"elasticemail"``
+                or ``"sendcloud"``.
         """
         raise NotImplementedError
 

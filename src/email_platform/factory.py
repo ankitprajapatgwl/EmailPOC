@@ -22,6 +22,7 @@ from src.config import Settings
 from src.email_platform.elasticemail_provider import ElasticEmailProvider
 from src.email_platform.email_master import EmailMaster, ProviderConfigError
 from src.email_platform.mailgun_provider import MailgunEmailProvider
+from src.email_platform.sendcloud_provider import SendCloudEmailProvider
 from src.email_platform.sendgrid_provider import SendGridEmailProvider
 
 # Registry mapping the lowercase provider key to its implementation class.
@@ -31,6 +32,7 @@ _PROVIDERS: dict[str, type[EmailMaster]] = {
     "sendgrid": SendGridEmailProvider,
     "mailgun": MailgunEmailProvider,
     "elasticemail": ElasticEmailProvider,
+    "sendcloud": SendCloudEmailProvider,
 }
 
 
@@ -42,7 +44,7 @@ class EmailProviderFactory:
 
     Example:
         >>> EmailProviderFactory.supported()
-        ['sendgrid', 'mailgun', 'elasticemail']
+        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud']
     """
 
     @classmethod

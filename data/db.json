@@ -348,6 +348,246 @@
       "quantity": 5000,
       "target_price": "60",
       "subject": "[RFQ-DD32] Request for Quotation — Wireless Earbuds Model E50"
+    },
+    "11250767": {
+      "conv_id": "11250767",
+      "thread_id": "11250767",
+      "project_id": "proj-4d5e6f7a-b8c9-0123-def0-234567890104",
+      "project_name": "Mechanical Keyboard TKL",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "supplier_email": "ankit.prajapat@galaxyweblinks.com",
+      "supplier_name": "Vishal Sharma",
+      "email_address": "RahulSharma-11250767@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "open",
+      "created_at": "2026-07-02T14:51:04.143055+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "RahulSharma-11250767@mail.jobsetu.online",
+          "reply_to": "RahulSharma-11250767@mail.jobsetu.online",
+          "to_email": "ankit.prajapat@galaxyweblinks.com",
+          "subject": "[RFQ-1125] Request for Quotation — Mechanical Keyboard TKL",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Vishal Sharma,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Mechanical Keyboard TKL</td><td>500 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-11250767 | USR-b2c3d4e5-f6a7-8901-bcde-f12345678902 | THREAD-11250767</p></div>",
+          "product_name": "Mechanical Keyboard TKL",
+          "quantity": 500,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendgrid",
+          "provider_message_id": "fkJwsxGXSg-FcVRhEfxXNA",
+          "status_code": 202,
+          "sent_at": "2026-07-02T14:51:04.208444+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Mechanical Keyboard TKL",
+      "quantity": 500,
+      "target_price": "10",
+      "subject": "[RFQ-1125] Request for Quotation — Mechanical Keyboard TKL"
+    },
+    "57240f51": {
+      "conv_id": "57240f51",
+      "thread_id": "57240f51",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Amit",
+      "email_address": "SnehaJoshi-57240f51@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "open",
+      "created_at": "2026-07-02T16:39:20.446245+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "SnehaJoshi-57240f51@mail.jobsetu.online",
+          "reply_to": "SnehaJoshi-57240f51@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-5724] Request for Quotation — Bluetooth Speaker X200",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Amit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Bluetooth Speaker X200</td><td>2000 units</td><td>12 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-57240F51 | USR-e5f6a7b8-c9d0-1234-ef01-345678901235 | THREAD-57240F51</p></div>",
+          "product_name": "Bluetooth Speaker X200",
+          "quantity": 2000,
+          "target_price": "12",
+          "attachments": [
+            {
+              "filename": "email_providers_report.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 37832
+            }
+          ],
+          "provider": "sendgrid",
+          "provider_message_id": "2w33TB57TIq63hrywV0DRg",
+          "status_code": 202,
+          "sent_at": "2026-07-02T16:39:20.501426+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Bluetooth Speaker X200",
+      "quantity": 2000,
+      "target_price": "12",
+      "subject": "[RFQ-5724] Request for Quotation — Bluetooth Speaker X200"
+    },
+    "d339f69a": {
+      "conv_id": "d339f69a",
+      "thread_id": "d339f69a",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "supplier_email": "ankit.prajapat@galaxyweblinks.com",
+      "supplier_name": "Amit",
+      "email_address": "SnehaJoshi-d339f69a@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "replied",
+      "created_at": "2026-07-02T16:42:22.453078+00:00",
+      "reply_count": 1,
+      "last_reply_at": "2026-07-02T16:51:01.471021+00:00",
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "SnehaJoshi-d339f69a@mail.jobsetu.online",
+          "reply_to": "SnehaJoshi-d339f69a@mail.jobsetu.online",
+          "to_email": "ankit.prajapat@galaxyweblinks.com",
+          "subject": "[RFQ-D339] Request for Quotation — Bluetooth Speaker X200",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Amit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Bluetooth Speaker X200</td><td>200 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-D339F69A | USR-e5f6a7b8-c9d0-1234-ef01-345678901235 | THREAD-D339F69A</p></div>",
+          "product_name": "Bluetooth Speaker X200",
+          "quantity": 200,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "strategic_architecture_compliance_guide.md",
+              "content_type": "text/markdown",
+              "size": 7492
+            }
+          ],
+          "provider": "sendgrid",
+          "provider_message_id": "sEiJFGpxRTWdyPEUkMvl9Q",
+          "status_code": 202,
+          "sent_at": "2026-07-02T16:42:22.503922+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "email_type": "reply",
+          "from_email": "Ankit Prajapat <ankit.prajapat@galaxyweblinks.com>",
+          "to_email": "\"SnehaJoshi-d339f69a@mail.jobsetu.online\"\t<SnehaJoshi-d339f69a@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-D339] Request for Quotation — Bluetooth Speaker X200",
+          "body_text": "hii\r\n________________________________\r\nFrom: Ankit Prajapat <ankit.prajapat@galaxyweblinks.com>\r\nSent: 02 July 2026 22:14\r\nTo: SnehaJoshi-d339f69a@mail.jobsetu.online <SnehaJoshi-d339f69a@mail.jobsetu.online>\r\nSubject: Re: [RFQ-D339] Request for Quotation  Bluetooth Speaker X200\r\n\r\nReply is working\r\n\r\n\r\n\r\n________________________________\r\nFrom: JobSetu <SnehaJoshi-d339f69a@mail.jobsetu.online>\r\nSent: 02 July 2026 22:12\r\nTo: Ankit Prajapat <ankit.prajapat@galaxyweblinks.com>\r\nSubject: [RFQ-D339] Request for Quotation  Bluetooth Speaker X200\r\n\r\n[JobSetu]\r\n\r\nDear Amit,\r\n\r\nI am writing to request a formal quotation for the following:\r\n\r\nProduct Quantity        Target Price\r\nBluetooth Speaker X200  200 units       10 per unit\r\n\r\nPlease include the following in your quotation:\r\n\r\n  *   Unit price at stated quantity (FOB)\r\n  *   Minimum order quantity (MOQ)\r\n  *   Lead time and production capacity\r\n  *   Payment terms\r\n  *   Product specifications and certifications\r\n\r\nWe look forward to your response within 3 business days.\r\n\r\nBest regards,\r\nJobSetu Sourcing Team\r\n\r\n________________________________\r\n\r\nReference: CONV-D339F69A | USR-e5f6a7b8-c9d0-1234-ef01-345678901235 | THREAD-D339F69A\r\n\r\n\r\n",
+          "body_html": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">\r\n<style type=\"text/css\" style=\"display:none;\"> P {margin-top:0;margin-bottom:0;} </style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);\" class=\"elementToProof\">\r\nhii</div>\r\n<div id=\"appendonsend\"></div>\r\n<hr style=\"display:inline-block;width:98%\" tabindex=\"-1\">\r\n<div id=\"divRplyFwdMsg\" dir=\"ltr\"><font face=\"Calibri, sans-serif\" style=\"font-size:11pt\" color=\"#000000\"><b>From:</b> Ankit Prajapat &lt;ankit.prajapat@galaxyweblinks.com&gt;<br>\r\n<b>Sent:</b> 02 July 2026 22:14<br>\r\n<b>To:</b> SnehaJoshi-d339f69a@mail.jobsetu.online &lt;SnehaJoshi-d339f69a@mail.jobsetu.online&gt;<br>\r\n<b>Subject:</b> Re: [RFQ-D339] Request for Quotation  Bluetooth Speaker X200</font>\r\n<div>&nbsp;</div>\r\n</div>\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n<div dir=\"ltr\">\r\n<div class=\"x_elementToProof\" style=\"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\">\r\nReply is working</div>\r\n<div class=\"x_elementToProof\" style=\"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\">\r\n<br>\r\n</div>\r\n<div class=\"x_elementToProof\" style=\"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\">\r\n<br>\r\n</div>\r\n<div class=\"x_elementToProof\" style=\"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibri,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\">\r\n<br>\r\n</div>\r\n<div id=\"x_appendonsend\"></div>\r\n<hr tabindex=\"-1\" style=\"display:inline-block; width:98%\">\r\n<div id=\"x_divRplyFwdMsg\" dir=\"ltr\"><font face=\"Calibri, sans-serif\" color=\"#000000\" style=\"font-size:11pt\"><b>From:</b> JobSetu &lt;SnehaJoshi-d339f69a@mail.jobsetu.online&gt;<br>\r\n<b>Sent:</b> 02 July 2026 22:12<br>\r\n<b>To:</b> Ankit Prajapat &lt;ankit.prajapat@galaxyweblinks.com&gt;<br>\r\n<b>Subject:</b> [RFQ-D339] Request for Quotation  Bluetooth Speaker X200</font>\r\n<div>&nbsp;</div>\r\n</div>\r\n<div>\r\n<div style=\"font-family:Arial,sans-serif; max-width:600px\"><img alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\">\r\n<p>Dear Amit,</p>\r\n<p>I am writing to request a formal quotation for the following:</p>\r\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse; width:100%\">\r\n<tbody>\r\n<tr style=\"background-color:#f5f5f5\">\r\n<th>Product</th>\r\n<th>Quantity</th>\r\n<th>Target Price</th>\r\n</tr>\r\n<tr>\r\n<td>Bluetooth Speaker X200</td>\r\n<td>200 units</td>\r\n<td>10 per unit</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>Please include the following in your quotation:</p>\r\n<ul>\r\n<li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul>\r\n<p>We look forward to your response within 3 business days.</p>\r\n<p>Best regards,<br>\r\n<strong>JobSetu Sourcing Team</strong></p>\r\n<hr style=\"border:none; border-top:1px solid #eee; margin-top:30px\">\r\n<p style=\"font-size:11px; color:#aaa\">Reference: CONV-D339F69A | USR-e5f6a7b8-c9d0-1234-ef01-345678901235 | THREAD-D339F69A</p>\r\n</div>\r\n<img alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height:1px!important; width:1px!important; border-width:0!important; margin-top:0!important; margin-bottom:0!important; margin-right:0!important; margin-left:0!important; padding-top:0!important; padding-bottom:0!important; padding-right:0!important; padding-left:0!important\" src=\"https://u109675297.ct.sendgrid.net/wf/open?upn=u001.dicmzNS13rfuyA-2B6SOZv3gT76-2BEWZW5BeJs4Hm0gaRKFv971PzvtKSf0Ji-2F64gr1RjCJpKg1m3vHPk-2BecnYgIUduwR5epfwB3ikpjwZ4DILgo9O2ot-2BK8NK9CG6atEajOzd3Gnz0VW7dpn0cP2sNx-2FFpjf-2FomduzSjRxNsk3gTWVq9peYqZ6hXAUqbEQHxSGjd2L1ptV4qOBTQL9BYA8OH0JqgHyNwRxeAicbREAnGUBcGl-2BGvnyYC9xbn9zPeFA\"></div>\r\n</div>\r\n</body>\r\n</html>\r\n",
+          "attachments": [],
+          "dkim": "{@galaxyweblinks.com : pass}",
+          "spf": "pass",
+          "spam_score": "-0.1",
+          "provider": "sendgrid",
+          "received_at": "2026-07-02T16:51:01.471021+00:00"
+        }
+      ],
+      "product_name": "Bluetooth Speaker X200",
+      "quantity": 200,
+      "target_price": "10",
+      "subject": "[RFQ-D339] Request for Quotation — Bluetooth Speaker X200"
+    },
+    "f7c0ea21": {
+      "conv_id": "f7c0ea21",
+      "thread_id": "f7c0ea21",
+      "project_id": "proj-8b9c0d1e-f2a3-4567-1234-678901234508",
+      "project_name": "Noise Cancelling Headphones NC300",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "supplier_email": "ankit.prajapat@galaxyweblinks.com",
+      "supplier_name": "preetam",
+      "email_address": "AnkitPrajapat-f7c0ea21@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "open",
+      "created_at": "2026-07-02T16:53:58.597775+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "AnkitPrajapat-f7c0ea21@mail.jobsetu.online",
+          "reply_to": "AnkitPrajapat-f7c0ea21@mail.jobsetu.online",
+          "to_email": "ankit.prajapat@galaxyweblinks.com",
+          "subject": "[RFQ-F7C0] Request for Quotation — Noise Cancelling Headphones NC300",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear preetam,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Noise Cancelling Headphones NC300</td><td>1200 units</td><td>40 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-F7C0EA21 | USR-a1b2c3d4-e5f6-7890-abcd-ef1234567891 | THREAD-F7C0EA21</p></div>",
+          "product_name": "Noise Cancelling Headphones NC300",
+          "quantity": 1200,
+          "target_price": "40",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendgrid",
+          "provider_message_id": "3eokiHLoSx6H-jZkvszmqw",
+          "status_code": 202,
+          "sent_at": "2026-07-02T16:53:58.662616+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Noise Cancelling Headphones NC300",
+      "quantity": 1200,
+      "target_price": "40",
+      "subject": "[RFQ-F7C0] Request for Quotation — Noise Cancelling Headphones NC300"
+    },
+    "8f660389": {
+      "conv_id": "8f660389",
+      "thread_id": "8f660389",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "supplier_email": "ankit.prajapat@galaxyweblinks.com",
+      "supplier_name": "Rahul",
+      "email_address": "AnkitPrajapat-8f660389@mail.jobsetu.online",
+      "provider": "sendcloud",
+      "status": "open",
+      "created_at": "2026-07-02T16:57:03.703537+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "AnkitPrajapat-8f660389@mail.jobsetu.online",
+          "reply_to": "AnkitPrajapat-8f660389@mail.jobsetu.online",
+          "to_email": "ankit.prajapat@galaxyweblinks.com",
+          "subject": "[RFQ-8F66] Request for Quotation — Bluetooth Speaker X200",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Rahul,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Bluetooth Speaker X200</td><td>200 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-8F660389 | USR-a1b2c3d4-e5f6-7890-abcd-ef1234567891 | THREAD-8F660389</p></div>",
+          "product_name": "Bluetooth Speaker X200",
+          "quantity": 200,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendcloud",
+          "provider_message_id": "1783011473829_124076_562487_4886.sc-10-1-255-237-inbound0$ankit.prajapat@galaxyweblinks.com",
+          "status_code": 200,
+          "sent_at": "2026-07-02T16:57:30.799161+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Bluetooth Speaker X200",
+      "quantity": 200,
+      "target_price": "10",
+      "subject": "[RFQ-8F66] Request for Quotation — Bluetooth Speaker X200"
     }
   },
   "users": {
@@ -357,6 +597,17 @@
     ],
     "d4e5f6a7-b8c9-0123-def0-234567890124": [
       "dd32fbf4"
+    ],
+    "b2c3d4e5-f6a7-8901-bcde-f12345678902": [
+      "11250767"
+    ],
+    "e5f6a7b8-c9d0-1234-ef01-345678901235": [
+      "57240f51",
+      "d339f69a"
+    ],
+    "a1b2c3d4-e5f6-7890-abcd-ef1234567891": [
+      "f7c0ea21",
+      "8f660389"
     ]
   },
   "unmatched_emails": [],
@@ -381,6 +632,41 @@
       "user_name": "Vikram Nair",
       "user_email": "vikram.nair@gmail.com",
       "created_at": "2026-06-25T07:27:01.556372+00:00"
+    },
+    "11250767": {
+      "conv_id": "11250767",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "user_email": "rahul.sharma@gmail.com",
+      "created_at": "2026-07-02T14:51:04.143055+00:00"
+    },
+    "57240f51": {
+      "conv_id": "57240f51",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "user_email": "sneha.joshi@gmail.com",
+      "created_at": "2026-07-02T16:39:20.446245+00:00"
+    },
+    "d339f69a": {
+      "conv_id": "d339f69a",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "user_email": "sneha.joshi@gmail.com",
+      "created_at": "2026-07-02T16:42:22.453078+00:00"
+    },
+    "f7c0ea21": {
+      "conv_id": "f7c0ea21",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "user_email": "ankit.prajapat@gmail.com",
+      "created_at": "2026-07-02T16:53:58.597775+00:00"
+    },
+    "8f660389": {
+      "conv_id": "8f660389",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "user_email": "ankit.prajapat@gmail.com",
+      "created_at": "2026-07-02T16:57:03.703537+00:00"
     }
   },
   "predefined_users": [
@@ -437,6 +723,51 @@
       "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
       "user_name": "Vikram Nair",
       "created_at": "2026-06-25T07:27:01.556372+00:00"
+    },
+    "11250767": {
+      "thread_id": "11250767",
+      "conv_id": "11250767",
+      "project_id": "proj-4d5e6f7a-b8c9-0123-def0-234567890104",
+      "project_name": "Mechanical Keyboard TKL",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "created_at": "2026-07-02T14:51:04.143055+00:00"
+    },
+    "57240f51": {
+      "thread_id": "57240f51",
+      "conv_id": "57240f51",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "created_at": "2026-07-02T16:39:20.446245+00:00"
+    },
+    "d339f69a": {
+      "thread_id": "d339f69a",
+      "conv_id": "d339f69a",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "e5f6a7b8-c9d0-1234-ef01-345678901235",
+      "user_name": "Sneha Joshi",
+      "created_at": "2026-07-02T16:42:22.453078+00:00"
+    },
+    "f7c0ea21": {
+      "thread_id": "f7c0ea21",
+      "conv_id": "f7c0ea21",
+      "project_id": "proj-8b9c0d1e-f2a3-4567-1234-678901234508",
+      "project_name": "Noise Cancelling Headphones NC300",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "created_at": "2026-07-02T16:53:58.597775+00:00"
+    },
+    "8f660389": {
+      "thread_id": "8f660389",
+      "conv_id": "8f660389",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+      "user_name": "Ankit Prajapat",
+      "created_at": "2026-07-02T16:57:03.703537+00:00"
     }
   },
   "predefined_projects": [

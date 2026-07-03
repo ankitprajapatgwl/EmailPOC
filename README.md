@@ -2,9 +2,11 @@
 
 A FastAPI proof-of-concept for managing RFQ (Request for Quotation) email
 conversations with suppliers using **dynamic email addressing**. The
-supported and actively-documented provider is **SendGrid**; Mailgun and
-Elastic Email are also implemented and selectable via config, but only
-SendGrid currently has a written setup guide in this repo.
+supported and actively-documented provider is **SendGrid**; Mailgun,
+Elastic Email and SendCloud are also implemented and selectable via config,
+but only SendGrid currently has a written setup guide in this repo. SendCloud
+outbound sending is fully implemented; its inbound reply parsing is a stub
+(no SendCloud inbound webhook payload doc is available yet).
 
 Each conversation gets a unique email address that encodes the user and
 conversation IDs directly in the local-part:
@@ -17,7 +19,8 @@ user_id   conv_id
 
 Supplier replies go back to the same address. The active provider's inbound
 feature (SendGrid Inbound Parse / Mailgun Routes / Elastic Email inbound
-notifications) posts the reply to the single `/webhooks/inbound` endpoint,
+notifications / SendCloud — not yet implemented) posts the reply to the
+single `/webhooks/inbound` endpoint,
 which parses both IDs and stores the reply against the correct conversation —
 no lookup tables needed on the mail side.
 
@@ -27,9 +30,10 @@ no lookup tables needed on the mail side.
 
 - **SendGrid-first** — domain-level authentication + Inbound Parse, fully
   documented in [`sendgrid_dynamic_domain_auth.md`](sendgrid_dynamic_domain_auth.md).
-- **Pluggable providers** — the code also supports Mailgun and Elastic Email
-  via a single `EMAIL_PROVIDER` env var (no code changes), but they have no
-  written setup guide in this repo yet.
+- **Pluggable providers** — the code also supports Mailgun, Elastic Email and
+  SendCloud via a single `EMAIL_PROVIDER` env var (no code changes), but they
+  have no written setup guide in this repo yet. SendCloud inbound reply
+  parsing is not implemented (outbound sending only).
 - **Send RFQ emails** from a per-conversation dynamic address.
 - **One inbound webhook** for every provider — a factory selects the right
   parser to normalise each provider's payload (and attachments).
@@ -66,12 +70,14 @@ EmailPOC/
 │   │   ├── sendgrid_provider.py  # SendGrid SDK (primary, documented)
 │   │   ├── mailgun_provider.py   # Mailgun HTTP API (requests)
 │   │   ├── elasticemail_provider.py  # Elastic Email SDK
+│   │   ├── sendcloud_provider.py # SendCloud HTTP API (requests)
 │   │   └── factory.py            # EmailProviderFactory
 │   └── webhook_factory/          # INBOUND parsers
 │       ├── webhook_master.py     # WebhookParserMaster ABC + InboundEmail
 │       ├── sendgrid_webhook.py
 │       ├── mailgun_webhook.py    # + HMAC signature verification
 │       ├── elasticemail_webhook.py
+│       ├── sendcloud_webhook.py  # Stub — no inbound doc yet
 │       └── factory.py            # WebhookParserFactory
 ├── templates/                    # Jinja2 UI templates
 ├── static/                       # Static assets (served at /static)
@@ -113,20 +119,23 @@ data/db.json
 
 Copy `.env.example` to `.env` and fill in your values.
 
-| Variable                      | Required     | Default                           | Description                               |
-| ----------------------------- | ------------ | --------------------------------- | ----------------------------------------- |
-| `EMAIL_PROVIDER`              | ✅           | `sendgrid`                        | `sendgrid` \| `mailgun` \| `elasticemail` |
-| `LOG_LEVEL`                   | ❌           | `INFO`                            | `DEBUG`/`INFO`/`WARNING`/`ERROR`          |
-| `INBOUND_DOMAIN`              | ✅           | —                                 | Subdomain whose MX points at the provider |
-| `FROM_EMAIL`                  | ✅           | —                                 | Verified sender (From header)             |
-| `COMPANY_NAME`                | ❌           | `Your Company`                    | Display name in From + signature          |
-| `SENDGRID_API_KEY`            | sendgrid     | —                                 | API key with Mail Send                    |
-| `MAILGUN_API_KEY`             | mailgun      | —                                 | Private API key                           |
-| `MAILGUN_DOMAIN`              | mailgun      | —                                 | Sending domain                            |
-| `MAILGUN_API_BASE`            | ❌           | `https://api.mailgun.net`         | Region base (US/EU)                       |
-| `MAILGUN_WEBHOOK_SIGNING_KEY` | ❌           | —                                 | Verifies inbound POSTs (recommended)      |
-| `ELASTICEMAIL_API_KEY`        | elasticemail | —                                 | API key with Send access                  |
-| `ELASTICEMAIL_API_URL`        | ❌           | `https://api.elasticemail.com/v4` | v4 REST base URL                          |
+| Variable                      | Required     | Default                           | Description                                          |
+| ----------------------------- | ------------ | --------------------------------- | ----------------------------------------------------- |
+| `EMAIL_PROVIDER`              | ✅           | `sendgrid`                        | `sendgrid` \| `mailgun` \| `elasticemail` \| `sendcloud` |
+| `LOG_LEVEL`                   | ❌           | `INFO`                            | `DEBUG`/`INFO`/`WARNING`/`ERROR`                       |
+| `INBOUND_DOMAIN`              | ✅           | —                                 | Subdomain whose MX points at the provider              |
+| `FROM_EMAIL`                  | ✅           | —                                 | Verified sender (From header)                          |
+| `COMPANY_NAME`                | ❌           | `Your Company`                    | Display name in From + signature                       |
+| `SENDGRID_API_KEY`            | sendgrid     | —                                 | API key with Mail Send                                 |
+| `MAILGUN_API_KEY`             | mailgun      | —                                 | Private API key                                        |
+| `MAILGUN_DOMAIN`              | mailgun      | —                                 | Sending domain                                         |
+| `MAILGUN_API_BASE`            | ❌           | `https://api.mailgun.net`         | Region base (US/EU)                                    |
+| `MAILGUN_WEBHOOK_SIGNING_KEY` | ❌           | —                                 | Verifies inbound POSTs (recommended)                    |
+| `ELASTICEMAIL_API_KEY`        | elasticemail | —                                 | API key with Send access                                |
+| `ELASTICEMAIL_API_URL`        | ❌           | `https://api.elasticemail.com/v4` | v4 REST base URL                                        |
+| `SENDCLOUD_API_USER`          | sendcloud    | —                                 | API user from the SendCloud console                     |
+| `SENDCLOUD_API_KEY`           | sendcloud    | —                                 | API key from the SendCloud console                       |
+| `SENDCLOUD_API_BASE`          | ❌           | `https://api.aurorasendcloud.com` | Region base (Singapore/US/HK)                            |
 
 Only the active provider's credentials are required — the app fails fast at
 startup with a clear message if the selected provider is misconfigured.
@@ -151,10 +160,14 @@ It walks through:
 5. Generating dynamic `From`/`Reply-To` addresses and sending/receiving RFQ
    emails end-to-end.
 
-Mailgun and Elastic Email are implemented in `src/email_platform/` and
-`src/webhook_factory/` and can be selected via `EMAIL_PROVIDER`, but neither
-has a written setup guide in this repo yet — refer to each provider's own
-docs for domain authentication and inbound routing if you switch to them.
+Mailgun, Elastic Email and SendCloud are implemented in
+`src/email_platform/` and `src/webhook_factory/` and can be selected via
+`EMAIL_PROVIDER`, but none has a written setup guide in this repo yet —
+refer to each provider's own docs for domain authentication and inbound
+routing if you switch to them. SendCloud specifically only sends outbound
+mail today; its `src/webhook_factory/sendcloud_webhook.py` parser is a
+stub that raises a clear error until SendCloud's inbound webhook payload
+format is documented and implemented.
 
 ---
 

@@ -26,16 +26,22 @@ from src.webhook_factory.elasticemail_webhook import (
     ElasticEmailWebhookParser,
 )
 from src.webhook_factory.mailgun_webhook import MailgunWebhookParser
+from src.webhook_factory.sendcloud_webhook import SendCloudWebhookParser
 from src.webhook_factory.sendgrid_webhook import SendGridWebhookParser
 from src.webhook_factory.webhook_master import WebhookParserMaster
 
 # Registry mapping the lowercase provider key to its parser class. Keep the
 # keys identical to those in the email-provider factory so a single
 # ``EMAIL_PROVIDER`` value selects a matching send/receive pair.
+#
+# NOTE: "sendcloud" maps to a stub parser (SendCloud's inbound webhook
+# payload has not been documented yet) — outbound sending works, inbound
+# replies fail with a clear "not implemented" error instead of crashing.
 _PARSERS: dict[str, type[WebhookParserMaster]] = {
     "sendgrid": SendGridWebhookParser,
     "mailgun": MailgunWebhookParser,
     "elasticemail": ElasticEmailWebhookParser,
+    "sendcloud": SendCloudWebhookParser,
 }
 
 
@@ -47,7 +53,7 @@ class WebhookParserFactory:
 
     Example:
         >>> WebhookParserFactory.supported()
-        ['sendgrid', 'mailgun', 'elasticemail']
+        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud']
     """
 
     @classmethod

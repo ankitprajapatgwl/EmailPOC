@@ -72,6 +72,9 @@ class Settings:
             used to verify inbound POST authenticity.
         elasticemail_api_key (str | None): Elastic Email API key.
         elasticemail_api_url (str): Elastic Email v4 REST base URL.
+        sendcloud_api_user (str | None): SendCloud ``API_USER`` credential.
+        sendcloud_api_key (str | None): SendCloud ``API_KEY`` credential.
+        sendcloud_api_base (str): SendCloud REST base URL (region-specific).
         base_dir (Path): Repository root directory.
         data_dir (Path): Directory holding the JSON store and attachments.
         attachments_dir (Path): Directory where inbound attachments land.
@@ -121,6 +124,16 @@ class Settings:
         self.elasticemail_api_key = os.getenv("ELASTICEMAIL_API_KEY")
         self.elasticemail_api_url = os.getenv(
             "ELASTICEMAIL_API_URL", "https://api.elasticemail.com/v4"
+        ).rstrip("/")
+
+        # ── SendCloud credentials ─────────────────────────────────────
+        self.sendcloud_api_user = os.getenv("SENDCLOUD_API_USER")
+        self.sendcloud_api_key = os.getenv("SENDCLOUD_API_KEY")
+        # Singapore region (default): https://api.aurorasendcloud.com
+        # US region: https://api-us.aurorasendcloud.com
+        # CN (Hong Kong SAR) region: https://api-hk.aurorasendcloud.com
+        self.sendcloud_api_base = os.getenv(
+            "SENDCLOUD_API_BASE", "https://api.aurorasendcloud.com"
         ).rstrip("/")
 
         # ── Filesystem paths (anchored at the repository root) ───────
