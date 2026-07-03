@@ -588,15 +588,153 @@
       "quantity": 200,
       "target_price": "10",
       "subject": "[RFQ-8F66] Request for Quotation — Bluetooth Speaker X200"
+    },
+    "e78b478c": {
+      "conv_id": "e78b478c",
+      "thread_id": "e78b478c",
+      "project_id": "proj-4d5e6f7a-b8c9-0123-def0-234567890104",
+      "project_name": "Mechanical Keyboard TKL",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Preetam",
+      "email_address": "PriyaMehta-e78b478c@mail.jobsetu.online",
+      "provider": "sendcloud",
+      "status": "open",
+      "created_at": "2026-07-03T07:04:17.518181+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "PriyaMehta-e78b478c@mail.jobsetu.online",
+          "reply_to": "PriyaMehta-e78b478c@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-E78B] Request for Quotation — Mechanical Keyboard TKL",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Preetam,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Mechanical Keyboard TKL</td><td>5000 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-E78B478C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-E78B478C</p></div>",
+          "product_name": "Mechanical Keyboard TKL",
+          "quantity": 5000,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendcloud",
+          "provider_message_id": "1783062258089_124076_1736826_6695.sc-10-1-255-248-inboundgo0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-03T07:04:17.584722+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Mechanical Keyboard TKL",
+      "quantity": 5000,
+      "target_price": "10",
+      "subject": "[RFQ-E78B] Request for Quotation — Mechanical Keyboard TKL"
+    },
+    "f25d0855": {
+      "conv_id": "f25d0855",
+      "thread_id": "f25d0855",
+      "project_id": "proj-3c4d5e6f-a7b8-9012-cdef-123456789003",
+      "project_name": "Wireless Earbuds Model E50",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Gopal",
+      "email_address": "VikramNair-f25d0855@mail.jobsetu.online",
+      "provider": "sendcloud",
+      "status": "open",
+      "created_at": "2026-07-03T08:09:42.195452+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "VikramNair-f25d0855@mail.jobsetu.online",
+          "reply_to": "VikramNair-f25d0855@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-F25D] Request for Quotation — Wireless Earbuds Model E50",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Gopal,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Wireless Earbuds Model E50</td><td>200 units</td><td>20 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-F25D0855 | USR-d4e5f6a7-b8c9-0123-def0-234567890124 | THREAD-F25D0855</p></div>",
+          "product_name": "Wireless Earbuds Model E50",
+          "quantity": 200,
+          "target_price": "20",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendcloud",
+          "provider_message_id": "1783066397179_124076_562487_7639.sc-10-1-255-237-inbound0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-03T08:09:42.260551+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Wireless Earbuds Model E50",
+      "quantity": 200,
+      "target_price": "20",
+      "subject": "[RFQ-F25D] Request for Quotation — Wireless Earbuds Model E50"
+    },
+    "fa00a209": {
+      "conv_id": "fa00a209",
+      "thread_id": "fa00a209",
+      "project_id": "proj-3c4d5e6f-a7b8-9012-cdef-123456789003",
+      "project_name": "Wireless Earbuds Model E50",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Priya",
+      "email_address": "PriyaMehta-fa00a209@mail.jobsetu.online",
+      "provider": "sendcloud",
+      "status": "open",
+      "created_at": "2026-07-03T08:16:34.586540+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "PriyaMehta-fa00a209@mail.jobsetu.online",
+          "reply_to": "PriyaMehta-fa00a209@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-FA00] Request for Quotation — Wireless Earbuds Model E50",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Priya,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Wireless Earbuds Model E50</td><td>200 units</td><td>20 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-FA00A209 | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-FA00A209</p></div>",
+          "product_name": "Wireless Earbuds Model E50",
+          "quantity": 200,
+          "target_price": "20",
+          "attachments": [
+            {
+              "filename": "SendGrid_China_Quick_Reference.md",
+              "content_type": "text/markdown",
+              "size": 16076
+            }
+          ],
+          "provider": "sendcloud",
+          "provider_message_id": "1783066610714_124076_1736826_9966.sc-10-1-255-248-inboundgo0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-03T08:16:34.652281+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Wireless Earbuds Model E50",
+      "quantity": 200,
+      "target_price": "20",
+      "subject": "[RFQ-FA00] Request for Quotation — Wireless Earbuds Model E50"
     }
   },
   "users": {
     "c3d4e5f6-a7b8-9012-cdef-123456789013": [
       "5376e036",
-      "021d5be7"
+      "021d5be7",
+      "e78b478c",
+      "fa00a209"
     ],
     "d4e5f6a7-b8c9-0123-def0-234567890124": [
-      "dd32fbf4"
+      "dd32fbf4",
+      "f25d0855"
     ],
     "b2c3d4e5-f6a7-8901-bcde-f12345678902": [
       "11250767"
@@ -667,6 +805,27 @@
       "user_name": "Ankit Prajapat",
       "user_email": "ankit.prajapat@gmail.com",
       "created_at": "2026-07-02T16:57:03.703537+00:00"
+    },
+    "e78b478c": {
+      "conv_id": "e78b478c",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "user_email": "priya.mehta@gmail.com",
+      "created_at": "2026-07-03T07:04:17.518181+00:00"
+    },
+    "f25d0855": {
+      "conv_id": "f25d0855",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "user_email": "vikram.nair@gmail.com",
+      "created_at": "2026-07-03T08:09:42.195452+00:00"
+    },
+    "fa00a209": {
+      "conv_id": "fa00a209",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "user_email": "priya.mehta@gmail.com",
+      "created_at": "2026-07-03T08:16:34.586540+00:00"
     }
   },
   "predefined_users": [
@@ -768,6 +927,33 @@
       "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
       "user_name": "Ankit Prajapat",
       "created_at": "2026-07-02T16:57:03.703537+00:00"
+    },
+    "e78b478c": {
+      "thread_id": "e78b478c",
+      "conv_id": "e78b478c",
+      "project_id": "proj-4d5e6f7a-b8c9-0123-def0-234567890104",
+      "project_name": "Mechanical Keyboard TKL",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "created_at": "2026-07-03T07:04:17.518181+00:00"
+    },
+    "f25d0855": {
+      "thread_id": "f25d0855",
+      "conv_id": "f25d0855",
+      "project_id": "proj-3c4d5e6f-a7b8-9012-cdef-123456789003",
+      "project_name": "Wireless Earbuds Model E50",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "created_at": "2026-07-03T08:09:42.195452+00:00"
+    },
+    "fa00a209": {
+      "thread_id": "fa00a209",
+      "conv_id": "fa00a209",
+      "project_id": "proj-3c4d5e6f-a7b8-9012-cdef-123456789003",
+      "project_name": "Wireless Earbuds Model E50",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "created_at": "2026-07-03T08:16:34.586540+00:00"
     }
   },
   "predefined_projects": [

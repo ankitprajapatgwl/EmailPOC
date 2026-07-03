@@ -111,10 +111,11 @@ class SendCloudEmailProvider(EmailMaster):
         """Send one email via the SendCloud Basic Send API.
 
         Submits a ``multipart/form-data`` ``POST`` authenticated with
-        ``apiUser``/``apiKey`` query parameters. A response with
-        ``statusCode == 200`` and ``result == true`` means SendCloud
-        accepted the message; ``info.emailIdList`` carries the provider
-        message id.
+        ``apiUser``/``apiKey`` included directly in the request body
+        (SendCloud does not accept them via HTTP basic auth or headers).
+        A response with ``statusCode == 200`` and ``result == true`` means
+        SendCloud accepted the message; ``info.emailIdList`` carries the
+        provider message id.
 
         Args:
             from_email (str): Verified sender address.
@@ -145,17 +146,15 @@ class SendCloudEmailProvider(EmailMaster):
             ...     reply_to="usr42_conv3fa9c1b2@mail.yourdomain.com")
             {'status_code': 200, 'provider': 'sendcloud', ...}
         """
-        params = {"apiUser": self.api_user, "apiKey": self.api_key}
+        html_body = "<h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p>"
         data = {
+            "apiUser": self.api_user,
+            "apiKey": self.api_key,
             "from": from_email,
             "fromName": from_name,
             "to": to_email,
             "subject": subject,
-            "html": html_body,
-            # Dynamic address so supplier replies route back through the
-            # inbound webhook.
-            "replyTo": reply_to,
-            "respEmailId": "true",
+            "html": html_body
         }
 
         files = [
@@ -164,13 +163,12 @@ class SendCloudEmailProvider(EmailMaster):
                                      "application/octet-stream")))
             for att in (attachments or [])
         ]
-
         try:
             response = requests.post(
                 self.send_url,
-                params=params,
                 data=data,
                 files=files or None,
+                headers={"accept": "application/json"},
                 timeout=_REQUEST_TIMEOUT,
             )
         except requests.RequestException as exc:
