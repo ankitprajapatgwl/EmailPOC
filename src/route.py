@@ -34,13 +34,27 @@ from typing import List
 from urllib.parse import quote
 
 from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 
 from src.email_platform.email_master import EmailProviderError
 from src.services.conversation_service import ConversationService
 
 # A single router that :mod:`src.app` includes on the FastAPI application.
 router = APIRouter()
+
+# Maps ConversationService.handle_inbound's "status" field to an HTTP
+# status code. "matched"/"unmatched"/"skipped" are all valid, non-retryable
+# outcomes (a spam email or an address that doesn't match a conversation is
+# not a delivery failure), so they stay 200 — a non-2xx would make most
+# providers retry the same POST. "rejected" (bad signature) and "error"
+# (unparseable payload) are genuine failures and get a non-2xx status.
+_INBOUND_STATUS_CODES = {
+    "matched": 200,
+    "unmatched": 200,
+    "skipped": 200,
+    "rejected": 400,
+    "error": 500,
+}
 
 
 # ── UI routes ────────────────────────────────────────────────────────
@@ -349,12 +363,17 @@ async def handle_inbound_email(request: Request):
             depending on the provider.
 
     Returns:
-        dict: A status payload describing the outcome — one of ``matched``,
+        JSONResponse: The status payload from
+            :meth:`ConversationService.handle_inbound` — one of ``matched``,
             ``unmatched``, ``skipped`` (spam), ``rejected`` (bad signature)
-            or ``error``.
+            or ``error`` — with a matching HTTP status code (200 for
+            matched/unmatched/skipped, 400 for rejected, 500 for error; see
+            :data:`_INBOUND_STATUS_CODES`).
     """
     service: ConversationService = request.app.state.service
-    return await service.handle_inbound(request)
+    result = await service.handle_inbound(request)
+    status_code = _INBOUND_STATUS_CODES.get(result.get("status"), 200)
+    return JSONResponse(content=result, status_code=status_code)
 
 
 @router.get("/webhooks/inbound")
