@@ -136,16 +136,16 @@
         <!-- HTML preview toggle -->
         <div style="display:flex; gap:8px; margin-bottom:10px;">
           <button onclick="toggleView(this, 'html-{{ loop.index }}')"
-                  class="btn btn-secondary btn-sm" data-mode="html">
+                  class="btn btn-primary btn-sm" data-mode="html">
             Show HTML
           </button>
           <button onclick="toggleView(this, 'text-{{ loop.index }}')"
-                  class="btn btn-primary btn-sm" data-mode="text">
+                  class="btn btn-secondary btn-sm" data-mode="text">
             Plain Text
           </button>
         </div>
-        <div id="text-{{ loop.index }}" class="email-text-body">{{ email.body_text or '(no plain text content)' }}</div>
-        <div id="html-{{ loop.index }}" class="email-html-body-wrap" style="display:none;">
+        <div id="text-{{ loop.index }}" class="email-text-body" style="display:none;">{{ email.body_text or '(no plain text content)' }}</div>
+        <div id="html-{{ loop.index }}" class="email-html-body-wrap">
           <iframe srcdoc="{{ email.body_html | e }}" sandbox="allow-same-origin"
                   onload="autoHeight(this)"></iframe>
         </div>

@@ -319,8 +319,8 @@
       "provider": "sendcloud",
       "status": "replied",
       "created_at": "2026-07-06T05:06:15.383943+00:00",
-      "reply_count": 2,
-      "last_reply_at": "2026-07-06T05:10:07.601842+00:00",
+      "reply_count": 3,
+      "last_reply_at": "2026-07-06T05:49:39.715090+00:00",
       "emails_sent": [
         {
           "email_type": "new_thread",
@@ -423,6 +423,45 @@
           "spam_score": "0.0",
           "provider": "sendcloud",
           "received_at": "2026-07-06T05:10:07.601842+00:00"
+        },
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "JobSetu <RahulSharma-28da790c@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-28DA] Request for Quotation — Noise Cancelling Headphones NC300",
+          "body_text": "July 06 reply button with attachments\n\n\n\nOn Mon, Jul 6, 2026 at 10:36 AM JobSetu\n<RahulSharma-28da790c@mail.jobsetu.online> wrote:\n\n> Hello World!\n>\n> Your first email via AuroraSendCloud API\n> click to unsubscribe\n> <https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9>\n",
+          "body_html": "<div dir=\"ltr\">July 06 reply button with attachments<br><br><br></div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Mon, Jul 6, 2026 at 10:36 AM JobSetu &lt;RahulSharma-28da790c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "strategic_architecture_compliance_guide.md",
+              "content_type": "text/markdown",
+              "size": 7492,
+              "url": "/attachments/28da790c_e3c8884f_1_strategic_architecture_compliance_guide.md"
+            },
+            {
+              "filename": "email_providers_report.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 37832,
+              "url": "/attachments/28da790c_e3c8884f_2_email_providers_report.docx"
+            },
+            {
+              "filename": "medical_report_master_schema.json",
+              "content_type": "application/json",
+              "size": 7779,
+              "url": "/attachments/28da790c_e3c8884f_3_medical_report_master_schema.json"
+            },
+            {
+              "filename": "AnkitPrajapat.pdf",
+              "content_type": "application/pdf",
+              "size": 377365,
+              "url": "/attachments/28da790c_e3c8884f_4_AnkitPrajapat.pdf"
+            }
+          ],
+          "dkim": "",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "sendcloud",
+          "received_at": "2026-07-06T05:49:39.715090+00:00"
         }
       ],
       "product_name": "Noise Cancelling Headphones NC300",
