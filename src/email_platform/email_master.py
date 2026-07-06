@@ -264,21 +264,12 @@ class EmailMaster(ABC):
         # the 79-column limit; ``"".join`` reassembles the final markup.
         # Small base64-encoded blue banner (320×40 PNG) for image-tracking
         # tests — demonstrates inline image rendering across email clients.
-        banner_b64 = (
-            "iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+"
-            "AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDP"
-            "Zu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iB"
-            "IczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCE"
-            "GRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjAD"
-            "Q5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJ"
-            "RU5ErkJggg=="
-        )
         parts = [
             '<div style="font-family: Arial, sans-serif; '
             'max-width: 600px;">',
             # Company banner image (inline base64 — renders without external
             # host; tests that images in email body are tracked correctly)
-            f'<img src="data:image/png;base64,{banner_b64}" '
+            f'<img src="https://placehold.co/320x40/blue/white?text={company}" '
             f'alt="{company}" width="320" height="40" '
             'style="display:block; margin-bottom:16px;">',
             f"<p>Dear {supplier_name},</p>",

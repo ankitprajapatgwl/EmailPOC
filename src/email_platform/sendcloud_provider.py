@@ -146,7 +146,6 @@ class SendCloudEmailProvider(EmailMaster):
             ...     reply_to="usr42_conv3fa9c1b2@mail.yourdomain.com")
             {'status_code': 200, 'provider': 'sendcloud', ...}
         """
-        html_body = "<h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p>"
         data = {
             "apiUser": self.api_user,
             "apiKey": self.api_key,
