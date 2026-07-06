@@ -12,6 +12,7 @@ dependencies = [
     "python-multipart>=0.0.18",
     "requests>=2.34.2",
     "elasticemail>=4.1.4",
+    "httpx>=0.28.1",
 ]
 
 [tool.uv]

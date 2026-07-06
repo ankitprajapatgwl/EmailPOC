@@ -17,6 +17,9 @@ Example:
 
 import base64
 import json
+import email
+from email.policy import default
+import httpx  # Used if you choose to download via raw_message_url
 
 from fastapi import Request
 
@@ -82,9 +85,7 @@ class SendCloudWebhookParser(WebhookParserMaster):
                 "attachments": await self._extract_attachments(form),
             }
         except Exception as exc:  # noqa: BLE001 - normalise to one type
-            self.log.error(
-                "Failed to extract SendCloud multipart fields: %s", exc
-            )
+            self.log.error("Failed to extract SendCloud multipart fields: %s", exc)
             raise WebhookParseError(
                 f"Could not extract SendCloud multipart fields: {exc}"
             ) from exc
@@ -155,9 +156,7 @@ class SendCloudWebhookParser(WebhookParserMaster):
             try:
                 form = await request.form()
             except Exception as exc:  # noqa: BLE001 - normalise to one type
-                self.log.error(
-                    "Could not read SendCloud form body: %s", exc
-                )
+                self.log.error("Could not read SendCloud form body: %s", exc)
                 raise WebhookParseError(
                     f"Could not read SendCloud form body: {exc}"
                 ) from exc
@@ -207,54 +206,45 @@ class SendCloudWebhookParser(WebhookParserMaster):
         return inbound
 
     async def _extract_attachments(self, form) -> list[RawAttachment]:
-        """Read SendCloud multipart attachment files into memory.
+        """Extract attachments from the raw_message text string or raw_message_url."""
+        attachments: list[RawAttachment] = []
 
-        Args:
-            form: The parsed multipart form mapping.
+        # 1. Capture the raw EML string content
+        raw_eml = form.get("raw_message")
 
-        Returns:
-            list[RawAttachment]: One entry per uploaded file; empty when the
-                message carried no attachments.
-        """
-        count = int(form.get("attachments", 0) or 0)
-        if count <= 0:
+        # Alternative strategy: If raw_message is empty or clipped, stream it from the URL
+        if not raw_eml and form.get("raw_message_url"):
+            self.log.debug("raw_message blank, downloading from raw_message_url...")
+            async with httpx.AsyncClient() as client:
+                response = await client.get(form.get("raw_message_url"))
+                if response.status_code == 200:
+                    raw_eml = response.text
+
+        if not raw_eml:
+            self.log.debug("No raw message stream discovered in webhook payload.")
             return []
 
-        try:
-            info = json.loads(form.get("attachment-info", "{}") or "{}")
-        except (TypeError, ValueError) as exc:
-            # Missing/garbled metadata is non-fatal — fall back to defaults.
-            self.log.debug(
-                "Could not parse SendCloud attachment-info metadata: %s", exc
-            )
-            info = {}
+        # 2. Parse the EML string into an email object
+        msg = email.message_from_string(raw_eml, policy=default)
 
-        attachments: list[RawAttachment] = []
-        for i in range(1, count + 1):
-            upload = form.get(f"attachment{i}")
-            if not upload or not hasattr(upload, "read"):
+        # 3. Walk through email parts to locate binary items
+        for part in msg.walk():
+            # Skip structures that aren't file configurations
+            if (
+                part.get_content_disposition() != "attachment"
+                and not part.get_filename()
+            ):
                 continue
-            meta = info.get(f"attachment{i}", {})
-            filename = meta.get("filename", f"attachment_{i}")
-            content_type = meta.get("type", "application/octet-stream")
-            try:
-                content = await upload.read()
-            except Exception as exc:  # noqa: BLE001 - normalise to one type
-                self.log.error(
-                    "Could not read SendCloud attachment %s: %s",
-                    filename,
-                    exc,
-                )
-                continue
-            attachments.append(RawAttachment(filename, content_type, content))
-        if len(attachments) != count:
-            # The declared count and the actual uploaded parts disagree —
-            # not fatal, but worth surfacing when debugging missing files.
-            self.log.debug(
-                "SendCloud declared %d attachment(s) but %d were present",
-                count,
-                len(attachments),
-            )
+
+            filename = part.get_filename() or "unnamed_attachment"
+            content_type = part.get_content_type() or "application/octet-stream"
+
+            # Extract payload bytes directly (automatically handles base64/quoted-printable decoding)
+            content = part.get_payload(decode=True)
+
+            if content:
+                attachments.append(RawAttachment(filename, content_type, content))
+
         return attachments
 
     def _attachments_from_json(self, raw_attachments) -> list[RawAttachment]:
@@ -289,9 +279,7 @@ class SendCloudWebhookParser(WebhookParserMaster):
             )
             encoded = item.get("content") or item.get("data")
             if not encoded:
-                self.log.debug(
-                    "SendCloud JSON attachment %s has no content", filename
-                )
+                self.log.debug("SendCloud JSON attachment %s has no content", filename)
                 continue
 
             try:

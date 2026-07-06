@@ -165,8 +165,8 @@
       "provider": "sendcloud",
       "status": "replied",
       "created_at": "2026-07-04T05:57:15.623625+00:00",
-      "reply_count": 3,
-      "last_reply_at": "2026-07-04T06:31:57.255231+00:00",
+      "reply_count": 5,
+      "last_reply_at": "2026-07-06T05:10:07.465948+00:00",
       "emails_sent": [
         {
           "email_type": "new_thread",
@@ -243,12 +243,171 @@
           "spam_score": "0.0",
           "provider": "sendcloud",
           "received_at": "2026-07-04T06:31:57.255231+00:00"
+        },
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "JobSetu <VikramNair-f6b1d3a6@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-F6B1] Request for Quotation — 27-inch 4K Monitor Stand",
+          "body_text": "06 July Reply button with attchements\n\nOn Sat, Jul 4, 2026 at 12:01 PM Ankit prajapat <ankitprajapat948@gmail.com>\nwrote:\n\n> 3rd Reply button\n>\n>\n>\n> On Sat, Jul 4, 2026 at 11:56 AM Ankit prajapat <ankitprajapat948@gmail.com>\n> wrote:\n>\n>> New reply button\n>>\n>>\n>>\n>> On Sat, Jul 4, 2026 at 11:28 AM Ankit prajapat <\n>> ankitprajapat948@gmail.com> wrote:\n>>\n>>> Reply Button with attachments\n>>>\n>>>\n>>>\n>>> On Sat, Jul 4, 2026 at 11:27 AM JobSetu\n>>> <VikramNair-f6b1d3a6@mail.jobsetu.online> wrote:\n>>>\n>>>> Hello World!\n>>>>\n>>>> Your first email via AuroraSendCloud API\n>>>> click to unsubscribe\n>>>> <https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzE0NDYzODMyNl8xMjQwNzZfMTczNjgyNl8zNzA1LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiNDZhZWM0ZTk5YmQ4ZjliNTQ1ZWM3Mjk1MjBkMDQ1ZGIiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4xMC4xODkiLCAiY29udGVudF90eXBlIjogIiIsICJyZWNlaXZlciI6ICJhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJtYWlsbGlzdF9pZCI6IDAsICJvdmVyc2VhcyI6ICIiLCAiY2F0ZWdvcnlfaWQiOiA4MzMwNzksICJvdXRfcG9vbF9pZCI6IDU1fQ%3D%3D>\n>>>\n>>>\n",
+          "body_html": "<div dir=\"ltr\">06 July Reply button with attchements<br></div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 12:01 PM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">3rd Reply button<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:56 AM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\" target=\"_blank\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">New reply button<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:28 AM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\" target=\"_blank\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">Reply Button with attachments<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:27 AM JobSetu &lt;VikramNair-f6b1d3a6@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzE0NDYzODMyNl8xMjQwNzZfMTczNjgyNl8zNzA1LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiNDZhZWM0ZTk5YmQ4ZjliNTQ1ZWM3Mjk1MjBkMDQ1ZGIiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4xMC4xODkiLCAiY29udGVudF90eXBlIjogIiIsICJyZWNlaXZlciI6ICJhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJtYWlsbGlzdF9pZCI6IDAsICJvdmVyc2VhcyI6ICIiLCAiY2F0ZWdvcnlfaWQiOiA4MzMwNzksICJvdXRfcG9vbF9pZCI6IDU1fQ%3D%3D\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n</blockquote></div>\n</blockquote></div>\n</blockquote></div>\n",
+          "attachments": [],
+          "dkim": "",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "sendcloud",
+          "received_at": "2026-07-06T05:02:29.091038+00:00"
+        },
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "JobSetu <VikramNair-f6b1d3a6@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-F6B1] Request for Quotation — 27-inch 4K Monitor Stand",
+          "body_text": "06 July Reply button with attchements\n\nOn Sat, Jul 4, 2026 at 12:01 PM Ankit prajapat <ankitprajapat948@gmail.com>\nwrote:\n\n> 3rd Reply button\n>\n>\n>\n> On Sat, Jul 4, 2026 at 11:56 AM Ankit prajapat <ankitprajapat948@gmail.com>\n> wrote:\n>\n>> New reply button\n>>\n>>\n>>\n>> On Sat, Jul 4, 2026 at 11:28 AM Ankit prajapat <\n>> ankitprajapat948@gmail.com> wrote:\n>>\n>>> Reply Button with attachments\n>>>\n>>>\n>>>\n>>> On Sat, Jul 4, 2026 at 11:27 AM JobSetu\n>>> <VikramNair-f6b1d3a6@mail.jobsetu.online> wrote:\n>>>\n>>>> Hello World!\n>>>>\n>>>> Your first email via AuroraSendCloud API\n>>>> click to unsubscribe\n>>>> <https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzE0NDYzODMyNl8xMjQwNzZfMTczNjgyNl8zNzA1LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiNDZhZWM0ZTk5YmQ4ZjliNTQ1ZWM3Mjk1MjBkMDQ1ZGIiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4xMC4xODkiLCAiY29udGVudF90eXBlIjogIiIsICJyZWNlaXZlciI6ICJhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJtYWlsbGlzdF9pZCI6IDAsICJvdmVyc2VhcyI6ICIiLCAiY2F0ZWdvcnlfaWQiOiA4MzMwNzksICJvdXRfcG9vbF9pZCI6IDU1fQ%3D%3D>\n>>>\n>>>\n",
+          "body_html": "<div dir=\"ltr\">06 July Reply button with attchements<br></div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 12:01 PM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">3rd Reply button<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:56 AM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\" target=\"_blank\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">New reply button<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:28 AM Ankit prajapat &lt;<a href=\"mailto:ankitprajapat948@gmail.com\" target=\"_blank\">ankitprajapat948@gmail.com</a>&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div dir=\"ltr\">Reply Button with attachments<br><br><br></div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Sat, Jul 4, 2026 at 11:27 AM JobSetu &lt;VikramNair-f6b1d3a6@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzE0NDYzODMyNl8xMjQwNzZfMTczNjgyNl8zNzA1LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiNDZhZWM0ZTk5YmQ4ZjliNTQ1ZWM3Mjk1MjBkMDQ1ZGIiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4xMC4xODkiLCAiY29udGVudF90eXBlIjogIiIsICJyZWNlaXZlciI6ICJhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJtYWlsbGlzdF9pZCI6IDAsICJvdmVyc2VhcyI6ICIiLCAiY2F0ZWdvcnlfaWQiOiA4MzMwNzksICJvdXRfcG9vbF9pZCI6IDU1fQ%3D%3D\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n</blockquote></div>\n</blockquote></div>\n</blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "medical_report_master_schema.json",
+              "content_type": "application/json",
+              "size": 7779,
+              "url": "/attachments/f6b1d3a6_2defa5b1_1_medical_report_master_schema.json"
+            }
+          ],
+          "dkim": "",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "sendcloud",
+          "received_at": "2026-07-06T05:10:07.465948+00:00"
         }
       ],
       "product_name": "27-inch 4K Monitor Stand",
       "quantity": 200,
       "target_price": "10",
       "subject": "[RFQ-F6B1] Request for Quotation — 27-inch 4K Monitor Stand"
+    },
+    "28da790c": {
+      "conv_id": "28da790c",
+      "thread_id": "28da790c",
+      "project_id": "proj-8b9c0d1e-f2a3-4567-1234-678901234508",
+      "project_name": "Noise Cancelling Headphones NC300",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Preetam",
+      "email_address": "RahulSharma-28da790c@mail.jobsetu.online",
+      "provider": "sendcloud",
+      "status": "replied",
+      "created_at": "2026-07-06T05:06:15.383943+00:00",
+      "reply_count": 2,
+      "last_reply_at": "2026-07-06T05:10:07.601842+00:00",
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "RahulSharma-28da790c@mail.jobsetu.online",
+          "reply_to": "RahulSharma-28da790c@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-28DA] Request for Quotation — Noise Cancelling Headphones NC300",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAAoCAIAAAAAIrR+AAAAlElEQVR4nO3TQQ0AIBDAsHOCNrwiDA98yJImFbDPZu0DRM33AuCZgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYQaGMANDmIEhzMAQZmAIMzCEGRjCDAxhBoYwA0OYgSHMwBBmYAgzMIQZGMIMDGEGhjADQ5iBIczAEGZgCDMwhBkYwgwMYRdsKEuywjKwPQAAAABJRU5ErkJggg==\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Preetam,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Noise Cancelling Headphones NC300</td><td>200 units</td><td>20 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-28DA790C | USR-b2c3d4e5-f6a7-8901-bcde-f12345678902 | THREAD-28DA790C</p></div>",
+          "product_name": "Noise Cancelling Headphones NC300",
+          "quantity": 200,
+          "target_price": "20",
+          "attachments": [
+            {
+              "filename": "email_providers_report.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 37832
+            }
+          ],
+          "provider": "sendcloud",
+          "provider_message_id": "1783314377633_124076_1736826_7339.sc-10-1-255-248-inboundgo0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-06T05:06:15.418500+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "JobSetu <RahulSharma-28da790c@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-28DA] Request for Quotation — Noise Cancelling Headphones NC300",
+          "body_text": "July 06 reply button with attachments\n\n\n\nOn Mon, Jul 6, 2026 at 10:36 AM JobSetu\n<RahulSharma-28da790c@mail.jobsetu.online> wrote:\n\n> Hello World!\n>\n> Your first email via AuroraSendCloud API\n> click to unsubscribe\n> <https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9>\n",
+          "body_html": "<div dir=\"ltr\">July 06 reply button with attachments<br><br><br></div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Mon, Jul 6, 2026 at 10:36 AM JobSetu &lt;RahulSharma-28da790c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "strategic_architecture_compliance_guide.md",
+              "content_type": "text/markdown",
+              "size": 7492,
+              "url": "/attachments/28da790c_f50e23cc_1_strategic_architecture_compliance_guide.md"
+            },
+            {
+              "filename": "email_providers_report.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 37832,
+              "url": "/attachments/28da790c_f50e23cc_2_email_providers_report.docx"
+            },
+            {
+              "filename": "medical_report_master_schema.json",
+              "content_type": "application/json",
+              "size": 7779,
+              "url": "/attachments/28da790c_f50e23cc_3_medical_report_master_schema.json"
+            },
+            {
+              "filename": "AnkitPrajapat.pdf",
+              "content_type": "application/pdf",
+              "size": 377365,
+              "url": "/attachments/28da790c_f50e23cc_4_AnkitPrajapat.pdf"
+            }
+          ],
+          "dkim": "",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "sendcloud",
+          "received_at": "2026-07-06T05:10:04.357568+00:00"
+        },
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "JobSetu <RahulSharma-28da790c@mail.jobsetu.online>",
+          "subject": "Re: [RFQ-28DA] Request for Quotation — Noise Cancelling Headphones NC300",
+          "body_text": "July 06 reply button with attachments\n\n\n\nOn Mon, Jul 6, 2026 at 10:36 AM JobSetu\n<RahulSharma-28da790c@mail.jobsetu.online> wrote:\n\n> Hello World!\n>\n> Your first email via AuroraSendCloud API\n> click to unsubscribe\n> <https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9>\n",
+          "body_html": "<div dir=\"ltr\">July 06 reply button with attachments<br><br><br></div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Mon, Jul 6, 2026 at 10:36 AM JobSetu &lt;RahulSharma-28da790c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><h1>Hello World!</h1><p>Your first email via AuroraSendCloud API</p><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track2.sendcloud.net/track/unsubscribe.do?p=eyJ1c2VyX2lkIjogMTI0MDc2LCAidGFza19pZCI6ICIiLCAiZW1haWxfaWQiOiAiMTc4MzMxNDM3NzYzM18xMjQwNzZfMTczNjgyNl83MzM5LnNjLTEwLTEtMjU1LTI0OC1pbmJvdW5kZ28wJGFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgInBhZ2VfaWQiOiAtMSwgInNpZ24iOiAiZjJjZDgyMmM3NTlkZjI3YmMzZDhiMDE1NjM3NWMwZTMiLCAidXNlcl9oZWFkZXJzIjoge30sICJsYWJlbCI6IDAsICJ0cmFja19kb21haW4iOiAidHJhY2syLnNlbmRjbG91ZC5uZXQiLCAicmVhbF90eXBlIjogIiIsICJuZXRlYXNlIjogImZhbHNlIiwgIm91dF9pcCI6ICI0Ny44OC4yNi4yOSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzMzA3OSwgIm91dF9wb29sX2lkIjogNTV9\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "strategic_architecture_compliance_guide.md",
+              "content_type": "text/markdown",
+              "size": 7492,
+              "url": "/attachments/28da790c_b3ae4032_1_strategic_architecture_compliance_guide.md"
+            },
+            {
+              "filename": "email_providers_report.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 37832,
+              "url": "/attachments/28da790c_b3ae4032_2_email_providers_report.docx"
+            },
+            {
+              "filename": "medical_report_master_schema.json",
+              "content_type": "application/json",
+              "size": 7779,
+              "url": "/attachments/28da790c_b3ae4032_3_medical_report_master_schema.json"
+            },
+            {
+              "filename": "AnkitPrajapat.pdf",
+              "content_type": "application/pdf",
+              "size": 377365,
+              "url": "/attachments/28da790c_b3ae4032_4_AnkitPrajapat.pdf"
+            }
+          ],
+          "dkim": "",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "sendcloud",
+          "received_at": "2026-07-06T05:10:07.601842+00:00"
+        }
+      ],
+      "product_name": "Noise Cancelling Headphones NC300",
+      "quantity": 200,
+      "target_price": "20",
+      "subject": "[RFQ-28DA] Request for Quotation — Noise Cancelling Headphones NC300"
     }
   },
   "users": {
@@ -260,6 +419,9 @@
     ],
     "d4e5f6a7-b8c9-0123-def0-234567890124": [
       "f6b1d3a6"
+    ],
+    "b2c3d4e5-f6a7-8901-bcde-f12345678902": [
+      "28da790c"
     ]
   },
   "unmatched_emails": [],
@@ -284,6 +446,13 @@
       "user_name": "Vikram Nair",
       "user_email": "vikram.nair@gmail.com",
       "created_at": "2026-07-04T05:57:15.623625+00:00"
+    },
+    "28da790c": {
+      "conv_id": "28da790c",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "user_email": "rahul.sharma@gmail.com",
+      "created_at": "2026-07-06T05:06:15.383943+00:00"
     }
   },
   "predefined_users": [
@@ -340,6 +509,15 @@
       "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
       "user_name": "Vikram Nair",
       "created_at": "2026-07-04T05:57:15.623625+00:00"
+    },
+    "28da790c": {
+      "thread_id": "28da790c",
+      "conv_id": "28da790c",
+      "project_id": "proj-8b9c0d1e-f2a3-4567-1234-678901234508",
+      "project_name": "Noise Cancelling Headphones NC300",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "created_at": "2026-07-06T05:06:15.383943+00:00"
     }
   },
   "predefined_projects": [
