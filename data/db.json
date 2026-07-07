@@ -1,8 +1,165 @@
 {
-  "conversations": {},
-  "users": {},
-  "unmatched_emails": [],
-  "user_conversations": {},
+  "conversations": {
+    "f482098c": {
+      "conv_id": "f482098c",
+      "thread_id": "f482098c",
+      "project_id": "proj-2b3c4d5e-f6a7-8901-bcde-f12345678902",
+      "project_name": "USB-C Hub Pro 7-Port",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Ankit",
+      "email_address": "PriyaMehta-f482098c@mail.jobsetu.online",
+      "provider": "engagelab",
+      "status": "replied",
+      "created_at": "2026-07-07T05:52:54.063822+00:00",
+      "reply_count": 3,
+      "last_reply_at": "2026-07-07T05:59:19.137100+00:00",
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "PriyaMehta-f482098c@mail.jobsetu.online",
+          "reply_to": "PriyaMehta-f482098c@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Ankit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>USB-C Hub Pro 7-Port</td><td>200 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-F482098C</p></div>",
+          "product_name": "USB-C Hub Pro 7-Port",
+          "quantity": 200,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "AuroraSendCloud_Documentation.md",
+              "content_type": "text/markdown",
+              "size": 36399
+            }
+          ],
+          "provider": "engagelab",
+          "provider_message_id": "1783403574578_149710_18756_819.sc-10_43_4_74-inbound0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-07T05:52:54.093328+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "PriyaMehta-f482098c@mail.jobsetu.online",
+          "subject": "Re: [RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port",
+          "body_text": "Reply Button\n\nOn Tue, Jul 7, 2026 at 11:22 AM JobSetu\n<PriyaMehta-f482098c@mail.jobsetu.online> wrote:\n\n> [image: JobSetu]\n>\n> Dear Ankit,\n>\n> I am writing to request a formal quotation for the following:\n> Product Quantity Target Price\n> USB-C Hub Pro 7-Port 200 units 10 per unit\n>\n> Please include the following in your quotation:\n>\n>    - Unit price at stated quantity (FOB)\n>    - Minimum order quantity (MOQ)\n>    - Lead time and production capacity\n>    - Payment terms\n>    - Product specifications and certifications\n>\n> We look forward to your response within 3 business days.\n>\n> Best regards,\n> *JobSetu Sourcing Team*\n> ------------------------------\n>\n> Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 |\n> THREAD-F482098C\n> click to unsubscribe\n> <https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D>\n",
+          "body_html": "<div dir=\"ltr\">Reply Button </div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Jul 7, 2026 at 11:22 AM JobSetu &lt;PriyaMehta-f482098c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div style=\"font-family:Arial,sans-serif;max-width:600px\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display: block; margin-bottom: 16px;\"><p>Dear Ankit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\"><tbody><tr style=\"background-color:rgb(245,245,245)\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>USB-C Hub Pro 7-Port</td><td>200 units</td><td>10 per unit</td></tr></tbody></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\"><p style=\"font-size:11px;color:rgb(170,170,170)\">Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-F482098C</p></div><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "email_oauth_and_china_provider_strategy.md",
+              "content_type": "text/markdown",
+              "size": 16178,
+              "url": "/attachments/f482098c_46281cde_1_email_oauth_and_china_provider_strategy.md"
+            }
+          ],
+          "dkim": "pass",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "engagelab",
+          "received_at": "2026-07-07T05:56:16.564340+00:00"
+        },
+        {
+          "email_type": "reply",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "PriyaMehta-f482098c@mail.jobsetu.online",
+          "subject": "Re: [RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port",
+          "body_text": "Reply Button\n\nOn Tue, Jul 7, 2026 at 11:22 AM JobSetu\n<PriyaMehta-f482098c@mail.jobsetu.online> wrote:\n\n> [image: JobSetu]\n>\n> Dear Ankit,\n>\n> I am writing to request a formal quotation for the following:\n> Product Quantity Target Price\n> USB-C Hub Pro 7-Port 200 units 10 per unit\n>\n> Please include the following in your quotation:\n>\n>    - Unit price at stated quantity (FOB)\n>    - Minimum order quantity (MOQ)\n>    - Lead time and production capacity\n>    - Payment terms\n>    - Product specifications and certifications\n>\n> We look forward to your response within 3 business days.\n>\n> Best regards,\n> *JobSetu Sourcing Team*\n> ------------------------------\n>\n> Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 |\n> THREAD-F482098C\n> click to unsubscribe\n> <https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D>\n",
+          "body_html": "<div dir=\"ltr\">Reply Button </div><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Jul 7, 2026 at 11:22 AM JobSetu &lt;PriyaMehta-f482098c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div style=\"font-family:Arial,sans-serif;max-width:600px\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display: block; margin-bottom: 16px;\"><p>Dear Ankit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\"><tbody><tr style=\"background-color:rgb(245,245,245)\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>USB-C Hub Pro 7-Port</td><td>200 units</td><td>10 per unit</td></tr></tbody></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\"><p style=\"font-size:11px;color:rgb(170,170,170)\">Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-F482098C</p></div><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n",
+          "attachments": [
+            {
+              "filename": "email_oauth_and_china_provider_strategy.md",
+              "content_type": "text/markdown",
+              "size": 16178,
+              "url": "/attachments/f482098c_7b215063_1_email_oauth_and_china_provider_strategy.md"
+            }
+          ],
+          "dkim": "pass",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "engagelab",
+          "received_at": "2026-07-07T05:57:20.541010+00:00"
+        },
+        {
+          "email_type": "forwarded",
+          "from_email": "ankitprajapat948@gmail.com",
+          "to_email": "PriyaMehta-f482098c@mail.jobsetu.online",
+          "subject": "Fwd: [RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port",
+          "body_text": " Forwarded message button\n\n---------- Forwarded message ---------\nFrom: Ankit prajapat <ankitprajapat948@gmail.com>\nDate: Tue, Jul 7, 2026 at 11:23 AM\nSubject: Re: [RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port\nTo: PriyaMehta-f482098c <PriyaMehta-f482098c@mail.jobsetu.online>\n\n\nReply Button\n\nOn Tue, Jul 7, 2026 at 11:22 AM JobSetu\n<PriyaMehta-f482098c@mail.jobsetu.online> wrote:\n\n> [image: JobSetu]\n>\n> Dear Ankit,\n>\n> I am writing to request a formal quotation for the following:\n> Product Quantity Target Price\n> USB-C Hub Pro 7-Port 200 units 10 per unit\n>\n> Please include the following in your quotation:\n>\n>    - Unit price at stated quantity (FOB)\n>    - Minimum order quantity (MOQ)\n>    - Lead time and production capacity\n>    - Payment terms\n>    - Product specifications and certifications\n>\n> We look forward to your response within 3 business days.\n>\n> Best regards,\n> *JobSetu Sourcing Team*\n> ------------------------------\n>\n> Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 |\n> THREAD-F482098C\n> click to unsubscribe\n> <https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D>\n",
+          "body_html": "<div dir=\"ltr\"> Forwarded message button <br><br><div class=\"gmail_quote gmail_quote_container\"><div dir=\"ltr\" class=\"gmail_attr\">---------- Forwarded message ---------<br>From: <strong class=\"gmail_sendername\" dir=\"auto\">Ankit prajapat</strong> <span dir=\"auto\">&lt;<a href=\"mailto:ankitprajapat948@gmail.com\">ankitprajapat948@gmail.com</a>&gt;</span><br>Date: Tue, Jul 7, 2026 at 11:23 AM<br>Subject: Re: [RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port<br>To: PriyaMehta-f482098c &lt;PriyaMehta-f482098c@mail.jobsetu.online&gt;<br></div><br><br><div dir=\"ltr\">Reply Button </div><br><div class=\"gmail_quote\"><div dir=\"ltr\" class=\"gmail_attr\">On Tue, Jul 7, 2026 at 11:22 AM JobSetu &lt;PriyaMehta-f482098c@mail.jobsetu.online&gt; wrote:<br></div><blockquote class=\"gmail_quote\" style=\"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex\"><div style=\"font-family:Arial,sans-serif;max-width:600px\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block;margin-bottom:16px\"><p>Dear Ankit,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%\"><tbody><tr style=\"background-color:rgb(245,245,245)\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>USB-C Hub Pro 7-Port</td><td>200 units</td><td>10 per unit</td></tr></tbody></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border-width:1px medium medium;border-style:solid none none;border-color:rgb(238,238,238) currentcolor currentcolor;margin-top:30px\"><p style=\"font-size:11px;color:rgb(170,170,170)\">Reference: CONV-F482098C | USR-c3d4e5f6-a7b8-9012-cdef-123456789013 | THREAD-F482098C</p></div><center><table width=\"100%\" align=\"center\" style=\"max-width:900px;margin:0px auto;width:100%\"><tbody><tr align=\"center\"></tr><tr align=\"center\"><td style=\"border-top:1px solid rgb(229,229,229);padding-top:15px;padding-bottom:15px\" width=\"560\"><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\"><tbody><tr><td style=\"background-color:rgb(221,221,221);border:1px solid rgb(221,221,221);border-radius:4px;padding:3px 15px;text-align:center\"><a style=\"color:rgb(166,166,166);background:rgb(221,221,221);font-size:12px;text-decoration:none\" href=\"https://track01.engagelab.com/track/unsubscribe.do?p=eyJ0cmFja19kb21haW4iOiAidHJhY2swMS5lbmdhZ2VsYWIuY29tIiwgInVzZXJfaWQiOiAxNDk3MTAsICJ0YXNrX2lkIjogIiIsICJlbWFpbF9pZCI6ICIxNzgzNDAzNTc0NTc4XzE0OTcxMF8xODc1Nl84MTkuc2MtMTBfNDNfNF83NC1pbmJvdW5kMCRhbmtpdHByYWphcGF0OTQ4QGdtYWlsLmNvbSIsICJwYWdlX2lkIjogLTEsICJzaWduIjogIjU1Yjk1YWQ0YTFkMjQ5NjAzZmE3YTFiMjc3ODk4YzEyIiwgInVzZXJfaGVhZGVycyI6IHt9LCAibGFiZWwiOiAwLCAiY3VzdG9tX2FyZ3MiOiB7fSwgInJlYWxfdHlwZSI6ICIiLCAibmV0ZWFzZSI6ICJmYWxzZSIsICJvdXRfaXAiOiAiOC4yMTkuMTA4LjI0NSIsICJjb250ZW50X3R5cGUiOiAiIiwgInJlY2VpdmVyIjogImFua2l0cHJhamFwYXQ5NDhAZ21haWwuY29tIiwgIm1haWxsaXN0X2lkIjogMCwgIm92ZXJzZWFzIjogIiIsICJjYXRlZ29yeV9pZCI6IDgzNjg5MSwgIm91dF9wb29sX2lkIjogMTEzfQ%3D%3D\" rel=\"noopener\" target=\"_blank\">click to unsubscribe</a></td></tr></tbody></table></td></tr></tbody></table></center></blockquote></div>\n</div></div>\n",
+          "attachments": [
+            {
+              "filename": "email_oauth_and_china_provider_strategy.md",
+              "content_type": "text/markdown",
+              "size": 16178,
+              "url": "/attachments/f482098c_e0d1273b_1_email_oauth_and_china_provider_strategy.md"
+            },
+            {
+              "filename": "elasticemail_complete_setup.docx",
+              "content_type": "application/wps-office.docx",
+              "size": 23890,
+              "url": "/attachments/f482098c_e0d1273b_2_elasticemail_complete_setup.docx"
+            },
+            {
+              "filename": "RFQ.jpg",
+              "content_type": "image/jpeg",
+              "size": 78433,
+              "url": "/attachments/f482098c_e0d1273b_3_RFQ.jpg"
+            },
+            {
+              "filename": "school-agent-phase1.zip",
+              "content_type": "application/zip",
+              "size": 14644,
+              "url": "/attachments/f482098c_e0d1273b_4_school-agent-phase1.zip"
+            }
+          ],
+          "dkim": "pass",
+          "spf": "",
+          "spam_score": "0.0",
+          "provider": "engagelab",
+          "received_at": "2026-07-07T05:59:19.137100+00:00"
+        }
+      ],
+      "product_name": "USB-C Hub Pro 7-Port",
+      "quantity": 200,
+      "target_price": "10",
+      "subject": "[RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port"
+    }
+  },
+  "users": {
+    "c3d4e5f6-a7b8-9012-cdef-123456789013": [
+      "f482098c"
+    ]
+  },
+  "unmatched_emails": [
+    {
+      "from_email": "ankitprajapat948@gmail.com",
+      "to_email": "RahulSharma-8ddfd168@mail.jobsetu.online",
+      "subject": "Re: [RFQ-8DDF] Request for Quotation — USB-C Hub Pro 7-Port",
+      "provider": "engagelab",
+      "received_at": "2026-07-07T06:28:21.508177+00:00",
+      "needs_review": true
+    },
+    {
+      "from_email": "ankitprajapat948@gmail.com",
+      "to_email": "RahulSharma-8ddfd168@mail.jobsetu.online",
+      "subject": "Re: [RFQ-8DDF] Request for Quotation — USB-C Hub Pro 7-Port",
+      "provider": "engagelab",
+      "received_at": "2026-07-07T07:47:03.490562+00:00",
+      "needs_review": true
+    }
+  ],
+  "user_conversations": {
+    "f482098c": {
+      "conv_id": "f482098c",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "user_email": "priya.mehta@gmail.com",
+      "created_at": "2026-07-07T05:52:54.063822+00:00"
+    }
+  },
   "predefined_users": [
     {
       "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
@@ -30,7 +187,17 @@
       "email": "sneha.joshi@gmail.com"
     }
   ],
-  "threads": {},
+  "threads": {
+    "f482098c": {
+      "thread_id": "f482098c",
+      "conv_id": "f482098c",
+      "project_id": "proj-2b3c4d5e-f6a7-8901-bcde-f12345678902",
+      "project_name": "USB-C Hub Pro 7-Port",
+      "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
+      "user_name": "Priya Mehta",
+      "created_at": "2026-07-07T05:52:54.063822+00:00"
+    }
+  },
   "predefined_projects": [
     {
       "id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",

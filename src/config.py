@@ -75,6 +75,9 @@ class Settings:
         sendcloud_api_user (str | None): SendCloud ``API_USER`` credential.
         sendcloud_api_key (str | None): SendCloud ``API_KEY`` credential.
         sendcloud_api_base (str): SendCloud REST base URL (region-specific).
+        engagelab_api_user (str | None): EngageLab ``API_USER`` credential.
+        engagelab_api_key (str | None): EngageLab ``API_KEY`` credential.
+        engagelab_api_base (str): EngageLab REST base URL (region-specific).
         base_dir (Path): Repository root directory.
         data_dir (Path): Directory holding the JSON store and attachments.
         attachments_dir (Path): Directory where inbound attachments land.
@@ -134,6 +137,15 @@ class Settings:
         # CN (Hong Kong SAR) region: https://api-hk.aurorasendcloud.com
         self.sendcloud_api_base = os.getenv(
             "SENDCLOUD_API_BASE", "https://api.aurorasendcloud.com"
+        ).rstrip("/")
+
+        # ── EngageLab credentials ────────────────────────────────────
+        self.engagelab_api_user = os.getenv("ENGAGELAB_API_USER")
+        self.engagelab_api_key = os.getenv("ENGAGELAB_API_KEY")
+        # Singapore region (default): https://email.api.engagelab.cc
+        # Turkey region: https://emailapi-tr.engagelab.com
+        self.engagelab_api_base = os.getenv(
+            "ENGAGELAB_API_BASE", "https://email.api.engagelab.cc"
         ).rstrip("/")
 
         # ── Filesystem paths (anchored at the repository root) ───────

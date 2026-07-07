@@ -25,6 +25,7 @@ from src.email_platform.email_master import ProviderConfigError
 from src.webhook_factory.elasticemail_webhook import (
     ElasticEmailWebhookParser,
 )
+from src.webhook_factory.engagelab_webhook import EngageLabWebhookParser
 from src.webhook_factory.mailgun_webhook import MailgunWebhookParser
 from src.webhook_factory.sendcloud_webhook import SendCloudWebhookParser
 from src.webhook_factory.sendgrid_webhook import SendGridWebhookParser
@@ -42,6 +43,7 @@ _PARSERS: dict[str, type[WebhookParserMaster]] = {
     "mailgun": MailgunWebhookParser,
     "elasticemail": ElasticEmailWebhookParser,
     "sendcloud": SendCloudWebhookParser,
+    "engagelab": EngageLabWebhookParser,
 }
 
 
@@ -53,7 +55,7 @@ class WebhookParserFactory:
 
     Example:
         >>> WebhookParserFactory.supported()
-        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud']
+        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud', 'engagelab']
     """
 
     @classmethod

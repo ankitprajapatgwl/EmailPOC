@@ -21,6 +21,7 @@ import logging
 from src.config import Settings
 from src.email_platform.elasticemail_provider import ElasticEmailProvider
 from src.email_platform.email_master import EmailMaster, ProviderConfigError
+from src.email_platform.engagelab_provider import EngageLabEmailProvider
 from src.email_platform.mailgun_provider import MailgunEmailProvider
 from src.email_platform.sendcloud_provider import SendCloudEmailProvider
 from src.email_platform.sendgrid_provider import SendGridEmailProvider
@@ -33,6 +34,7 @@ _PROVIDERS: dict[str, type[EmailMaster]] = {
     "mailgun": MailgunEmailProvider,
     "elasticemail": ElasticEmailProvider,
     "sendcloud": SendCloudEmailProvider,
+    "engagelab": EngageLabEmailProvider,
 }
 
 
@@ -44,7 +46,7 @@ class EmailProviderFactory:
 
     Example:
         >>> EmailProviderFactory.supported()
-        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud']
+        ['sendgrid', 'mailgun', 'elasticemail', 'sendcloud', 'engagelab']
     """
 
     @classmethod

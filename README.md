@@ -2,11 +2,13 @@
 
 A FastAPI proof-of-concept for managing RFQ (Request for Quotation) email
 conversations with suppliers using **dynamic email addressing**. The
-supported and actively-documented provider is **SendGrid**; Mailgun,
-Elastic Email and SendCloud are also implemented and selectable via config,
-but only SendGrid currently has a written setup guide in this repo. SendCloud
-outbound sending is fully implemented; its inbound reply parsing is a stub
-(no SendCloud inbound webhook payload doc is available yet).
+supported and actively-documented providers are **SendGrid** and
+**EngageLab**; Mailgun, Elastic Email and SendCloud are also implemented and
+selectable via config, but have no written setup guide in this repo.
+SendCloud outbound sending is fully implemented; its inbound reply parsing
+is a stub (no SendCloud inbound webhook payload doc is available yet).
+EngageLab has both outbound sending and inbound reply parsing implemented —
+see [`setup_docs/engagelab_guide/engagelab_setup.md`](setup_docs/engagelab_guide/engagelab_setup.md).
 
 Each conversation gets a unique email address that encodes the user and
 conversation IDs directly in the local-part:
@@ -19,8 +21,8 @@ user_id   conv_id
 
 Supplier replies go back to the same address. The active provider's inbound
 feature (SendGrid Inbound Parse / Mailgun Routes / Elastic Email inbound
-notifications / SendCloud — not yet implemented) posts the reply to the
-single `/webhooks/inbound` endpoint,
+notifications / EngageLab Inbound Route / SendCloud — not yet implemented)
+posts the reply to the single `/webhooks/inbound` endpoint,
 which parses both IDs and stores the reply against the correct conversation —
 no lookup tables needed on the mail side.
 
@@ -30,6 +32,8 @@ no lookup tables needed on the mail side.
 
 - **SendGrid-first** — domain-level authentication + Inbound Parse, fully
   documented in [`sendgrid_dynamic_domain_auth.md`](sendgrid_dynamic_domain_auth.md).
+- **EngageLab** — dynamic sender addresses + Inbound Route webhook, fully
+  documented in [`setup_docs/engagelab_guide/engagelab_setup.md`](setup_docs/engagelab_guide/engagelab_setup.md).
 - **Pluggable providers** — the code also supports Mailgun, Elastic Email and
   SendCloud via a single `EMAIL_PROVIDER` env var (no code changes), but they
   have no written setup guide in this repo yet. SendCloud inbound reply
@@ -71,6 +75,7 @@ EmailPOC/
 │   │   ├── mailgun_provider.py   # Mailgun HTTP API (requests)
 │   │   ├── elasticemail_provider.py  # Elastic Email SDK
 │   │   ├── sendcloud_provider.py # SendCloud HTTP API (requests)
+│   │   ├── engagelab_provider.py # EngageLab HTTP API (requests, Basic Auth)
 │   │   └── factory.py            # EmailProviderFactory
 │   └── webhook_factory/          # INBOUND parsers
 │       ├── webhook_master.py     # WebhookParserMaster ABC + InboundEmail
@@ -78,6 +83,7 @@ EmailPOC/
 │       ├── mailgun_webhook.py    # + HMAC signature verification
 │       ├── elasticemail_webhook.py
 │       ├── sendcloud_webhook.py  # Stub — no inbound doc yet
+│       ├── engagelab_webhook.py  # EngageLab Inbound Route parser
 │       └── factory.py            # WebhookParserFactory
 ├── templates/                    # Jinja2 UI templates
 ├── static/                       # Static assets (served at /static)
@@ -121,7 +127,7 @@ Copy `.env.example` to `.env` and fill in your values.
 
 | Variable                      | Required     | Default                           | Description                                          |
 | ----------------------------- | ------------ | --------------------------------- | ----------------------------------------------------- |
-| `EMAIL_PROVIDER`              | ✅           | `sendgrid`                        | `sendgrid` \| `mailgun` \| `elasticemail` \| `sendcloud` |
+| `EMAIL_PROVIDER`              | ✅           | `sendgrid`                        | `sendgrid` \| `mailgun` \| `elasticemail` \| `sendcloud` \| `engagelab` |
 | `LOG_LEVEL`                   | ❌           | `INFO`                            | `DEBUG`/`INFO`/`WARNING`/`ERROR`                       |
 | `INBOUND_DOMAIN`              | ✅           | —                                 | Subdomain whose MX points at the provider              |
 | `FROM_EMAIL`                  | ✅           | —                                 | Verified sender (From header)                          |
@@ -136,6 +142,9 @@ Copy `.env.example` to `.env` and fill in your values.
 | `SENDCLOUD_API_USER`          | sendcloud    | —                                 | API user from the SendCloud console                     |
 | `SENDCLOUD_API_KEY`           | sendcloud    | —                                 | API key from the SendCloud console                       |
 | `SENDCLOUD_API_BASE`          | ❌           | `https://api.aurorasendcloud.com` | Region base (Singapore/US/HK)                            |
+| `ENGAGELAB_API_USER`          | engagelab    | —                                 | API_USER created in the EngageLab dashboard              |
+| `ENGAGELAB_API_KEY`           | engagelab    | —                                 | API_KEY generated for that API_USER                      |
+| `ENGAGELAB_API_BASE`          | ❌           | `https://email.api.engagelab.cc`  | Region base (Singapore/Turkey)                           |
 
 Only the active provider's credentials are required — the app fails fast at
 startup with a clear message if the selected provider is misconfigured.
@@ -168,6 +177,28 @@ routing if you switch to them. SendCloud specifically only sends outbound
 mail today; its `src/webhook_factory/sendcloud_webhook.py` parser is a
 stub that raises a clear error until SendCloud's inbound webhook payload
 format is documented and implemented.
+
+---
+
+## Provider Setup Guide (EngageLab)
+
+EngageLab is the second fully-documented provider — both outbound sending
+(dynamic `from`/`reply_to` addresses) and inbound reply parsing (Inbound
+Route webhook) are implemented. The complete walkthrough is in:
+
+- **[`setup_docs/engagelab_guide/engagelab_setup.md`](setup_docs/engagelab_guide/engagelab_setup.md)**
+
+It walks through:
+
+1. Creating a Trigger Email `API_USER`/`API_KEY` pair in the EngageLab
+   dashboard and binding it to your sending subdomain.
+2. Authenticating the subdomain (SPF/DKIM TXT records + MX record) at your
+   DNS provider.
+3. Sending with dynamic, unregistered `from`/`reply_to` prefixes once the
+   subdomain suffix is verified.
+4. Binding an Inbound Route webhook to the `API_USER` so supplier replies
+   POST to `/webhooks/inbound`.
+5. Testing outbound via `curl` and inbound via `ngrok`.
 
 ---
 

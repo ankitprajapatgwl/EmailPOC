@@ -136,8 +136,8 @@ class WebhookParserMaster(ABC):
         """Return the lowercase provider key this parser handles.
 
         Returns:
-            str: One of ``"sendgrid"``, ``"mailgun"`` or
-                ``"elasticemail"``.
+            str: One of ``"sendgrid"``, ``"mailgun"``, ``"elasticemail"``,
+                ``"sendcloud"`` or ``"engagelab"``.
         """
         raise NotImplementedError
 
