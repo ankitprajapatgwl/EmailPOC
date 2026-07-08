@@ -12,6 +12,7 @@ Official Docs: EngageLab Email API
 ## Table of Contents
 
 1. [What Is EngageLab](#1-what-is-engagelab)
+   - [1.1 Pricing](#11-pricing)
 2. [Data Centers, Base URLs & Auth](#2-data-centers-base-urls--auth)
 3. [API_USER & Keys (Dashboard Setup)](#3-api_user--keys-dashboard-setup)
 4. [Domain Authentication (SPF / DKIM / MX / Tracking)](#4-domain-authentication-spf--dkim--mx--tracking)
@@ -31,6 +32,16 @@ Key features we utilize:
 - **Dynamic Sender Identities** — EngageLab allows you to define custom prefixes dynamically at send time, provided the domain suffix is authenticated.
 - **Inbound Webhook Routing** — Catching replies to our dynamically generated addresses and pushing them to our `/webhooks/inbound` endpoint.
 - **API_USER Architecture** — EngageLab isolates sending reputations and webhooks per API_USER entity.
+
+### 1.1 Pricing
+
+| Tier | Volume | Cost |
+|---|---|---|
+| Free | 50 emails/day | ✅ Free |
+| Paid | 10,000 emails/month | $29.90/month |
+| Paid | 50,000 emails/month | $127.00/month |
+
+This is the provider used for our China-region POC (see `SUPPLIER_EMAIL_FLOW.md` for the full provider cost comparison).
 
 ## 2. Data Centers, Base URLs & Auth
 
