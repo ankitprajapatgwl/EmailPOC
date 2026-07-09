@@ -126,11 +126,129 @@
       "quantity": 200,
       "target_price": "10",
       "subject": "[RFQ-F482] Request for Quotation — USB-C Hub Pro 7-Port"
+    },
+    "2c8102d9": {
+      "conv_id": "2c8102d9",
+      "thread_id": "2c8102d9",
+      "project_id": "proj-2b3c4d5e-f6a7-8901-bcde-f12345678902",
+      "project_name": "USB-C Hub Pro 7-Port",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "supplier_email": "ankit.prajapat@galaxyweblinks.com",
+      "supplier_name": "Vikash",
+      "email_address": "RahulSharma-2c8102d9@mail.jobsetu.online",
+      "provider": "sendgrid",
+      "status": "replied",
+      "created_at": "2026-07-09T06:35:34.815227+00:00",
+      "reply_count": 1,
+      "last_reply_at": "2026-07-09T06:38:48.428080+00:00",
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "RahulSharma-2c8102d9@mail.jobsetu.online",
+          "reply_to": "RahulSharma-2c8102d9@mail.jobsetu.online",
+          "to_email": "ankit.prajapat@galaxyweblinks.com",
+          "subject": "[RFQ-2C81] Request for Quotation — USB-C Hub Pro 7-Port",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Vikash,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>USB-C Hub Pro 7-Port</td><td>200 units</td><td>10 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-2C8102D9 | USR-b2c3d4e5-f6a7-8901-bcde-f12345678902 | THREAD-2C8102D9</p></div>",
+          "product_name": "USB-C Hub Pro 7-Port",
+          "quantity": 200,
+          "target_price": "10",
+          "attachments": [
+            {
+              "filename": "LangSmith_Summary_Report.md",
+              "content_type": "text/markdown",
+              "size": 12266
+            }
+          ],
+          "provider": "sendgrid",
+          "provider_message_id": "oXvvDKI5TXqlCaOaootMDg",
+          "status_code": 202,
+          "sent_at": "2026-07-09T06:35:54.933469+00:00"
+        }
+      ],
+      "emails_received": [
+        {
+          "email_type": "new_thread",
+          "from_email": "Ankit Prajapat <ankit.prajapat@galaxyweblinks.com>",
+          "to_email": "\"RahulSharma-2c8102d9@mail.jobsetu.online\"\t<RahulSharma-2c8102d9@mail.jobsetu.online>",
+          "subject": "New Thread Start",
+          "body_text": "New Thread Start with file\r\n\r\nThanks Ankit\r\n",
+          "body_html": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\r\n<style type=\"text/css\" style=\"display:none;\"> P {margin-top:0;margin-bottom:0;} </style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div class=\"elementToProof\" style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);\">\r\nNew Thread Start with file&nbsp;</div>\r\n<div class=\"elementToProof\" style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);\">\r\n<br>\r\n</div>\r\n<div class=\"elementToProof\" style=\"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);\">\r\nThanks Ankit</div>\r\n</body>\r\n</html>\r\n",
+          "attachments": [
+            {
+              "filename": "LangSmith_Technical_Reference_Report.md",
+              "content_type": "text/markdown",
+              "size": 26899,
+              "url": "/attachments/2c8102d9_37c7223e_1_LangSmith_Technical_Reference_Report.md"
+            }
+          ],
+          "dkim": "{@galaxyweblinks.com : pass}",
+          "spf": "pass",
+          "spam_score": "-0.1",
+          "provider": "sendgrid",
+          "received_at": "2026-07-09T06:38:48.428080+00:00"
+        }
+      ],
+      "product_name": "USB-C Hub Pro 7-Port",
+      "quantity": 200,
+      "target_price": "10",
+      "subject": "[RFQ-2C81] Request for Quotation — USB-C Hub Pro 7-Port"
+    },
+    "73cdd0e4": {
+      "conv_id": "73cdd0e4",
+      "thread_id": "73cdd0e4",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "supplier_email": "ankitprajapat948@gmail.com",
+      "supplier_name": "Google",
+      "email_address": "VikramNair-73cdd0e4@mail.jobsetu.online",
+      "provider": "engagelab",
+      "status": "open",
+      "created_at": "2026-07-09T06:50:20.033161+00:00",
+      "reply_count": 0,
+      "last_reply_at": null,
+      "emails_sent": [
+        {
+          "email_type": "new_thread",
+          "from_email": "VikramNair-73cdd0e4@mail.jobsetu.online",
+          "reply_to": "VikramNair-73cdd0e4@mail.jobsetu.online",
+          "to_email": "ankitprajapat948@gmail.com",
+          "subject": "[RFQ-73CD] Request for Quotation — Bluetooth Speaker X200",
+          "body_html": "<div style=\"font-family: Arial, sans-serif; max-width: 600px;\"><img src=\"https://placehold.co/320x40/blue/white?text=JobSetu\" alt=\"JobSetu\" width=\"320\" height=\"40\" style=\"display:block; margin-bottom:16px;\"><p>Dear Google,</p><p>I am writing to request a formal quotation for the following:</p><table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse: collapse; width: 100%;\"><tr style=\"background-color: #f5f5f5;\"><th>Product</th><th>Quantity</th><th>Target Price</th></tr><tr><td>Bluetooth Speaker X200</td><td>200 units</td><td>15 per unit</td></tr></table><p>Please include the following in your quotation:</p><ul><li>Unit price at stated quantity (FOB)</li><li>Minimum order quantity (MOQ)</li><li>Lead time and production capacity</li><li>Payment terms</li><li>Product specifications and certifications</li></ul><p>We look forward to your response within 3 business days.</p><p>Best regards,<br><strong>JobSetu Sourcing Team</strong></p><hr style=\"border:none; border-top:1px solid #eee; margin-top:30px;\"><p style=\"font-size:11px; color:#aaa;\">Reference: CONV-73CDD0E4 | USR-d4e5f6a7-b8c9-0123-def0-234567890124 | THREAD-73CDD0E4</p></div>",
+          "product_name": "Bluetooth Speaker X200",
+          "quantity": 200,
+          "target_price": "15",
+          "attachments": [
+            {
+              "filename": "sendgrid_dynamic_domain_auth.md",
+              "content_type": "text/markdown",
+              "size": 37868
+            }
+          ],
+          "provider": "engagelab",
+          "provider_message_id": "1783579851341_149710_17810_1968.sc-10_43_5_248-inbound0$ankitprajapat948@gmail.com",
+          "status_code": 200,
+          "sent_at": "2026-07-09T06:50:35.130691+00:00"
+        }
+      ],
+      "emails_received": [],
+      "product_name": "Bluetooth Speaker X200",
+      "quantity": 200,
+      "target_price": "15",
+      "subject": "[RFQ-73CD] Request for Quotation — Bluetooth Speaker X200"
     }
   },
   "users": {
     "c3d4e5f6-a7b8-9012-cdef-123456789013": [
       "f482098c"
+    ],
+    "b2c3d4e5-f6a7-8901-bcde-f12345678902": [
+      "2c8102d9"
+    ],
+    "d4e5f6a7-b8c9-0123-def0-234567890124": [
+      "73cdd0e4"
     ]
   },
   "unmatched_emails": [
@@ -158,6 +276,20 @@
       "user_name": "Priya Mehta",
       "user_email": "priya.mehta@gmail.com",
       "created_at": "2026-07-07T05:52:54.063822+00:00"
+    },
+    "2c8102d9": {
+      "conv_id": "2c8102d9",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "user_email": "rahul.sharma@gmail.com",
+      "created_at": "2026-07-09T06:35:34.815227+00:00"
+    },
+    "73cdd0e4": {
+      "conv_id": "73cdd0e4",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "user_email": "vikram.nair@gmail.com",
+      "created_at": "2026-07-09T06:50:20.033161+00:00"
     }
   },
   "predefined_users": [
@@ -196,6 +328,24 @@
       "user_id": "c3d4e5f6-a7b8-9012-cdef-123456789013",
       "user_name": "Priya Mehta",
       "created_at": "2026-07-07T05:52:54.063822+00:00"
+    },
+    "2c8102d9": {
+      "thread_id": "2c8102d9",
+      "conv_id": "2c8102d9",
+      "project_id": "proj-2b3c4d5e-f6a7-8901-bcde-f12345678902",
+      "project_name": "USB-C Hub Pro 7-Port",
+      "user_id": "b2c3d4e5-f6a7-8901-bcde-f12345678902",
+      "user_name": "Rahul Sharma",
+      "created_at": "2026-07-09T06:35:34.815227+00:00"
+    },
+    "73cdd0e4": {
+      "thread_id": "73cdd0e4",
+      "conv_id": "73cdd0e4",
+      "project_id": "proj-1a2b3c4d-e5f6-7890-abcd-ef1234567801",
+      "project_name": "Bluetooth Speaker X200",
+      "user_id": "d4e5f6a7-b8c9-0123-def0-234567890124",
+      "user_name": "Vikram Nair",
+      "created_at": "2026-07-09T06:50:20.033161+00:00"
     }
   },
   "predefined_projects": [
