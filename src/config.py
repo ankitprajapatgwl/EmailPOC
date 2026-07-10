@@ -27,6 +27,7 @@ Example:
 """
 
 import os
+import secrets
 from functools import lru_cache
 from pathlib import Path
 
@@ -103,6 +104,25 @@ class Settings:
         Returns:
             None
         """
+        # ── Database ──────────────────────────────────────────────────
+        self.database_url = os.getenv(
+            "DATABASE_URL",
+            "postgresql+asyncpg://postgres:postgres@localhost:5433/emailpoc",
+        )
+
+        # ── Auth / sessions ───────────────────────────────────────────
+        # Signs the short-lived "pending registration" cookie used between
+        # the registration wizard's steps (§3.2) — NOT used for session
+        # tokens themselves (those are random + DB-verified, unaffected by
+        # this key). Falling back to a fresh random value means existing
+        # in-progress registrations are invalidated on every restart; set it
+        # explicitly for anything longer-lived than local dev.
+        self.secret_key = os.getenv("SECRET_KEY") or secrets.token_urlsafe(32)
+        self.session_ttl_days = int(os.getenv("SESSION_TTL_DAYS", "7"))
+        self.session_cookie_secure = (
+            os.getenv("SESSION_COOKIE_SECURE", "true").strip().lower() == "true"
+        )
+
         # ── Global settings ──────────────────────────────────────────
         self.email_provider = os.getenv(
             "EMAIL_PROVIDER", "sendgrid"

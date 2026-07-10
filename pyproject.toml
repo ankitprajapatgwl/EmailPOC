@@ -13,6 +13,13 @@ dependencies = [
     "requests>=2.34.2",
     "elasticemail>=4.1.4",
     "httpx>=0.28.1",
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg>=0.29",
+    "alembic>=1.13",
+    "passlib[bcrypt]>=1.7",
+    # passlib 1.7.4's bcrypt backend detection reads bcrypt.__about__, removed in bcrypt>=4.1
+    "bcrypt>=3.2,<4.1",
+    "email-validator>=2.1",
 ]
 
 [tool.uv]

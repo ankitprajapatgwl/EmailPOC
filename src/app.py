@@ -6,7 +6,7 @@ ready-to-serve :data:`app` object that Uvicorn imports
 
 1. Load configuration (:func:`src.config.get_settings`).
 2. Configure the single shared logger from ``LOG_LEVEL``.
-3. Open the JSON store.
+3. Build the async Postgres engine/session factory.
 4. Build the active email provider and inbound webhook parser from
    ``EMAIL_PROVIDER`` via their factories.
 5. Assemble the :class:`ConversationService`.
@@ -21,12 +21,16 @@ Example:
     'EmailPOC'
 """
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from src.auth.routes import router as auth_router
 from src.config import get_settings
-from src.db import EmailDB
+from src.db.repository import Repository
+from src.db.session import create_engine_and_sessionmaker
 from src.email_platform.factory import EmailProviderFactory
 from src.logger import AppLogger
 from src.route import router
@@ -71,7 +75,8 @@ def create_app() -> FastAPI:
     settings.static_dir.mkdir(parents=True, exist_ok=True)
 
     # 3. Build infrastructure + the active provider/parser pair.
-    db = EmailDB(str(settings.db_path), logger)
+    engine, session_factory = create_engine_and_sessionmaker(settings.database_url)
+    db = Repository(session_factory, settings, logger)
     email_provider = EmailProviderFactory.create(
         settings.email_provider, settings, logger
     )
@@ -82,8 +87,13 @@ def create_app() -> FastAPI:
         db, email_provider, webhook_parser, settings, logger
     )
 
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        yield
+        await engine.dispose()
+
     # 4. Assemble the FastAPI app and register everything.
-    app = FastAPI(title="EmailPOC")
+    app = FastAPI(title="EmailPOC", lifespan=lifespan)
     app.mount(
         "/static",
         StaticFiles(directory=str(settings.static_dir)),
@@ -106,6 +116,7 @@ def create_app() -> FastAPI:
         directory=str(settings.templates_dir)
     )
 
+    app.include_router(auth_router)
     app.include_router(router)
     logger.info("EmailPOC application ready")
     return app

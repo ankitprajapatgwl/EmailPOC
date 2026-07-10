@@ -30,7 +30,7 @@ from pathlib import Path
 from fastapi import Request
 
 from src.config import Settings
-from src.db import EmailDB
+from src.db.repository import DuplicateConversationTokenError, Repository
 from src.email_platform.email_master import EmailMaster
 from src.webhook_factory.webhook_master import (
     InboundEmail,
@@ -42,12 +42,18 @@ from src.webhook_factory.webhook_master import (
 # discarded before being matched to a conversation.
 _SPAM_THRESHOLD = 5.0
 
+# Bounded retry for the rare case a freshly generated 8-char conversation
+# token collides with an existing one (the DB's UNIQUE constraint is the
+# real backstop; this just turns a collision into a silent re-pick instead
+# of a user-facing error).
+_MAX_TOKEN_ATTEMPTS = 5
+
 
 class ConversationService:
     """Coordinate conversations, outbound sends and inbound replies.
 
     Attributes:
-        db (EmailDB): The JSON persistence layer.
+        db (Repository): The async Postgres persistence layer.
         email (EmailMaster): The active outbound email provider. Its
             inherited address helpers are reused on the inbound side so the
             encode/decode logic has a single source of truth.
@@ -62,7 +68,7 @@ class ConversationService:
 
     def __init__(
         self,
-        db: EmailDB,
+        db: Repository,
         email_provider: EmailMaster,
         webhook_parser: WebhookParserMaster,
         settings: Settings,
@@ -71,7 +77,7 @@ class ConversationService:
         """Store the collaborators this service orchestrates.
 
         Args:
-            db (EmailDB): The JSON persistence layer.
+            db (Repository): The async Postgres persistence layer.
             email_provider (EmailMaster): The active outbound provider.
             webhook_parser (WebhookParserMaster): The active inbound parser.
             settings (Settings): Shared application configuration.
@@ -88,7 +94,7 @@ class ConversationService:
 
     # ── Outbound ─────────────────────────────────────────────────────
 
-    def create_conversation(
+    async def create_conversation(
         self,
         user_id: str,
         user_name: str,
@@ -99,9 +105,13 @@ class ConversationService:
     ) -> dict:
         """Create and persist a new tracked conversation.
 
-        Generates a unique thread_id (used as conv_id for email routing),
-        builds the associated dynamic email address, stores the record in
-        ``conversations``, ``user_conversations``, and ``threads`` tables.
+        Generates a unique token (used as conv_id for email routing) and the
+        associated dynamic email address, then stores the record in
+        ``conversations``. Retries with a freshly generated token, up to
+        :data:`_MAX_TOKEN_ATTEMPTS` times, if the token collides with an
+        existing conversation's — the DB's own UNIQUE constraint on
+        ``conversations.token`` is what actually guarantees no duplicates;
+        this loop just makes a collision invisible to the caller.
 
         Args:
             user_id (str): The platform user UUID who owns this conversation.
@@ -110,69 +120,60 @@ class ConversationService:
             supplier_name (str): Human-readable supplier display name.
             project_id (str): UUID of the selected predefined project.
                 When provided this is stored as the "Conversation ID" for
-                grouping; the generated thread_id handles email routing.
+                grouping; the generated token handles email routing.
             project_name (str): Product name from the selected project.
 
         Returns:
             dict: The newly created conversation record.
+
+        Raises:
+            DuplicateConversationTokenError: If every attempt collides
+                (astronomically unlikely with an 8-char hex token space).
         """
-        thread_id = self.email.generate_conversation_id()
-        # conv_id = thread_id for email routing; project_id is the business
-        # level conversation identifier displayed in the UI.
-        conv_id = thread_id
-        email_addr = self.email.build_dynamic_email(user_name, conv_id)
         now = datetime.now(timezone.utc).isoformat()
+        last_error: DuplicateConversationTokenError | None = None
 
-        conversation = {
-            "conv_id": conv_id,
-            "thread_id": thread_id,
-            "project_id": project_id,
-            "project_name": project_name,
-            "user_id": str(user_id),
-            "user_name": user_name,
-            "supplier_email": supplier_email,
-            "supplier_name": supplier_name,
-            "email_address": email_addr,
-            "provider": self.email.provider_name,
-            "status": "open",
-            "created_at": now,
-            "reply_count": 0,
-            "last_reply_at": None,
-            "emails_sent": [],
-            "emails_received": [],
-        }
-        self.db.insert_conversation(conversation)
+        for _ in range(_MAX_TOKEN_ATTEMPTS):
+            conv_id = self.email.generate_conversation_id()
+            email_addr = self.email.build_dynamic_email(user_name, conv_id)
 
-        user_info = self.db.get_user_by_id(user_id)
-        self.db.insert_user_conversation(
-            conv_id=conv_id,
-            user_id=str(user_id),
-            user_name=user_name,
-            user_email=user_info.get("email", "") if user_info else "",
-            created_at=now,
-        )
+            conversation = {
+                "conv_id": conv_id,
+                "thread_id": conv_id,
+                "project_id": project_id,
+                "project_name": project_name,
+                "user_id": str(user_id),
+                "user_name": user_name,
+                "supplier_email": supplier_email,
+                "supplier_name": supplier_name,
+                "email_address": email_addr,
+                "provider": self.email.provider_name,
+                "status": "open",
+                "created_at": now,
+                "reply_count": 0,
+                "last_reply_at": None,
+                "emails_sent": [],
+                "emails_received": [],
+            }
+            try:
+                await self.db.insert_conversation(conversation)
+            except DuplicateConversationTokenError as exc:
+                last_error = exc
+                self.log.warning("Conversation token collision on %s, retrying", conv_id)
+                continue
 
-        self.db.insert_thread(
-            thread_id=thread_id,
-            conv_id=conv_id,
-            project_id=project_id,
-            project_name=project_name,
-            user_id=str(user_id),
-            user_name=user_name,
-            created_at=now,
-        )
+            self.log.info(
+                "Created conversation %s (project=%s user=%s provider=%s)",
+                conv_id,
+                project_id or "none",
+                user_id,
+                self.email.provider_name,
+            )
+            return conversation
 
-        self.log.info(
-            "Created conversation %s (thread=%s project=%s user=%s provider=%s)",
-            conv_id,
-            thread_id,
-            project_id or "none",
-            user_id,
-            self.email.provider_name,
-        )
-        return conversation
+        raise last_error
 
-    def send_rfq(
+    async def send_rfq(
         self,
         *,
         user_id: str,
@@ -219,7 +220,7 @@ class ConversationService:
             >>> result["status_code"]                 # doctest: +SKIP
             202
         """
-        conversation = self.db.get_conversation(conv_id)
+        conversation = await self.db.get_conversation(conv_id)
         reply_to = (
             conversation["email_address"]
             if conversation
@@ -271,8 +272,8 @@ class ConversationService:
             "status_code": result.get("status_code"),
             "sent_at": now,
         }
-        self.db.add_sent_email(conv_id, sent_record)
-        self.db.update_conversation(conv_id, {
+        await self.db.add_sent_email(conv_id, sent_record)
+        await self.db.update_conversation(conv_id, {
             "product_name": product_name,
             "quantity": quantity,
             "target_price": target_price,
@@ -287,7 +288,7 @@ class ConversationService:
             "conv_id": conv_id,
         }
 
-    def delete_conversation(self, conv_id: str, user_id: str) -> bool:
+    async def delete_conversation(self, conv_id: str, user_id: str) -> bool:
         """Delete a conversation owned by ``user_id`` and its attachments.
 
         Verifies ownership before deleting anything, so one user cannot
@@ -304,25 +305,24 @@ class ConversationService:
             bool: True if the conversation existed and belonged to
                 ``user_id`` and was deleted, False otherwise.
         """
-        conversation = self.db.get_conversation(conv_id)
+        conversation = await self.db.get_conversation(conv_id)
         if not conversation or str(conversation["user_id"]) != str(user_id):
             return False
 
         for path in Path(self.settings.attachments_dir).glob(f"{conv_id}_*"):
             path.unlink(missing_ok=True)
 
-        self.db.delete_conversation(conv_id, user_id)
+        await self.db.delete_conversation(conv_id, user_id)
         self.log.info("Deleted conversation %s for user %s", conv_id, user_id)
         return True
 
-    def delete_user_conversations(self, user_id: str) -> int:
+    async def delete_user_conversations(self, user_id: str) -> int:
         """Delete every conversation, email and attachment for a user.
 
         Used by the Email Tracking page's per-user delete action, where
         deleting a user is really "wipe all conversations owned by this
-        user" — the underlying ``EmailDB`` has no separate user record to
-        remove, and the fixed ``predefined_users`` dropdown list is left
-        untouched so the user can still start new conversations later.
+        user" — the user's own row in ``users`` is untouched, so they can
+        still start new conversations afterwards.
 
         Args:
             user_id (str): The user whose entire tracking history should
@@ -331,7 +331,7 @@ class ConversationService:
         Returns:
             int: The number of conversations deleted.
         """
-        conv_ids = self.db.delete_user_conversations(user_id)
+        conv_ids = await self.db.delete_user_conversations(user_id)
         for conv_id in conv_ids:
             for path in Path(self.settings.attachments_dir).glob(f"{conv_id}_*"):
                 path.unlink(missing_ok=True)
@@ -396,9 +396,9 @@ class ConversationService:
             )
             return {"status": "skipped", "reason": "spam"}
 
-        return self._record_inbound(inbound)
+        return await self._record_inbound(inbound)
 
-    def _record_inbound(self, inbound: InboundEmail) -> dict:
+    async def _record_inbound(self, inbound: InboundEmail) -> dict:
         """Match a parsed inbound email and persist it.
 
         Args:
@@ -414,7 +414,8 @@ class ConversationService:
         parsed = self.email.parse_dynamic_email(inbound.to_email)
 
         if not parsed:
-            self.db.insert_unmatched({
+            await self.db.insert_unmatched({
+                "reason": "address_not_recognized",
                 "from_email": inbound.from_email,
                 "to_email": inbound.to_email,
                 "subject": inbound.subject,
@@ -426,9 +427,10 @@ class ConversationService:
             return {"status": "unmatched"}
 
         conv_id = parsed["conv_id"]
-        conversation = self.db.get_conversation(conv_id)
+        conversation = await self.db.get_conversation(conv_id)
         if not conversation:
-            self.db.insert_unmatched({
+            await self.db.insert_unmatched({
+                "reason": "conversation_not_found",
                 "from_email": inbound.from_email,
                 "to_email": inbound.to_email,
                 "subject": inbound.subject,
@@ -459,8 +461,8 @@ class ConversationService:
             "provider": inbound.provider,
             "received_at": received_at,
         }
-        self.db.add_received_email(conv_id, inbound_record)
-        action = self._classify_reply(conv_id, inbound.body_text)
+        await self.db.add_received_email(conv_id, inbound_record)
+        action = await self._classify_reply(conv_id, inbound.body_text)
 
         return {
             "status": "matched",
@@ -469,7 +471,7 @@ class ConversationService:
             "action": action,
         }
 
-    def _classify_reply(self, conv_id: str, reply_body: str) -> str:
+    async def _classify_reply(self, conv_id: str, reply_body: str) -> str:
         """Classify a supplier reply with simple keyword matching.
 
         Buckets the reply into one of four action classes. A ``DECLINED``
@@ -496,7 +498,7 @@ class ConversationService:
             w in text for w in ["sorry", "cannot", "unable", "no stock"]
         ):
             action = "DECLINED"
-            self.db.update_conversation(conv_id, {"status": "declined"})
+            await self.db.update_conversation(conv_id, {"status": "declined"})
         elif any(
             w in text for w in ["question", "clarif", "more info", "?"]
         ):
