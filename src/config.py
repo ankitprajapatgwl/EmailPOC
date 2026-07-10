@@ -128,6 +128,11 @@ class Settings:
         self.session_cookie_secure = (
             os.getenv("SESSION_COOKIE_SECURE", "true").strip().lower() == "true"
         )
+        # Local-dev-only login bypass (see src/auth/dev_bypass.py). Off by
+        # default so a stray deploy never exposes an unauthenticated login.
+        self.dev_bypass_login = (
+            os.getenv("DEV_BYPASS_LOGIN", "false").strip().lower() == "true"
+        )
 
         # ── Global settings ──────────────────────────────────────────
         self.email_provider = os.getenv(

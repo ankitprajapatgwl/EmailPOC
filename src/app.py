@@ -27,6 +27,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from src.auth.dev_bypass import router as dev_bypass_router
 from src.auth.routes import router as auth_router
 from src.config import BASE_PATH, get_settings
 from src.db.repository import Repository
@@ -118,6 +119,7 @@ def create_app() -> FastAPI:
     app.state.templates.env.globals["base_path"] = BASE_PATH
 
     app.include_router(auth_router, prefix=BASE_PATH)
+    app.include_router(dev_bypass_router, prefix=BASE_PATH)
     app.include_router(router, prefix=BASE_PATH)
     logger.info("EmailPOC application ready")
     return app
