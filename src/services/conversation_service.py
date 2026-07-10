@@ -187,7 +187,9 @@ class ConversationService:
     ) -> dict:
         """Render and send an RFQ email, then persist the sent record.
 
-        The ``From`` header is the verified sender (``FROM_EMAIL``); the
+        The ``From`` header is the user's permanent ``sending_email``
+        (assigned at registration, see
+        :meth:`~src.db.repository.Repository.assign_sending_email`); the
         ``Reply-To`` header is the conversation's dynamic address so that
         replies route back to the inbound webhook. After a successful send
         the record is appended to the conversation and the product metadata
@@ -226,6 +228,8 @@ class ConversationService:
             if conversation
             else self.email.build_dynamic_email(user_id, conv_id)
         )
+        user = await self.db.get_user_auth_by_id(user_id)
+        from_email = (user["sending_email"] if user else None) or self.settings.from_email
         subject = self.email.build_rfq_subject(conv_id, product_name)
         html_body = self.email.build_rfq_html(
             user_id=user_id,
@@ -239,9 +243,8 @@ class ConversationService:
 
         # Delegate transmission to the active provider. Any failure raises
         # an EmailProviderError, which the route turns into a user message
-        # self.settings.from_email,
         result = self.email.send_email(
-            from_email=reply_to,
+            from_email=from_email,
             from_name=self.settings.company_name,
             to_email=supplier_email,
             to_name=supplier_name,
@@ -253,7 +256,7 @@ class ConversationService:
 
         sent_record = {
             "email_type": "new_thread",
-            "from_email": reply_to,
+            "from_email": from_email,
             "reply_to": reply_to,
             "to_email": supplier_email,
             "subject": subject,
@@ -283,7 +286,7 @@ class ConversationService:
         return {
             "status_code": result.get("status_code"),
             "provider": result.get("provider"),
-            "from": reply_to,
+            "from": from_email,
             "to": supplier_email,
             "conv_id": conv_id,
         }
@@ -401,17 +404,28 @@ class ConversationService:
     async def _record_inbound(self, inbound: InboundEmail) -> dict:
         """Match a parsed inbound email and persist it.
 
+        Matching first tries the dynamic ``To`` address. Forwarded replies
+        can arrive with that address mangled by the supplier's mail client
+        (the ``-{conv_id}`` suffix dropped by autocomplete/address-book
+        normalisation), so as a fallback the quoted body is searched for the
+        ``CONV-{conv_id}`` reference footer that every RFQ email carries —
+        see :meth:`~src.email_platform.email_master.EmailMaster.parse_conv_id_from_body`.
+
         Args:
             inbound (InboundEmail): The normalised inbound email.
 
         Returns:
-            dict: ``{"status": "unmatched"}`` if the ``To`` address does not
-                decode, otherwise
+            dict: ``{"status": "unmatched"}`` if neither the ``To`` address
+                nor the body reference decode, otherwise
                 ``{"status": "matched", "user_id": ..., "conv_id": ...,
                 "action": ...}``.
         """
         received_at = datetime.now(timezone.utc).isoformat()
-        parsed = self.email.parse_dynamic_email(inbound.to_email)
+        parsed = self.email.parse_dynamic_email(
+            inbound.to_email
+        ) or self.email.parse_conv_id_from_body(
+            inbound.body_text, inbound.body_html
+        )
 
         if not parsed:
             await self.db.insert_unmatched({

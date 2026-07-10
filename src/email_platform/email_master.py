@@ -200,6 +200,35 @@ class EmailMaster(ABC):
                 return {"conv_id": match.group(1)}
         return None
 
+    def parse_conv_id_from_body(self, *texts: str) -> dict | None:
+        """Recover ``conv_id`` from the quoted RFQ reference footer.
+
+        Some mail clients mangle the dynamic ``To`` address when a supplier
+        forwards an RFQ instead of replying to it directly (autocomplete or
+        an address-book entry can drop the ``-{conv_id}`` suffix entirely).
+        When that happens the quoted original message is still present in
+        the body, including the ``Reference: CONV-{conv_id}`` footer written
+        by :meth:`build_rfq_html`, so it is used as a fallback match.
+
+        Args:
+            *texts (str): Candidate bodies to search, e.g. ``body_text`` and
+                ``body_html`` — the first match wins.
+
+        Returns:
+            dict | None: ``{"conv_id": str}`` (lowercase) on success, or
+                ``None`` if no candidate contains the footer reference.
+
+        Example:
+            >>> provider.parse_conv_id_from_body(
+            ...     "On Mon, ... Reference: CONV-3FA9C1B2 | USR-42")
+            {'conv_id': '3fa9c1b2'}
+        """
+        for text in texts:
+            match = re.search(r"CONV-([A-Fa-f0-9]{8})\b", text or "")
+            if match:
+                return {"conv_id": match.group(1).lower()}
+        return None
+
     # ── Shared RFQ rendering ─────────────────────────────────────────
 
     def build_rfq_subject(self, conv_id: str, product_name: str) -> str:
