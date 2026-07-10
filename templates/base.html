@@ -426,6 +426,120 @@
     .text-muted { color: var(--txt2); }
     .font-mono { font-family: "SF Mono", "Fira Code", Consolas, monospace; font-size: 12px; }
 
+    /* ── Compose layout (Send RFQ) ────────────── */
+    .compose-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      align-items: start;
+    }
+    .compose-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--sh);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .compose-card-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .compose-card-icon {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .compose-card-title { font-weight: 600; font-size: 14px; color: var(--txt); }
+    .compose-card-body { padding: 20px; }
+
+    /* Dropzone */
+    .dropzone {
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      padding: 22px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      background: var(--bg);
+    }
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+    .dropzone-icon { font-size: 24px; margin-bottom: 6px; }
+    .dropzone-text { font-size: 13px; color: var(--txt); font-weight: 500; }
+    .dropzone-hint { font-size: 11px; color: var(--txt2); margin-top: 3px; }
+    .file-chip-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .file-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 8px 5px 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--txt);
+      max-width: 220px;
+    }
+    .file-chip-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-chip-size { color: var(--txt2); flex-shrink: 0; }
+    .file-chip-remove {
+      border: none; background: none; cursor: pointer;
+      color: var(--txt2); font-size: 14px; line-height: 1;
+      padding: 0 0 0 2px; flex-shrink: 0;
+    }
+    .file-chip-remove:hover { color: var(--danger); }
+
+    /* Preview panel */
+    .preview-panel { position: sticky; top: 24px; }
+    .preview-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--sh-md);
+      overflow: hidden;
+    }
+    .preview-card-header {
+      padding: 12px 18px;
+      background: var(--sidebar);
+      color: #fff;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .preview-body { padding: 18px; }
+    .preview-row { margin-bottom: 14px; }
+    .preview-row:last-child { margin-bottom: 0; }
+    .preview-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--txt2); margin-bottom: 3px;
+    }
+    .preview-value { font-size: 13px; color: var(--txt); word-break: break-word; }
+    .preview-value.muted { color: var(--txt3); font-style: italic; }
+    .preview-value.mono { font-family: "SF Mono", "Fira Code", Consolas, monospace; font-size: 12px; }
+    .preview-subject {
+      font-size: 13px; font-weight: 600; color: var(--txt);
+      padding: 10px 12px;
+      background: var(--bg);
+      border-radius: 6px;
+      word-break: break-word;
+    }
+    .preview-divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .preview-attachment-count {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--txt2);
+    }
+    .preview-footer { padding: 16px 18px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 900px) {
+      .compose-layout { grid-template-columns: 1fr; }
+      .preview-panel { position: static; }
+    }
+
     @media (max-width: 720px) {
       .sidebar { width: 200px; }
       .main-content { margin-left: 200px; padding: 20px; }
