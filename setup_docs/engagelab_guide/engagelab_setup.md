@@ -30,7 +30,7 @@ Key features we utilize:
 
 - **Transactional API (Trigger Emails)** — Sending outbound RFQs using HTTP REST API.
 - **Dynamic Sender Identities** — EngageLab allows you to define custom prefixes dynamically at send time, provided the domain suffix is authenticated.
-- **Inbound Webhook Routing** — Catching replies to our dynamically generated addresses and pushing them to our `/webhooks/inbound` endpoint.
+- **Inbound Webhook Routing** — Catching replies to our dynamically generated addresses and pushing them to our `/email_poc/webhooks/inbound` endpoint.
 - **API_USER Architecture** — EngageLab isolates sending reputations and webhooks per API_USER entity.
 
 ### 1.1 Pricing
@@ -102,7 +102,7 @@ EngageLab handles "Envelope Sender" (`mail from`) and "Header Sender" (`from`).
 
 **The Golden Rule for EngageLab Dynamic Addresses:** Because you verified the suffix `mail.jobsetu.online`, EngageLab allows you to define the prefix dynamically on the fly without pre-registering it.
 
-If your dynamic address is `AnkitPrajapat-3fa9c1b2@mail.jobsetu.online`:
+If your dynamic address is `JamesWhitfield-3fa9c1b2@mail.jobsetu.online`:
 
 - Ensure the suffix exactly matches your verified domain.
 - Pass this dynamic address in both the `from` and `reply_to` fields.
@@ -118,10 +118,10 @@ Content-Type: application/json
 
 ```json
 {
-  "from": "EngageLab Team<AnkitPrajapat-3fa9c1b2@mail.jobsetu.online>",
+  "from": "EngageLab Team<JamesWhitfield-3fa9c1b2@mail.jobsetu.online>",
   "to": ["supplier@example.com"],
   "body": {
-    "reply_to": ["AnkitPrajapat-3fa9c1b2@mail.jobsetu.online"],
+    "reply_to": ["JamesWhitfield-3fa9c1b2@mail.jobsetu.online"],
     "subject": "RFQ: Required Parts",
     "content": {
       "html": "<h1>RFQ Details</h1><p>...</p>"
@@ -144,7 +144,7 @@ Because your MX records for `mail.jobsetu.online` point to EngageLab, EngageLab'
 1. In EngageLab Dashboard, go to WebHook settings.
 2. Add a new Webhook.
 3. Events: Select Inbound Email / Reply Received (and deselect click/open tracking if you only want replies).
-4. URL: Enter your public endpoint: `https://<your-domain>/webhooks/inbound`
+4. URL: Enter your public endpoint: `https://<your-domain>/email_poc/webhooks/inbound`
 5. Binding: Bind this Webhook to the specific API_USER you created in Step 3.
 
 **Wildcard / Catch-All**
@@ -156,7 +156,7 @@ Unlike some providers that require regex rules (`.*`), EngageLab routes all inbo
 When a reply arrives, EngageLab posts data to your webhook. You will map these in `EngageLabWebhookParser`:
 
 - `sender` (Supplier's email)
-- `recipient` (Your dynamic address: `AnkitPrajapat-3fa9c1b2@...`)
+- `recipient` (Your dynamic address: `JamesWhitfield-3fa9c1b2@...`)
 - `subject`
 - `message` / `html` / `text`
 - `attachments` (Base64 arrays)
@@ -190,7 +190,7 @@ curl -X POST "https://email.api.engagelab.cc/v1/mail/send" \
      -H "Authorization: Basic <Base64(API_USER:API_KEY)>" \
      -H "Content-Type: application/json" \
      -d '{
-           "from": "AnkitPrajapat-3fa9c1b2@mail.jobsetu.online",
+           "from": "JamesWhitfield-3fa9c1b2@mail.jobsetu.online",
            "to": ["test@example.com"],
            "body": {
              "subject": "Test RFQ",
@@ -204,6 +204,6 @@ curl -X POST "https://email.api.engagelab.cc/v1/mail/send" \
 ### Testing Inbound Webhook Locally
 
 1. Start Ngrok: `ngrok http 7000`
-2. Update EngageLab Webhook URL to: `https://<your-ngrok>.ngrok-free.app/webhooks/inbound`
+2. Update EngageLab Webhook URL to: `https://<your-ngrok>.ngrok-free.app/email_poc/webhooks/inbound`
 3. Send an email from your personal Gmail to `Test-1234abcd@mail.jobsetu.online`.
 4. Watch your local server console to inspect the incoming EngageLab webhook payload and implement the exact key mapping in `engagelab_webhook.py`.

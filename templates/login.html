@@ -12,7 +12,7 @@
 <div class="alert alert-error">{{ error }}</div>
 {% endif %}
 
-<form method="post" action="/login">
+<form method="post" action="{{ base_path }}/login">
   <div class="form-grid full">
     <div class="form-group">
       <label for="personal_email">Email</label>
@@ -32,6 +32,6 @@
 
 {% block footer %}
 <div class="auth-footer">
-  Don't have an account? <a href="/register">Register</a>
+  Don't have an account? <a href="{{ base_path }}/register">Register</a>
 </div>
 {% endblock %}

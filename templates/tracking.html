@@ -50,7 +50,7 @@
       </thead>
       <tbody>
         {% for conv in conversations %}
-        <tr onclick="location.href='/tracking/{{ conv.conv_id }}'">
+        <tr onclick="location.href='{{ base_path }}/tracking/{{ conv.conv_id }}'">
           <td class="mono" style="font-size:12px;">{{ conv.conv_id }}</td>
           <td>
             {% if conv.project_name %}
@@ -88,7 +88,7 @@
             {{ conv.last_reply_at[:16].replace('T',' ') if conv.last_reply_at else '—' }}
           </td>
           <td onclick="event.stopPropagation();">
-            <form method="post" action="/tracking/{{ conv.conv_id }}/delete"
+            <form method="post" action="{{ base_path }}/tracking/{{ conv.conv_id }}/delete"
                   onsubmit="return confirm('Delete this conversation and all its messages? This cannot be undone.');">
               <button type="submit" class="btn btn-danger btn-sm" title="Delete conversation">🗑️</button>
             </form>
@@ -106,7 +106,7 @@
       <div class="empty-icon">📭</div>
       <div class="empty-title">No conversations yet</div>
       <div class="empty-sub">Send your first RFQ email to get started.</div>
-      <a href="/send" class="btn btn-primary">📤 Send RFQ Email</a>
+      <a href="{{ base_path }}/send" class="btn btn-primary">📤 Send RFQ Email</a>
     </div>
   </div>
 </div>

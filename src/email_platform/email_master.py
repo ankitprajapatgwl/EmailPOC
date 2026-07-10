@@ -135,22 +135,22 @@ class EmailMaster(ABC):
         """Construct the dynamic email address for a conversation.
 
         Converts the user's display name to CamelCase (e.g.
-        ``"Ankit Prajapat"`` → ``"AnkitPrajapat"``) and combines it with the
+        ``"James Whitfield"`` → ``"JamesWhitfield"``) and combines it with the
         conversation/thread id via a hyphen so the address is human-readable
         and the conv_id can be recovered from any reply that arrives there.
 
         Args:
-            user_name (str): The user's display name (e.g. ``"Ankit Prajapat"``).
+            user_name (str): The user's display name (e.g. ``"James Whitfield"``).
             conv_id (str): The 8-character conversation identifier returned
                 by :meth:`generate_conversation_id`.
 
         Returns:
             str: Fully qualified address, e.g.
-                ``"AnkitPrajapat-3fa9c1b2@mail.jobsetu.online"``.
+                ``"JamesWhitfield-3fa9c1b2@mail.jobsetu.online"``.
 
         Example:
-            >>> provider.build_dynamic_email("Ankit Prajapat", "3fa9c1b2")
-            'AnkitPrajapat-3fa9c1b2@mail.jobsetu.online'
+            >>> provider.build_dynamic_email("James Whitfield", "3fa9c1b2")
+            'JamesWhitfield-3fa9c1b2@mail.jobsetu.online'
         """
         camel = "".join(word.capitalize() for word in user_name.split())
         return f"{camel}-{conv_id}@{self.settings.inbound_domain}"
@@ -161,9 +161,9 @@ class EmailMaster(ABC):
         Supports two address formats:
 
         * **Current**: ``{CamelCaseName}-{conv_id}@{INBOUND_DOMAIN}``
-          e.g. ``AnkitPrajapat-3fa9c1b2@mail.jobsetu.online``
+          e.g. ``JamesWhitfield-3fa9c1b2@mail.jobsetu.online``
         * **Legacy** (backward-compat): ``{prefix}_conv{conv_id}@{INBOUND_DOMAIN}``
-          e.g. ``ankit.prajapat_conv3fa9c1b2@mail.jobsetu.online``
+          e.g. ``james.whitfield_conv3fa9c1b2@mail.jobsetu.online``
 
         Args:
             email_address (str): The raw ``To`` address from an inbound
@@ -176,7 +176,7 @@ class EmailMaster(ABC):
 
         Example:
             >>> provider.parse_dynamic_email(
-            ...     "AnkitPrajapat-3fa9c1b2@mail.jobsetu.online")
+            ...     "JamesWhitfield-3fa9c1b2@mail.jobsetu.online")
             {'conv_id': '3fa9c1b2'}
             >>> provider.parse_dynamic_email("nobody@other.com") is None
             True
@@ -234,7 +234,7 @@ class EmailMaster(ABC):
     def extract_email_address(raw: str) -> str:
         """Strip a display name off a raw ``From``/``To`` header value.
 
-        Inbound payloads often carry ``"Ankit Prajapat <a@b.com>"`` rather
+        Inbound payloads often carry ``"James Whitfield <a@b.com>"`` rather
         than a bare address; matching against a stored address (e.g.
         ``users.sending_email``) needs just the ``a@b.com`` part.
 
@@ -247,8 +247,8 @@ class EmailMaster(ABC):
 
         Example:
             >>> EmailMaster.extract_email_address(
-            ...     "Ankit Prajapat <ankit@mail.jobsetu.online>")
-            'ankit@mail.jobsetu.online'
+            ...     "James Whitfield <james@mail.jobsetu.online>")
+            'james@mail.jobsetu.online'
         """
         return (parseaddr(raw or "")[1] or "").strip().lower()
 

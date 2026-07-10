@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="breadcrumb">
-  <a href="/tracking">Tracking</a>
+  <a href="{{ base_path }}/tracking">Tracking</a>
   <span class="breadcrumb-sep">›</span>
   <span class="breadcrumb-cur font-mono">{{ conversation.project_name or conversation.conv_id }}</span>
 </div>
@@ -13,7 +13,7 @@
 {% endif %}
 
 <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
-  <form method="post" action="/tracking/{{ conversation.conv_id }}/delete"
+  <form method="post" action="{{ base_path }}/tracking/{{ conversation.conv_id }}/delete"
         onsubmit="return confirm('Delete this conversation and all its messages? This cannot be undone.');">
     <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete Conversation</button>
   </form>

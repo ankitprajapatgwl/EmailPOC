@@ -64,10 +64,10 @@ class EngageLabEmailProvider(EmailMaster):
     Example:
         >>> provider = EngageLabEmailProvider(settings, logger)
         >>> result = provider.send_email(              # doctest: +SKIP
-        ...     from_email="AnkitPrajapat-3fa9c1b2@mail.jobsetu.online",
+        ...     from_email="JamesWhitfield-3fa9c1b2@mail.jobsetu.online",
         ...     from_name="Acme", to_email="buyer@x.com", to_name="Buyer",
         ...     subject="Hi", html_body="<p>Hi</p>",
-        ...     reply_to="AnkitPrajapat-3fa9c1b2@mail.jobsetu.online")
+        ...     reply_to="JamesWhitfield-3fa9c1b2@mail.jobsetu.online")
         >>> result["provider"]                         # doctest: +SKIP
         'engagelab'
     """
@@ -152,11 +152,11 @@ class EngageLabEmailProvider(EmailMaster):
 
         Example:
             >>> provider.send_email(                   # doctest: +SKIP
-            ...     from_email="AnkitPrajapat-3fa9c1b2@mail.jobsetu.online",
+            ...     from_email="JamesWhitfield-3fa9c1b2@mail.jobsetu.online",
             ...     from_name="Acme", to_email="buyer@x.com",
             ...     to_name="Buyer", subject="Hi",
             ...     html_body="<p>Hi</p>",
-            ...     reply_to="AnkitPrajapat-3fa9c1b2@mail.jobsetu.online")
+            ...     reply_to="JamesWhitfield-3fa9c1b2@mail.jobsetu.online")
             {'status_code': 200, 'provider': 'engagelab', ...}
         """
         mail_body: dict = {

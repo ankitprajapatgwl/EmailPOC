@@ -32,19 +32,19 @@ For every product a user searches for, we generate a **unique, one-time email ad
 
 | Supplier | On-the-Fly Generated Dynamic Address |
 |---|---|
-| John | ankit-0000@mail.ims.com |
-| Sam  | ankit-1111@mail.ims.com |
-| Elon | ankit-2222@mail.ims.com |
+| John | james-0000@mail.ims.com |
+| Sam  | james-1111@mail.ims.com |
+| Elon | james-2222@mail.ims.com |
 
 Each address has a unique ID baked into it (`0000`, `1111`, `2222`...). This ID is internally linked in our database to the user, the product search, and the supplier.
 
-**Why this matters:** This is the core trick that makes tracking possible. When a reply comes back to `ankit-1111@mail.ims.com`, we instantly know — just from the address — that this reply is from **Sam**, about the **Bluetooth speaker** request, for **this specific user**. We don't need to guess or match names/subjects manually.
+**Why this matters:** This is the core trick that makes tracking possible. When a reply comes back to `james-1111@mail.ims.com`, we instantly know — just from the address — that this reply is from **Sam**, about the **Bluetooth speaker** request, for **this specific user**. We don't need to guess or match names/subjects manually.
 
 ### Step 3: Catch supplier replies via Inbound Parse Webhook
 
 On the email provider's dashboard, we configure an **Inbound Parse Webhook URL**. This tells the provider: "Whenever mail arrives at any address under our domain, don't just deliver it to an inbox — send its contents as an HTTP request to this URL instead."
 
-When a supplier replies, the provider extracts the email content (sender, recipient, subject, body, attachments) and POSTs it to our backend endpoint. Our backend reads the recipient address (e.g., `ankit-1111@mail.ims.com`), pulls out the unique ID, and matches it back to the right supplier/product/user — all automatically.
+When a supplier replies, the provider extracts the email content (sender, recipient, subject, body, attachments) and POSTs it to our backend endpoint. Our backend reads the recipient address (e.g., `james-1111@mail.ims.com`), pulls out the unique ID, and matches it back to the right supplier/product/user — all automatically.
 
 This completes the loop: **User searches → We email suppliers dynamically → Supplier replies → We catch and route the reply back automatically.**
 

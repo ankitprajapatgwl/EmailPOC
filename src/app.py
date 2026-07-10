@@ -28,7 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from src.auth.routes import router as auth_router
-from src.config import get_settings
+from src.config import BASE_PATH, get_settings
 from src.db.repository import Repository
 from src.db.session import create_engine_and_sessionmaker
 from src.email_platform.factory import EmailProviderFactory
@@ -95,12 +95,12 @@ def create_app() -> FastAPI:
     # 4. Assemble the FastAPI app and register everything.
     app = FastAPI(title="EmailPOC", lifespan=lifespan)
     app.mount(
-        "/static",
+        f"{BASE_PATH}/static",
         StaticFiles(directory=str(settings.static_dir)),
         name="static",
     )
     app.mount(
-        "/attachments",
+        f"{BASE_PATH}/attachments",
         StaticFiles(directory=str(settings.attachments_dir)),
         name="attachments",
     )
@@ -115,9 +115,10 @@ def create_app() -> FastAPI:
     app.state.templates = Jinja2Templates(
         directory=str(settings.templates_dir)
     )
+    app.state.templates.env.globals["base_path"] = BASE_PATH
 
-    app.include_router(auth_router)
-    app.include_router(router)
+    app.include_router(auth_router, prefix=BASE_PATH)
+    app.include_router(router, prefix=BASE_PATH)
     logger.info("EmailPOC application ready")
     return app
 

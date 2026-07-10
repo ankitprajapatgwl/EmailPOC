@@ -14,12 +14,12 @@ from datetime import datetime, timedelta, timezone
 from fastapi import Request, Response
 
 from src.auth.security import sign_value, unsign_value
-from src.config import Settings
+from src.config import BASE_PATH, Settings
 from src.db.repository import Repository
 
 SESSION_COOKIE_NAME = "session_id"
 PENDING_COOKIE_NAME = "pending_registration"
-PENDING_COOKIE_PATH = "/register"
+PENDING_COOKIE_PATH = f"{BASE_PATH}/register"
 
 
 def _hash_token(token: str) -> str:

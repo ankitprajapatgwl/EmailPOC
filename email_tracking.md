@@ -1,7 +1,7 @@
 Aapki current approach technically sahi hai, lekin UX aur trust ke perspective se weak hai.
 
 ```
-ankit-0000@mail.ims.com
+james-0000@mail.ims.com
 ```
 
 ye disposable/temporary email jaisa lagta hai. Bahut se suppliers aise emails ignore kar dete hain ya spam samajh lete hain.
@@ -22,7 +22,7 @@ To multiple architecture options hain.
 User ka sirf ek email rahe.
 
 ```
-ankit@mail.ims.com
+james@mail.ims.com
 ```
 
 Ya
@@ -37,7 +37,7 @@ Example
 
 ```
 From:
-Ankit <ankit@mail.ims.com>
+James <james@mail.ims.com>
 
 To:
 john@supplier.com
@@ -89,7 +89,7 @@ Database
 
 | Message-ID | User  | Product   | Supplier |
 | ---------- | ----- | --------- | -------- |
-| 938483     | Ankit | Bluetooth | John     |
+| 938483     | James | Bluetooth | John     |
 
 Reply aata hai to email ke andar automatically hota hai
 
@@ -177,7 +177,7 @@ Supplier subject edit kar de.
 From
 
 ```
-Ankit <ankit@mail.ims.com>
+James <james@mail.ims.com>
 ```
 
 Reply-To
@@ -227,7 +227,7 @@ Problem
 New email compose kiya to
 
 ```
-ankit@mail.ims.com
+james@mail.ims.com
 ```
 
 likh dega.
@@ -302,7 +302,7 @@ Main agar IMS build kar raha hota to ye architecture choose karta.
 ```
 From:
 
-Ankit <ankit@mail.ims.com>
+James <james@mail.ims.com>
 
 Reply-To:
 
@@ -364,7 +364,7 @@ Supplier manually naya mail likhta hai
 ```
 To:
 
-ankit@mail.ims.com
+james@mail.ims.com
 ```
 
 Subject
@@ -436,7 +436,7 @@ Main **dynamic email address per supplier** approach ko continue nahi karunga, k
 
 Iske badle main ye stack use karunga:
 
-* **Single permanent sender address per user** (e.g. `ankit@mail.ims.com`)
+* **Single permanent sender address per user** (e.g. `james@mail.ims.com`)
 * **Unique `Reply-To` alias per conversation** (e.g. `reply+93KFD@mail.ims.com`)
 * **Unique `Message-ID`** for every outgoing email
 * **Conversation token in the subject** (e.g. `[Q-93KFD]`)

@@ -8,6 +8,7 @@ gate every authenticated route below depends on.
 from fastapi import HTTPException, Request
 
 from src.auth.sessions import get_current_user as _get_current_user
+from src.config import BASE_PATH
 
 
 async def get_current_user(request: Request) -> dict | None:
@@ -25,5 +26,5 @@ async def require_login(request: Request) -> dict:
     """
     user = await _get_current_user(request)
     if user is None:
-        raise HTTPException(status_code=303, headers={"Location": "/login"})
+        raise HTTPException(status_code=303, headers={"Location": f"{BASE_PATH}/login"})
     return user

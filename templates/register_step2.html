@@ -18,10 +18,10 @@
   <div class="text-sm text-muted" style="margin-top: 2px;">{{ user.personal_email }}</div>
 </div>
 
-<form method="post" action="/register/confirm-name">
+<form method="post" action="{{ base_path }}/register/confirm-name">
   <button type="submit" class="btn btn-primary btn-block">Confirm &amp; continue</button>
 </form>
 <div style="text-align: center; margin-top: 12px;">
-  <a href="/register" class="text-sm">Edit name</a>
+  <a href="{{ base_path }}/register" class="text-sm">Edit name</a>
 </div>
 {% endblock %}

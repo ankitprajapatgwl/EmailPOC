@@ -39,6 +39,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, Uplo
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from src.auth.dependencies import require_login
+from src.config import BASE_PATH
 from src.email_platform.email_master import EmailProviderError
 from src.services.conversation_service import ConversationService
 
@@ -65,7 +66,7 @@ _INBOUND_STATUS_CODES = {
 @router.get("/")
 async def home(_current_user: dict = Depends(require_login)):
     """Redirect the authenticated root path to the personal dashboard."""
-    return RedirectResponse("/tracking", status_code=303)
+    return RedirectResponse(f"{BASE_PATH}/tracking", status_code=303)
 
 
 @router.get("/send")
@@ -174,20 +175,20 @@ async def send_email_form(
             attachments=attachment_data or None,
         )
         return RedirectResponse(
-            f"/tracking/{conv_id}?success=1",
+            f"{BASE_PATH}/tracking/{conv_id}?success=1",
             status_code=303,
         )
     except EmailProviderError as exc:
         # Expected, well-described failure (bad key, send rejected, ...).
         log.error("Send failed: %s", exc)
         return RedirectResponse(
-            f"/send?error={quote(str(exc)[:300])}",
+            f"{BASE_PATH}/send?error={quote(str(exc)[:300])}",
             status_code=303,
         )
     except Exception as exc:  # noqa: BLE001 - last-resort safety net
         log.exception("Unexpected error while sending RFQ")
         return RedirectResponse(
-            f"/send?error={quote(str(exc)[:300])}",
+            f"{BASE_PATH}/send?error={quote(str(exc)[:300])}",
             status_code=303,
         )
 
@@ -306,7 +307,7 @@ async def delete_conversation(
     service: ConversationService = request.app.state.service
     if not await service.delete_conversation(conv_id, current_user["id"]):
         raise HTTPException(status_code=404, detail="Conversation not found")
-    return RedirectResponse("/tracking?deleted=1", status_code=303)
+    return RedirectResponse(f"{BASE_PATH}/tracking?deleted=1", status_code=303)
 
 
 # ── Inbound webhook (single URL for every provider) ──────────────────

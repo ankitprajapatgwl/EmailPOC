@@ -23,7 +23,7 @@ user_id   conv_id
 Supplier replies go back to the same address. The active provider's inbound
 feature (SendGrid Inbound Parse / Mailgun Routes / Elastic Email inbound
 notifications / EngageLab Inbound Route / SendCloud — not yet implemented)
-posts the reply to the single `/webhooks/inbound` endpoint, which parses
+posts the reply to the single `/email_poc/webhooks/inbound` endpoint, which parses
 both IDs and stores the reply against the correct conversation — no lookup
 tables needed on the mail side.
 
@@ -81,7 +81,7 @@ migrations) every time it starts — see
 [Database & migrations](#database--migrations) below for why that's always
 safe to re-run.
 
-Once it's up, open **http://localhost:7000** in your browser.
+Once it's up, open **http://localhost:7000/email_poc/** in your browser.
 
 ### Everyday commands
 
@@ -191,7 +191,7 @@ Browser UI ──(provider API)──▶ Supplier inbox
 POST /send                MX ──▶ provider inbound feature
    │                                  │
    ▼                                  ▼  HTTP POST
-ConversationService ◀──── POST /webhooks/inbound (one URL, any provider)
+ConversationService ◀──── POST /email_poc/webhooks/inbound (one URL, any provider)
    │
    ▼
 PostgreSQL
@@ -292,7 +292,7 @@ It walks through:
    sender verification needed for dynamic addresses).
 2. Adding the CNAME records SendGrid generates at your DNS provider.
 3. Pointing an MX record at `mx.sendgrid.net` for inbound mail.
-4. Configuring the Inbound Parse webhook to POST to `/webhooks/inbound`.
+4. Configuring the Inbound Parse webhook to POST to `/email_poc/webhooks/inbound`.
 5. Generating dynamic `From`/`Reply-To` addresses and sending/receiving RFQ
    emails end-to-end.
 
@@ -324,7 +324,7 @@ It walks through:
 3. Sending with dynamic, unregistered `from`/`reply_to` prefixes once the
    subdomain suffix is verified.
 4. Binding an Inbound Route webhook to the `API_USER` so supplier replies
-   POST to `/webhooks/inbound`.
+   POST to `/email_poc/webhooks/inbound`.
 5. Testing outbound via `curl` and inbound via `ngrok`.
 
 ---
@@ -365,7 +365,7 @@ uv run python main.py
 uv run uvicorn src.app:app --host 0.0.0.0 --port 7000 --reload
 ```
 
-Open **http://localhost:7000** in your browser.
+Open **http://localhost:7000/email_poc/** in your browser.
 
 ### Creating a new migration
 
@@ -378,6 +378,9 @@ uv run alembic upgrade head
 ---
 
 ## Routes
+
+Every path below is served under the `/email_poc` prefix, e.g. `/login` is
+actually `/email_poc/login`.
 
 ### UI
 
@@ -406,9 +409,9 @@ Every route above except the inbound webhook requires a logged-in user (see
 
 | Method | Path                      | Description                              |
 | ------ | ------------------------- | ---------------------------------------- |
-| `POST` | `/webhooks/inbound`       | Inbound handler (any provider)           |
-| `GET`  | `/webhooks/inbound`       | Validation probe (Elastic Email GETs it) |
-| `GET`  | `/attachments/{filename}` | Download a saved attachment              |
+| `POST` | `/email_poc/webhooks/inbound`       | Inbound handler (any provider)           |
+| `GET`  | `/email_poc/webhooks/inbound`       | Validation probe (Elastic Email GETs it) |
+| `GET`  | `/email_poc/attachments/{filename}` | Download a saved attachment              |
 
 ---
 
@@ -419,7 +422,7 @@ Every route above except the inbound webhook requires a logged-in user (see
 ```bash
 ngrok http 7000
 # Copy the https URL into the provider's inbound webhook config:
-#   https://<subdomain>.ngrok-free.app/webhooks/inbound
+#   https://<subdomain>.ngrok-free.app/email_poc/webhooks/inbound
 ```
 
 ### Simulate an inbound reply (without a real email)
@@ -427,7 +430,7 @@ ngrok http 7000
 The payload field names differ per provider. Example for **SendGrid**:
 
 ```bash
-curl -X POST http://localhost:7000/webhooks/inbound \
+curl -X POST http://localhost:7000/email_poc/webhooks/inbound \
   -F "from=buyer@acme.com" \
   -F "to=usr42_conv3fa9c1b2@mail.yourdomain.com" \
   -F "subject=RE: RFQ" \

@@ -20,6 +20,7 @@ from src.auth.sessions import (
     set_pending_cookie,
     set_session_cookie,
 )
+from src.config import BASE_PATH
 from src.db.repository import (
     DuplicatePersonalEmailError,
     DuplicateSendingEmailError,
@@ -75,12 +76,12 @@ async def login_submit(
     if user["status"] == "pending":
         # They created an account but never finished the wizard — resume it
         # instead of dead-ending on a login failure.
-        response = RedirectResponse("/register/confirm-name", status_code=303)
+        response = RedirectResponse(f"{BASE_PATH}/register/confirm-name", status_code=303)
         set_pending_cookie(response, user["id"], settings)
         return response
 
     token = await create_session_for_user(repo, user, request, settings)
-    response = RedirectResponse("/tracking", status_code=303)
+    response = RedirectResponse(f"{BASE_PATH}/tracking", status_code=303)
     set_session_cookie(response, token, settings)
     return response
 
@@ -88,7 +89,7 @@ async def login_submit(
 @router.post("/logout")
 async def logout(request: Request):
     await revoke_current_session(request)
-    response = RedirectResponse("/login", status_code=303)
+    response = RedirectResponse(f"{BASE_PATH}/login", status_code=303)
     clear_session_cookie(response)
     return response
 
@@ -169,7 +170,7 @@ async def register_step1_submit(
     except DuplicatePersonalEmailError:
         return error("An account with this email already exists.")
 
-    response = RedirectResponse("/register/confirm-name", status_code=303)
+    response = RedirectResponse(f"{BASE_PATH}/register/confirm-name", status_code=303)
     set_pending_cookie(response, user["id"], settings)
     return response
 
@@ -188,7 +189,7 @@ async def _load_pending_user(request: Request) -> dict | None:
 async def register_step2(request: Request):
     user = await _load_pending_user(request)
     if not user:
-        return RedirectResponse("/register", status_code=303)
+        return RedirectResponse(f"{BASE_PATH}/register", status_code=303)
     templates = request.app.state.templates
     return templates.TemplateResponse(request, "register_step2.html", {"user": user})
 
@@ -197,15 +198,15 @@ async def register_step2(request: Request):
 async def register_step2_submit(request: Request):
     user = await _load_pending_user(request)
     if not user:
-        return RedirectResponse("/register", status_code=303)
-    return RedirectResponse("/register/assign-email", status_code=303)
+        return RedirectResponse(f"{BASE_PATH}/register", status_code=303)
+    return RedirectResponse(f"{BASE_PATH}/register/assign-email", status_code=303)
 
 
 @router.get("/register/assign-email")
 async def register_step3(request: Request):
     user = await _load_pending_user(request)
     if not user:
-        return RedirectResponse("/register", status_code=303)
+        return RedirectResponse(f"{BASE_PATH}/register", status_code=303)
 
     repo: Repository = request.app.state.db
     settings = request.app.state.settings
@@ -225,7 +226,7 @@ async def register_step3_submit(
 ):
     user = await _load_pending_user(request)
     if not user:
-        return RedirectResponse("/register", status_code=303)
+        return RedirectResponse(f"{BASE_PATH}/register", status_code=303)
 
     repo: Repository = request.app.state.db
     settings = request.app.state.settings
@@ -255,7 +256,7 @@ async def register_step3_submit(
         }, status_code=409)
 
     token = await create_session_for_user(repo, activated_user, request, settings)
-    response = RedirectResponse("/tracking", status_code=303)
+    response = RedirectResponse(f"{BASE_PATH}/tracking", status_code=303)
     set_session_cookie(response, token, settings)
     clear_pending_cookie(response)
     return response

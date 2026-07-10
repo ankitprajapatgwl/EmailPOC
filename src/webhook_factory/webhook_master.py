@@ -36,7 +36,7 @@ from dataclasses import dataclass, field
 
 from fastapi import Request
 
-from src.config import Settings
+from src.config import BASE_PATH, Settings
 
 
 class WebhookParseError(Exception):
@@ -185,7 +185,7 @@ class WebhookParserMaster(ABC):
 
         Each file is saved under the configured attachments directory with a
         collision-resistant name (``{conv_id}_{batch}_{index}_{filename}``)
-        and exposed at the ``/attachments/{name}`` static URL. The per-call
+        and exposed at the ``{BASE_PATH}/attachments/{name}`` static URL. The per-call
         ``batch`` token (a short random hex) prevents a later reply on the
         same conversation from overwriting an earlier reply's attachment that
         happens to share a filename.
@@ -205,7 +205,7 @@ class WebhookParserMaster(ABC):
             ...     "3fa9c1b2",
             ...     [RawAttachment("q.pdf", "application/pdf", b"%PDF")])
             >>> meta[0]["url"]                        # doctest: +SKIP
-            '/attachments/3fa9c1b2_1a2b3c4d_1_q.pdf'
+            '/email_poc/attachments/3fa9c1b2_1a2b3c4d_1_q.pdf'
         """
         saved: list[dict] = []
         directory = self.settings.attachments_dir
@@ -233,7 +233,7 @@ class WebhookParserMaster(ABC):
                 "filename": att.filename,
                 "content_type": att.content_type,
                 "size": len(att.content),
-                "url": f"/attachments/{safe_name}",
+                "url": f"{BASE_PATH}/attachments/{safe_name}",
             })
             self.log.debug("Saved attachment %s", safe_name)
         return saved

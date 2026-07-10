@@ -10,7 +10,7 @@
 {% if success %}
 <div class="alert alert-success">
   ✅ Email sent successfully! Conversation ID: <strong>{{ conv_id }}</strong>
-  — <a href="/tracking/{{ conv_id }}">View conversation →</a>
+  — <a href="{{ base_path }}/tracking/{{ conv_id }}">View conversation →</a>
 </div>
 {% endif %}
 
@@ -23,7 +23,7 @@
 <div class="compose-layout">
 
   <div>
-    <form method="post" action="/send" id="rfq-form" enctype="multipart/form-data">
+    <form method="post" action="{{ base_path }}/send" id="rfq-form" enctype="multipart/form-data">
 
       <input type="hidden" id="project_id" name="project_id">
       <input type="hidden" id="project_name_hidden" name="project_name">
@@ -163,7 +163,7 @@
     <li>A unique email address is generated per conversation (encodes your name + a thread ID).</li>
     <li>The RFQ is sent from that address — supplier replies come back to the same address.</li>
     <li>Your active provider routes inbound replies to <code style="background:var(--bg);padding:1px 5px;border-radius:3px;">/webhooks/inbound</code>, which parses and stores the reply.</li>
-    <li>View the full conversation thread on the <a href="/tracking">Tracking</a> page.</li>
+    <li>View the full conversation thread on the <a href="{{ base_path }}/tracking">Tracking</a> page.</li>
   </ol>
 </div>
 

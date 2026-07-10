@@ -392,7 +392,7 @@ supplies:
 - `generate_conversation_id()` — 8-hex-char conversation id.
 - `build_dynamic_email(user_name, conv_id)` — builds
   `{CamelCaseName}-{conv_id}@{INBOUND_DOMAIN}`, e.g.
-  `AnkitPrajapat-3fa9c1b2@mail.jobsetu.online`.
+  `JamesWhitfield-3fa9c1b2@mail.jobsetu.online`.
 - `parse_dynamic_email(address)` — reverses that to recover `conv_id` from
   an inbound `To` address (also matches a legacy `prefix_conv{id}` format).
 - `build_rfq_subject` / `build_rfq_html` — renders the actual RFQ template
@@ -469,7 +469,7 @@ without any external lookup table.
     one-time "Get Verification Code" email confirmation.
   - **Webhook URL** — POSTs the parsed reply as JSON/form data to an
     HTTP(S) endpoint. **This is the method this app requires**, pointed at
-    `POST /webhooks/inbound`.
+    `POST /email_poc/webhooks/inbound`.
 
 - **Address pattern matching** — a route is scoped to a domain plus a
   prefix pattern: a literal prefix (`support` → `support@yourdomain.com`)
@@ -506,7 +506,7 @@ Before creating a route:
 
 ### Step-by-step: configure the Webhook Inbound Route (the method this app needs)
 
-This app requires **Method 2 — Push to Webhook URL**, so `/webhooks/inbound`
+This app requires **Method 2 — Push to Webhook URL**, so `/email_poc/webhooks/inbound`
 receives every supplier reply as an HTTP POST:
 
 1. **Choose Domain** — in the AuroraSendCloud dashboard's Inbound Route
@@ -525,12 +525,12 @@ receives every supplier reply as an HTTP POST:
    | `.*` | any address on the domain | ✅ **required** — matches every generated `{Name}-{conv_id}` address |
 
 3. **Configure URL** — enter the complete webhook URL, including scheme:
-   `https://<your-domain-or-ngrok>/webhooks/inbound`. Must start with
+   `https://<your-domain-or-ngrok>/email_poc/webhooks/inbound`. Must start with
    `http://` or `https://`.
 4. **Verify Endpoint** — confirm the URL is publicly reachable and can
-   accept a POST before saving. This app's `POST /webhooks/inbound`
+   accept a POST before saving. This app's `POST /email_poc/webhooks/inbound`
    handler already exists for this (`src/route.py`); it also implements a
-   `GET /webhooks/inbound` probe endpoint for providers (like Elastic
+   `GET /email_poc/webhooks/inbound` probe endpoint for providers (like Elastic
    Email) that validate a URL with a GET first.
 5. **Test Connection** — use the dashboard's test/send feature, or trigger
    a real reply, to confirm AuroraSendCloud can deliver a payload to your
@@ -633,8 +633,8 @@ Supplier hits "Reply" in their mail client
    → goes to {CamelCaseName}-{conv_id}@mail.jobsetu.online
    → MX (mx2.sendcloud.org) routes it to AuroraSendCloud
    → AuroraSendCloud Inbound Route (webhook mode, catch-all pattern)
-        POSTs to /webhooks/inbound
-   → route.py: POST /webhooks/inbound (src/route.py)
+        POSTs to /email_poc/webhooks/inbound
+   → route.py: POST /email_poc/webhooks/inbound (src/route.py)
    → ConversationService.handle_inbound
         → WebhookParserFactory picks SendCloudWebhookParser
         → parser.parse(request) → InboundEmail (best-effort field mapping)
@@ -738,7 +738,7 @@ url = "https://api.aurorasendcloud.com/api/mail/send"  # match your region
 data = {
     "apiUser": "<from .env: SENDCLOUD_API_USER>",
     "apiKey": "<from .env: SENDCLOUD_API_KEY>",
-    "from": "AnkitPrajapat-3fa9c1b2@mail.jobsetu.online",
+    "from": "JamesWhitfield-3fa9c1b2@mail.jobsetu.online",
     "fromName": "Testing User",
     "to": "you@example.com",
     "subject": "Welcome to AuroraSendCloud",
@@ -765,7 +765,7 @@ uv run python main.py
 ```bash
 ngrok http 7000
 # Configure the AuroraSendCloud Inbound Route (Webhook URL method) to:
-#   https://<subdomain>.ngrok-free.app/webhooks/inbound
+#   https://<subdomain>.ngrok-free.app/email_poc/webhooks/inbound
 # Route pattern: catch-all (.*) on mail.jobsetu.online
 ```
 
@@ -775,9 +775,9 @@ Field names are unconfirmed (see §8) — this mirrors the SendGrid-shaped
 guess currently coded into `sendcloud_webhook.py`:
 
 ```bash
-curl -X POST http://localhost:7000/webhooks/inbound \
+curl -X POST http://localhost:7000/email_poc/webhooks/inbound \
   -F "from=buyer@acme.com" \
-  -F "to=AnkitPrajapat-3fa9c1b2@mail.jobsetu.online" \
+  -F "to=JamesWhitfield-3fa9c1b2@mail.jobsetu.online" \
   -F "subject=RE: RFQ" \
   -F "text=Our price is \$11.50 per unit. MOQ 200 units." \
   -F "spam_score=0.1"

@@ -2,7 +2,7 @@
 ### jobsetu.online · Dynamic From + Reply-To · Domain-Level Auth Only · No Sender Verification
 
 > **Goal:** Send emails FROM dynamically generated addresses like
-> `ankit_42@mail.jobsetu.online` with a dynamic Reply-To — using
+> `james_42@mail.jobsetu.online` with a dynamic Reply-To — using
 > **domain-level authentication only**. No individual sender verification needed.
 >
 > Domain: **jobsetu.online** | DNS Provider: **Hostinger hPanel**
@@ -21,7 +21,7 @@
 
 ✅ Domain Authentication (this guide):
    Verify the domain: mail.jobsetu.online → ALL addresses on it can send
-   ankit_42@mail.jobsetu.online     ← works ✅ (no extra verification)
+   james_42@mail.jobsetu.online     ← works ✅ (no extra verification)
    user_3fa9c1b2@mail.jobsetu.online ← works ✅ (no extra verification)
    anyprefix_anything@mail.jobsetu.online ← works ✅
    Solution: Verify once, send from any prefix forever.
@@ -395,8 +395,8 @@ def build_dynamic_email(username: str, unique_id: str) -> str:
     Pattern: {username}_{unique_id}@mail.jobsetu.online
 
     Examples:
-        build_dynamic_email("ankit", "42")
-        → ankit_42@mail.jobsetu.online
+        build_dynamic_email("james", "42")
+        → james_42@mail.jobsetu.online
 
         build_dynamic_email("raj", "3fa9c1b2")
         → raj_3fa9c1b2@mail.jobsetu.online
@@ -409,12 +409,12 @@ def parse_dynamic_email(raw_address: str) -> dict | None:
     Extract username and unique_id from a dynamic email address.
 
     Handles all common formats:
-      "ankit_42@mail.jobsetu.online"
-      "<ankit_42@mail.jobsetu.online>"
-      "Ankit <ankit_42@mail.jobsetu.online>"
+      "james_42@mail.jobsetu.online"
+      "<james_42@mail.jobsetu.online>"
+      "James <james_42@mail.jobsetu.online>"
 
     Returns:
-      {"username": "ankit", "unique_id": "42"}  or  None
+      {"username": "james", "unique_id": "42"}  or  None
     """
     # Strip display name and angle brackets
     match = re.search(r'[\w._%+\-]+@[\w.\-]+', raw_address)
@@ -438,10 +438,10 @@ def parse_dynamic_email(raw_address: str) -> dict | None:
 # ── Test ──────────────────────────────────────────────────────
 if __name__ == "__main__":
     uid = generate_unique_id()
-    addr = build_dynamic_email("ankit", uid)
-    print(f"Generated: {addr}")             # ankit_3fa9c1b2@mail.jobsetu.online
+    addr = build_dynamic_email("james", uid)
+    print(f"Generated: {addr}")             # james_3fa9c1b2@mail.jobsetu.online
     print(f"Parsed:    {parse_dynamic_email(addr)}")
-    # {'username': 'ankit', 'unique_id': '3fa9c1b2'}
+    # {'username': 'james', 'unique_id': '3fa9c1b2'}
 ```
 
 ---
@@ -487,7 +487,7 @@ def send_email(
     domain-authenticated, covering ALL prefixes on this domain.
 
     Args:
-        username:   User's identifier (e.g. "ankit")
+        username:   User's identifier (e.g. "james")
         unique_id:  Conversation unique ID (e.g. "42" or "3fa9c1b2")
         to_email:   Recipient email address
         to_name:    Recipient display name
@@ -588,7 +588,7 @@ def build_rfq_html(
 if __name__ == "__main__":
     from dynamic_address import generate_unique_id
 
-    username  = "ankit"
+    username  = "james"
     unique_id = generate_unique_id()    # e.g. "3fa9c1b2"
 
     html = build_rfq_html(
@@ -612,8 +612,8 @@ if __name__ == "__main__":
 
 # Console output:
 # [Email Sent]
-#   From:     ankit_3fa9c1b2@mail.jobsetu.online  ← dynamic, no verification needed
-#   Reply-To: ankit_3fa9c1b2@mail.jobsetu.online  ← dynamic, tracks supplier replies
+#   From:     james_3fa9c1b2@mail.jobsetu.online  ← dynamic, no verification needed
+#   Reply-To: james_3fa9c1b2@mail.jobsetu.online  ← dynamic, tracks supplier replies
 #   To:       purchasing@acme-electronics.com
 #   Status:   202
 ```
@@ -655,7 +655,7 @@ async def handle_inbound_email(request: Request):
 
     SendGrid Inbound Parse provides these fields:
       from        → supplier's email address
-      to          → the dynamic address (ankit_42@mail.jobsetu.online)
+      to          → the dynamic address (james_42@mail.jobsetu.online)
       subject     → email subject
       text        → plain text body
       html        → HTML body
@@ -822,7 +822,7 @@ def send_rfq(username: str, unique_id: str, supplier_email: str, product: str):
 
 # ── Run ───────────────────────────────────────────────────────
 
-username  = "ankit"
+username  = "james"
 unique_id = generate_unique_id()        # → e.g. "3fa9c1b2"
 
 send_rfq(
@@ -833,15 +833,15 @@ send_rfq(
 )
 
 # ─── What happens next ───────────────────────────────────────
-# From:     ankit_3fa9c1b2@mail.jobsetu.online (dynamic ✅)
-# Reply-To: ankit_3fa9c1b2@mail.jobsetu.online (dynamic ✅)
+# From:     james_3fa9c1b2@mail.jobsetu.online (dynamic ✅)
+# Reply-To: james_3fa9c1b2@mail.jobsetu.online (dynamic ✅)
 # No sender verification error (domain auth covers all prefixes ✅)
 #
 # Supplier hits Reply
-# → Goes to: ankit_3fa9c1b2@mail.jobsetu.online
+# → Goes to: james_3fa9c1b2@mail.jobsetu.online
 # → MX record routes to SendGrid
 # → Inbound Parse POSTs to /webhooks/inbound
-# → Webhook extracts username=ankit, unique_id=3fa9c1b2
+# → Webhook extracts username=james, unique_id=3fa9c1b2
 # → Triggers negotiation agent
 
 
@@ -899,28 +899,28 @@ print(response.status_code)    # 202 = success, no verification error ✅
 # Simulate SendGrid posting to your webhook
 curl -X POST http://localhost:8000/webhooks/inbound \
   --data-urlencode "from=supplier@acme.com" \
-  --data-urlencode "to=ankit_42@mail.jobsetu.online" \
+  --data-urlencode "to=james_42@mail.jobsetu.online" \
   --data-urlencode "subject=Re: RFQ Bluetooth Speakers" \
   --data-urlencode "text=Our price is $11.50 per unit FOB Shenzhen."
 
 # Expected:
-# {"status":"processed","username":"ankit","unique_id":"42","action":"QUOTE_RECEIVED"}
+# {"status":"processed","username":"james","unique_id":"42","action":"QUOTE_RECEIVED"}
 ```
 
 ### Test 5: End-to-End Loop
 
 ```
 1. Run: python main.py
-   → Email sent FROM ankit_3fa9c1b2@mail.jobsetu.online
+   → Email sent FROM james_3fa9c1b2@mail.jobsetu.online
 
 2. Check your Gmail — email arrives from that dynamic address
 
 3. Hit Reply in Gmail
 
-4. Reply goes to: ankit_3fa9c1b2@mail.jobsetu.online
+4. Reply goes to: james_3fa9c1b2@mail.jobsetu.online
    → SendGrid catches it (MX record)
    → POSTs to your ngrok URL → /webhooks/inbound
-   → Webhook prints: username=ankit, unique_id=3fa9c1b2 ✅
+   → Webhook prints: username=james, unique_id=3fa9c1b2 ✅
 ```
 
 ---
@@ -981,8 +981,8 @@ Fix:     Settings → API Keys → Your Key → Edit
 │  No individual verification ever again ✅                    │
 │                                                              │
 │  OUTBOUND                                                    │
-│  From:     ankit_42@mail.jobsetu.online  ← DYNAMIC ✅       │
-│  Reply-To: ankit_42@mail.jobsetu.online  ← DYNAMIC ✅       │
+│  From:     james_42@mail.jobsetu.online  ← DYNAMIC ✅       │
+│  Reply-To: james_42@mail.jobsetu.online  ← DYNAMIC ✅       │
 │                     │                                        │
 │              ┌──────▼────────────┐                          │
 │  SendGrid    │  Sends via DKIM + │ → supplier@acme.com      │
@@ -990,7 +990,7 @@ Fix:     Settings → API Keys → Your Key → Edit
 │              └───────────────────┘                          │
 │                                                              │
 │  SUPPLIER hits Reply                                         │
-│    → Goes to: ankit_42@mail.jobsetu.online                  │
+│    → Goes to: james_42@mail.jobsetu.online                  │
 │                     │                                        │
 │              ┌──────▼────────────┐                          │
 │  MX record   │  mx.sendgrid.net  │ ← catches *@mail.job... │
@@ -1002,7 +1002,7 @@ Fix:     Settings → API Keys → Your Key → Edit
 │              └──────┬────────────┘                          │
 │                     │                                        │
 │              ┌──────▼────────────┐                          │
-│  Webhook     │ username = ankit  │                          │
+│  Webhook     │ username = james  │                          │
 │  parses      │ unique_id = 42    │                          │
 │              └──────┬────────────┘                          │
 │                     │                                        │

@@ -17,17 +17,17 @@
 <div class="alert alert-error">{{ error }}</div>
 {% endif %}
 
-<form method="post" action="/register">
+<form method="post" action="{{ base_path }}/register">
   <div class="form-grid">
     <div class="form-group">
       <label for="first_name">First name</label>
       <input type="text" id="first_name" name="first_name" required autofocus
-             value="{{ first_name or '' }}" placeholder="Ankit">
+             value="{{ first_name or '' }}" placeholder="James">
     </div>
     <div class="form-group">
       <label for="last_name">Last name</label>
       <input type="text" id="last_name" name="last_name" required
-             value="{{ last_name or '' }}" placeholder="Prajapat">
+             value="{{ last_name or '' }}" placeholder="Whitfield">
     </div>
     <div class="form-group span2">
       <label for="personal_email">Email <span class="label-hint">(used to log in)</span></label>
@@ -53,6 +53,6 @@
 
 {% block footer %}
 <div class="auth-footer">
-  Already have an account? <a href="/login">Log in</a>
+  Already have an account? <a href="{{ base_path }}/login">Log in</a>
 </div>
 {% endblock %}

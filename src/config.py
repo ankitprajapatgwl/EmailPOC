@@ -43,6 +43,12 @@ load_dotenv()
 # working directory the server was launched from.
 BASE_DIR = Path(__file__).resolve().parents[1]
 
+# URL prefix the whole app is served under, e.g. http://0.0.0.0:7000/email_poc/.
+# Every route, redirect, cookie path, static/attachment mount and template
+# link is anchored to this so the app can be moved to a different prefix by
+# changing this one constant.
+BASE_PATH = "/email_poc"
+
 
 class Settings:
     """Immutable snapshot of all application configuration.
