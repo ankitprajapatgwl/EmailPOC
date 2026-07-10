@@ -25,6 +25,7 @@ Example:
 
 import logging
 from datetime import datetime, timezone
+from email.utils import parseaddr
 from pathlib import Path
 
 from fastapi import Request
@@ -404,28 +405,44 @@ class ConversationService:
     async def _record_inbound(self, inbound: InboundEmail) -> dict:
         """Match a parsed inbound email and persist it.
 
-        Matching first tries the dynamic ``To`` address. Forwarded replies
-        can arrive with that address mangled by the supplier's mail client
-        (the ``-{conv_id}`` suffix dropped by autocomplete/address-book
-        normalisation), so as a fallback the quoted body is searched for the
-        ``CONV-{conv_id}`` reference footer that every RFQ email carries —
-        see :meth:`~src.email_platform.email_master.EmailMaster.parse_conv_id_from_body`.
+        Matching is tried in order, each covering a gap the previous one
+        cannot:
+
+        1. The dynamic ``To`` address (the normal reply/forward path).
+        2. Forwarded replies can arrive with that address mangled by the
+           supplier's mail client (the ``-{conv_id}`` suffix dropped by
+           autocomplete/address-book normalisation), so the quoted body is
+           searched for the ``CONV-{conv_id}`` reference footer every RFQ
+           email carries — see
+           :meth:`~src.email_platform.email_master.EmailMaster.parse_conv_id_from_body`.
+        3. A supplier composing a brand-new email (not reply/forward) has
+           no conv_id anywhere — no dynamic address, no quoted footer (see
+           ``setup_docs/engagelab_guide/engagelab_new_thread_issue.md``). If
+           it was addressed to a user's permanent, unique ``sending_email``,
+           that alone identifies the owning user, so it is bound to their
+           latest conversation with this supplier (or a new one is opened)
+           — see :meth:`_match_new_thread`.
 
         Args:
             inbound (InboundEmail): The normalised inbound email.
 
         Returns:
-            dict: ``{"status": "unmatched"}`` if neither the ``To`` address
-                nor the body reference decode, otherwise
+            dict: ``{"status": "unmatched"}`` if none of the three strategies
+                resolve a conv_id, otherwise
                 ``{"status": "matched", "user_id": ..., "conv_id": ...,
                 "action": ...}``.
         """
         received_at = datetime.now(timezone.utc).isoformat()
-        parsed = self.email.parse_dynamic_email(
-            inbound.to_email
-        ) or self.email.parse_conv_id_from_body(
-            inbound.body_text, inbound.body_html
+        parsed = (
+            self.email.parse_dynamic_email(inbound.to_email)
+            or self.email.parse_conv_id_from_body(
+                inbound.body_text, inbound.body_html
+            )
         )
+        if not parsed:
+            new_thread_conv_id = await self._match_new_thread(inbound)
+            if new_thread_conv_id:
+                parsed = {"conv_id": new_thread_conv_id}
 
         if not parsed:
             await self.db.insert_unmatched({
@@ -484,6 +501,67 @@ class ConversationService:
             "conv_id": conv_id,
             "action": action,
         }
+
+    async def _match_new_thread(self, inbound: InboundEmail) -> str | None:
+        """Bind a brand-new, headerless supplier email to its owning user.
+
+        A supplier who composes a fresh email instead of hitting reply/
+        forward produces a message with no conv_id anywhere — no dynamic
+        address, no quoted ``CONV-`` footer (see
+        ``setup_docs/engagelab_guide/engagelab_new_thread_issue.md`` for why
+        that's structurally unavoidable). But a supplier can only have
+        addressed it to a user's permanent, unique ``sending_email``
+        (assigned once at registration), so that address alone identifies
+        the owner. The email is then filed under the most recent existing
+        conversation with this supplier, or a new conversation is opened if
+        this supplier has never emailed this user before.
+
+        Args:
+            inbound (InboundEmail): The normalised inbound email.
+
+        Returns:
+            str | None: The conv_id to record this email against, or
+                ``None`` if ``inbound.to_email`` isn't any user's
+                ``sending_email``.
+        """
+        to_address = self.email.extract_email_address(inbound.to_email)
+        user = (
+            await self.db.get_user_by_sending_email(to_address)
+            if to_address
+            else None
+        )
+        if not user:
+            return None
+
+        supplier_email = self.email.extract_email_address(inbound.from_email)
+        existing = await self.db.find_latest_conversation_by_supplier(
+            user["id"], supplier_email
+        )
+        if existing:
+            self.log.info(
+                "New-thread inbound from %s bound to existing conversation %s",
+                supplier_email,
+                existing["conv_id"],
+            )
+            return existing["conv_id"]
+
+        supplier_name = parseaddr(inbound.from_email or "")[0] or supplier_email
+        conversation = await self.create_conversation(
+            user_id=user["id"],
+            user_name=user["full_name"],
+            supplier_email=supplier_email,
+            supplier_name=supplier_name,
+        )
+        await self.db.update_conversation(
+            conversation["conv_id"], {"subject": inbound.subject or ""}
+        )
+        self.log.info(
+            "New-thread inbound from %s opened conversation %s for user %s",
+            supplier_email,
+            conversation["conv_id"],
+            user["id"],
+        )
+        return conversation["conv_id"]
 
     async def _classify_reply(self, conv_id: str, reply_body: str) -> str:
         """Classify a supplier reply with simple keyword matching.

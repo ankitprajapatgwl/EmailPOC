@@ -147,6 +147,33 @@ class Repository:
             user = await session.get(User, self._as_uuid(user_id))
             return self._auth_user_to_dict(user) if user else None
 
+    async def get_user_by_sending_email(self, sending_email: str) -> dict | None:
+        """Reverse-lookup the user who owns a permanent ``sending_email``.
+
+        Used to bind a supplier's brand-new (headerless) email to its owning
+        user when it carries no conv_id anywhere — see
+        :meth:`~src.services.conversation_service.ConversationService._match_new_thread`.
+        ``sending_email`` is ``UNIQUE`` (``uq_users_sending_email``), so at
+        most one user can match.
+
+        Args:
+            sending_email (str): The bare address to look up (case-insensitive).
+
+        Returns:
+            dict | None: The auth-shaped user dict (see
+                :meth:`_auth_user_to_dict`), or ``None`` if no user has this
+                ``sending_email``.
+        """
+        async with self._session() as session:
+            user = (
+                await session.execute(
+                    select(User).where(
+                        func.lower(User.sending_email) == sending_email.lower()
+                    )
+                )
+            ).scalar_one_or_none()
+            return self._auth_user_to_dict(user) if user else None
+
     async def assign_sending_email(self, user_id: str, sending_email: str) -> dict:
         """Finish registration: set the permanent ``sending_email`` and activate.
 
@@ -487,6 +514,40 @@ class Repository:
                 self._conversation_to_dict(c, include_emails=False)
                 for c in result.scalars()
             ]
+
+    async def find_latest_conversation_by_supplier(
+        self, user_id: str, supplier_email: str
+    ) -> dict | None:
+        """Find the most recent conversation between a user and a supplier.
+
+        Used to bind a supplier's brand-new (headerless) email to whichever
+        thread they already have going with this user, instead of opening a
+        duplicate conversation every time that supplier composes fresh
+        instead of hitting reply — see
+        :meth:`~src.services.conversation_service.ConversationService._match_new_thread`.
+
+        Args:
+            user_id (str): The conversation owner.
+            supplier_email (str): The supplier's address (case-insensitive).
+
+        Returns:
+            dict | None: The most recently created matching conversation, or
+                ``None`` if this supplier has no conversation with the user yet.
+        """
+        async with self._session() as session:
+            conv = (
+                await session.execute(
+                    select(Conversation)
+                    .where(
+                        Conversation.user_id == self._as_uuid(user_id),
+                        func.lower(Conversation.supplier_email)
+                        == supplier_email.lower(),
+                    )
+                    .order_by(Conversation.created_at.desc())
+                    .limit(1)
+                )
+            ).scalar_one_or_none()
+            return self._conversation_to_dict(conv, include_emails=False) if conv else None
 
     async def get_all_users(self) -> list[dict]:
         async with self._session() as session:

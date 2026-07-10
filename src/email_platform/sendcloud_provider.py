@@ -5,15 +5,19 @@ POSTing ``multipart/form-data`` to SendCloud's ``/api/mail/send`` endpoint
 with the :mod:`requests` library — SendCloud does not ship a first-party
 Python SDK, so this mirrors the approach already used for
 :class:`~src.email_platform.mailgun_provider.MailgunEmailProvider`. The
-``From`` header uses the verified sender and ``replyTo`` carries the dynamic
-conversation address so supplier replies route back through this app's
-webhook.
+``From`` header is whatever address the caller passes in —
+:meth:`~src.services.conversation_service.ConversationService.send_rfq`
+passes each user's permanent ``sending_email`` (falling back to
+``FROM_EMAIL`` if unset) — and ``replyTo`` carries the dynamic conversation
+address so supplier replies route back through this app's webhook.
 
 Configuration consumed (see :class:`src.config.Settings`):
 
 - ``SENDCLOUD_API_USER`` *(required)* – API user, from the SendCloud console.
 - ``SENDCLOUD_API_KEY`` *(required)* – API key, from the SendCloud console.
 - ``SENDCLOUD_API_BASE`` – region base URL (Singapore by default).
+- ``FROM_EMAIL`` – fallback sender identity used only when a user has no
+  ``sending_email`` yet.
 - ``COMPANY_NAME`` – display name in the ``From`` header.
 
 Example:
@@ -118,7 +122,8 @@ class SendCloudEmailProvider(EmailMaster):
         provider message id.
 
         Args:
-            from_email (str): Verified sender address.
+            from_email (str): Sender address for the ``from`` field — the
+                user's ``sending_email``, or ``FROM_EMAIL`` as a fallback.
             from_name (str): Sender display name.
             to_email (str): Recipient address.
             to_name (str): Recipient display name (unused by the API but
@@ -152,6 +157,7 @@ class SendCloudEmailProvider(EmailMaster):
             "from": from_email,
             "fromName": from_name,
             "to": to_email,
+            "replyTo": reply_to,
             "subject": subject,
             "html": html_body
         }

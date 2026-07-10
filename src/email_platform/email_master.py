@@ -33,6 +33,7 @@ import logging
 import re
 import uuid
 from abc import ABC, abstractmethod
+from email.utils import parseaddr
 
 from src.config import Settings
 
@@ -228,6 +229,28 @@ class EmailMaster(ABC):
             if match:
                 return {"conv_id": match.group(1).lower()}
         return None
+
+    @staticmethod
+    def extract_email_address(raw: str) -> str:
+        """Strip a display name off a raw ``From``/``To`` header value.
+
+        Inbound payloads often carry ``"Ankit Prajapat <a@b.com>"`` rather
+        than a bare address; matching against a stored address (e.g.
+        ``users.sending_email``) needs just the ``a@b.com`` part.
+
+        Args:
+            raw (str): The raw header value, with or without a display name.
+
+        Returns:
+            str: The lowercased bare address, or ``""`` if none could be
+                parsed out.
+
+        Example:
+            >>> EmailMaster.extract_email_address(
+            ...     "Ankit Prajapat <ankit@mail.jobsetu.online>")
+            'ankit@mail.jobsetu.online'
+        """
+        return (parseaddr(raw or "")[1] or "").strip().lower()
 
     # ── Shared RFQ rendering ─────────────────────────────────────────
 
